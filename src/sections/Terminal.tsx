@@ -161,7 +161,6 @@ export const Terminal: React.FC<TerminalProps> = ({ hiringManagerMode }) => {
             <div>• projects   - Review my shipped projects & links</div>
             <div>• contact    - Display email & social contact links</div>
             <div>• stats      - Show real-time GitHub metrics</div>
-            <div>• chat       - Switched to interactive AI conversation</div>
             <div>• japanese   - Translate terminal to Japanese for 5s</div>
             <div>• clear      - Clear all command outputs</div>
           </div>
@@ -205,9 +204,6 @@ export const Terminal: React.FC<TerminalProps> = ({ hiringManagerMode }) => {
             <div>FUN FACT      : Fuel consumption is 95% black tea, 5% electricity.</div>
           </div>
         );
-        break;
-      case 'chat':
-        output = '⚡ Connecting to Claude AI model... (Integration setup succeeded. Awaiting query)';
         break;
       case 'japanese':
         setIsJapanese(true);

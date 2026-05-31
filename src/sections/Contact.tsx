@@ -88,7 +88,7 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
         if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
           console.warn('Local dev API fallback active. Simulating email payload delivery:');
           console.log({
-            from: "Portfolio Contact <onboarding@resend.dev>",
+            from: "Portfolio Contact <contact@manthanut.site>",
             to: ["manthanut27@gmail.com"],
             subject: `New message from ${name} via Portfolio`,
             html: `<h2>New Contact Form Submission</h2><p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong></p><p>${message}</p>`
@@ -122,14 +122,39 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
     }
   };
 
+  // Define dynamic color tokens based on hiringManagerMode
+  const styles = {
+    sectionBg: hiringManagerMode ? 'bg-slate-50 text-slate-900' : 'bg-[#CBEF9A] text-brand-navy',
+    outerWrapper: hiringManagerMode 
+      ? 'bg-slate-200/60 border border-slate-300/40' 
+      : 'bg-[#c8e6a0] border border-transparent',
+    cardBg: hiringManagerMode 
+      ? 'bg-white border border-slate-200 shadow-xl' 
+      : 'bg-[#e8f5d0] border border-white/30 shadow-2xl',
+    successCardBg: hiringManagerMode 
+      ? 'bg-white border border-slate-200 shadow-xl' 
+      : 'bg-[#e8f5d0] border border-white/30 shadow-2xl',
+    label: hiringManagerMode ? 'text-slate-500' : 'text-[#5a8a6a]',
+    inputFill: hiringManagerMode 
+      ? 'bg-slate-50 border-slate-200 focus:border-indigo-500/80 focus:ring-2 focus:ring-indigo-100 text-slate-900' 
+      : 'bg-[#f0fae8] border-[#5a8a6a]/15 focus:border-[#5a8a6a]/40 text-slate-800 focus:ring-2 focus:ring-[#5a8a6a]/5',
+    mailIcon: hiringManagerMode ? 'text-slate-400' : 'text-[#5a8a6a]',
+    charCounter: hiringManagerMode ? 'text-slate-400' : 'text-[#5a8a6a]/80',
+    submitBtn: hiringManagerMode 
+      ? 'bg-slate-900 hover:bg-slate-800 disabled:bg-slate-200 text-white disabled:text-slate-400 focus:ring-4 focus:ring-slate-200' 
+      : 'bg-[#c8c8e8] hover:bg-[#b8b8d8] disabled:bg-[#d8d8f8] text-[#2d2d4d] disabled:text-[#6d6d8d] focus:ring-4 focus:ring-[#c8c8e8]/30',
+    checkCircleIcon: hiringManagerMode ? 'text-indigo-600 bg-indigo-50' : 'text-[#5a8a6a] bg-[#c8e6a0]',
+    sendAnotherBtn: hiringManagerMode 
+      ? 'bg-slate-100 hover:bg-slate-200 text-slate-800 font-medium border border-slate-200' 
+      : 'bg-[#c8c8e8] hover:bg-[#b8b8d8] text-[#2d2d4d]'
+  };
+
   return (
     <section
       id="contact"
       data-kanji="連"
       data-label="CONNECT"
-      className={`relative w-full min-h-screen flex flex-col justify-center px-6 md:px-16 py-24 select-none transition-colors duration-1000 ${
-        hiringManagerMode ? 'bg-slate-50 text-slate-900' : 'bg-[#CBEF9A] text-brand-navy'
-      }`}
+      className={`relative w-full min-h-screen flex flex-col justify-center px-6 md:px-16 py-24 select-none transition-colors duration-1000 ${styles.sectionBg}`}
     >
       <div className="max-w-4xl mx-auto w-full flex flex-col gap-10 relative z-10">
         {/* Section Heading */}
@@ -147,35 +172,35 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
           </p>
         </div>
 
-        {/* Outer Wrapper: Soft Green background */}
-        <div className="w-full max-w-xl mx-auto bg-[#c8e6a0] rounded-[20px] p-8 md:p-[32px] shadow-2xl transition-all duration-300">
+        {/* Outer Wrapper */}
+        <div className={`w-full max-w-xl mx-auto rounded-[20px] p-8 md:p-[32px] transition-all duration-500 ${styles.outerWrapper}`}>
           
           {status === 'success' ? (
             /* Success State Card */
-            <div className="w-full bg-[#e8f5d0] rounded-[16px] p-7 md:p-[28px] flex flex-col items-center justify-center text-center gap-4 min-h-[300px] border border-white/30">
-              <div className="w-16 h-16 rounded-full bg-[#c8e6a0] flex items-center justify-center text-[#5a8a6a] animate-bounce shadow-md">
+            <div className={`w-full rounded-[16px] p-7 md:p-[28px] flex flex-col items-center justify-center text-center gap-4 min-h-[300px] transition-all duration-500 ${styles.successCardBg}`}>
+              <div className={`w-16 h-16 rounded-full flex items-center justify-center animate-bounce shadow-sm transition-colors duration-500 ${styles.checkCircleIcon}`}>
                 <CheckCircle className="w-9 h-9" />
               </div>
-              <h3 className="font-syne font-black text-2xl uppercase tracking-widest text-[#5a8a6a]">
+              <h3 className={`font-syne font-black text-2xl uppercase tracking-widest transition-colors duration-500 ${hiringManagerMode ? 'text-slate-800' : 'text-[#5a8a6a]'}`}>
                 Message sent!
               </h3>
-              <p className="font-body text-sm font-semibold text-[#5a8a6a]/95 max-w-xs leading-relaxed">
+              <p className={`font-body text-sm font-semibold max-w-xs leading-relaxed transition-colors duration-500 ${hiringManagerMode ? 'text-slate-600' : 'text-[#5a8a6a]/95'}`}>
                 I'll get back to you soon, {submittedName}.
               </p>
               <button
                 onClick={() => setStatus('idle')}
-                className="mt-2 px-6 py-3 bg-[#c8c8e8] hover:bg-[#b8b8d8] text-[#2d2d4d] font-space font-bold text-xs uppercase tracking-widest rounded-[12px] shadow-md hover:shadow-lg active:scale-95 transition-all cursor-pointer"
+                className={`mt-2 px-6 py-3 font-mono font-bold text-xs uppercase tracking-widest rounded-[12px] shadow-sm hover:shadow-md active:scale-95 transition-all cursor-pointer ${styles.sendAnotherBtn}`}
               >
                 Send Another
               </button>
             </div>
           ) : (
             /* Standard Contact Form view */
-            <div className="w-full bg-[#e8f5d0] rounded-[16px] p-7 md:p-[28px] flex flex-col gap-5 text-left border border-white/30">
+            <div className={`w-full rounded-[16px] p-7 md:p-[28px] flex flex-col gap-5 text-left transition-all duration-500 ${styles.cardBg}`}>
               
               {/* Full Name field */}
               <div className="flex flex-col gap-1.5 w-full">
-                <label className="uppercase tracking-widest text-[12px] font-mono font-bold text-[#5a8a6a]">
+                <label className={`uppercase tracking-widest text-[12px] font-mono font-bold transition-colors duration-500 ${styles.label}`}>
                   Full Name
                 </label>
                 <input
@@ -186,12 +211,12 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
                     setName(e.target.value);
                     if (nameError) setNameError('');
                   }}
-                  className={`w-full px-4 bg-[#f0fae8] rounded-[12px] h-[52px] border border-[#5a8a6a]/15 focus:border-[#5a8a6a]/40 outline-none text-slate-800 font-body text-sm transition-all select-text shadow-sm ${
+                  className={`w-full px-4 rounded-[12px] h-[52px] border outline-none font-body text-sm transition-all select-text shadow-sm ${styles.inputFill} ${
                     shakeName ? 'animate-shake border-red-500 ring-2 ring-red-200' : ''
                   }`}
                 />
                 {nameError && (
-                  <span className="text-[12px] text-red-500 font-semibold mt-0.5 ml-1">
+                  <span className="text-[12px] text-red-500 font-semibold mt-0.5 ml-1 animate-pulse">
                     {nameError}
                   </span>
                 )}
@@ -199,7 +224,7 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
 
               {/* Email Address field */}
               <div className="flex flex-col gap-1.5 w-full">
-                <label className="uppercase tracking-widest text-[12px] font-mono font-bold text-[#5a8a6a]">
+                <label className={`uppercase tracking-widest text-[12px] font-mono font-bold transition-colors duration-500 ${styles.label}`}>
                   Email Address
                 </label>
                 <div className="relative w-full">
@@ -211,14 +236,14 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
                       setEmail(e.target.value);
                       if (emailError) setEmailError('');
                     }}
-                    className={`w-full pl-4 pr-10 bg-[#f0fae8] rounded-[12px] h-[52px] border border-[#5a8a6a]/15 focus:border-[#5a8a6a]/40 outline-none text-slate-800 font-body text-sm transition-all select-text shadow-sm ${
+                    className={`w-full pl-4 pr-10 rounded-[12px] h-[52px] border outline-none font-body text-sm transition-all select-text shadow-sm ${styles.inputFill} ${
                       shakeEmail ? 'animate-shake border-red-500 ring-2 ring-red-200' : ''
                     }`}
                   />
-                  <Mail className="absolute right-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#5a8a6a]" />
+                  <Mail className={`absolute right-3.5 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-500 ${styles.mailIcon}`} />
                 </div>
                 {emailError && (
-                  <span className="text-[12px] text-red-500 font-semibold mt-0.5 ml-1">
+                  <span className="text-[12px] text-red-500 font-semibold mt-0.5 ml-1 animate-pulse">
                     {emailError}
                   </span>
                 )}
@@ -227,10 +252,10 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
               {/* Message field */}
               <div className="flex flex-col gap-1.5 w-full">
                 <div className="flex justify-between items-center">
-                  <label className="uppercase tracking-widest text-[12px] font-mono font-bold text-[#5a8a6a]">
+                  <label className={`uppercase tracking-widest text-[12px] font-mono font-bold transition-colors duration-500 ${styles.label}`}>
                     Message
                   </label>
-                  <span className="text-[12px] font-mono font-bold text-[#5a8a6a]/80">
+                  <span className={`text-[12px] font-mono font-bold transition-colors duration-500 ${styles.charCounter}`}>
                     {message.length} / 1000
                   </span>
                 </div>
@@ -242,12 +267,12 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
                     setMessage(e.target.value);
                     if (messageError) setMessageError('');
                   }}
-                  className={`w-full p-4 bg-[#f0fae8] rounded-[12px] h-[130px] resize-none border border-[#5a8a6a]/15 focus:border-[#5a8a6a]/40 outline-none text-slate-800 font-body text-sm transition-all select-text shadow-sm ${
+                  className={`w-full p-4 rounded-[12px] h-[130px] resize-none border outline-none font-body text-sm transition-all select-text shadow-sm ${styles.inputFill} ${
                     shakeMessage ? 'animate-shake border-red-500 ring-2 ring-red-200' : ''
                   }`}
                 />
                 {messageError && (
-                  <span className="text-[12px] text-red-500 font-semibold mt-0.5 ml-1">
+                  <span className="text-[12px] text-red-500 font-semibold mt-0.5 ml-1 animate-pulse">
                     {messageError}
                   </span>
                 )}
@@ -265,11 +290,11 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
               <button
                 onClick={handleSubmit}
                 disabled={loading}
-                className="w-full h-[52px] flex items-center justify-center gap-2.5 bg-[#c8c8e8] hover:bg-[#b8b8d8] disabled:bg-[#d8d8f8] text-[#2d2d4d] disabled:text-[#6d6d8d] rounded-[12px] font-mono font-bold text-sm uppercase tracking-widest cursor-pointer disabled:cursor-not-allowed shadow-md hover:shadow-lg active:scale-98 transition-all"
+                className={`w-full h-[52px] flex items-center justify-center gap-2.5 font-mono font-bold text-sm uppercase tracking-widest cursor-pointer disabled:cursor-not-allowed shadow-md hover:shadow-lg active:scale-98 transition-all duration-300 ${styles.submitBtn}`}
               >
                 {loading ? (
                   <>
-                    <span className="w-4 h-4 border-2 border-[#2d2d4d] border-t-transparent rounded-full animate-spin shrink-0" />
+                    <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin shrink-0" />
                     <span>SENDING...</span>
                   </>
                 ) : (

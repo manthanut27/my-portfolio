@@ -81,7 +81,13 @@ const MainPortfolio: React.FC = () => {
       {/* 3. Global Floating controllers */}
       <HMModeToggle
         active={hiringManagerMode}
-        onToggle={() => setHiringManagerMode(!hiringManagerMode)}
+        onToggle={() => {
+          setHiringManagerMode(!hiringManagerMode);
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          });
+        }}
       />
 
       {/* 4. Main Site Layout */}
