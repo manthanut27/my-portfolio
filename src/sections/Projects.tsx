@@ -46,6 +46,16 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode }) => {
       gitLink: import.meta.env.VITE_GITHUB_REPO_BMW || 'https://github.com/manthanut27/bmw-m4-showcase',
     },
     {
+      name: 'Quiz Application',
+      status: 'LIVE',
+      accentColor: '#500171', // purple
+      desc: 'An interactive web-based quiz that tests your foundational knowledge of HTML, CSS, and JavaScript through a series of multiple-choice questions.',
+      image: '/quiz-image.png',
+      tech: ['React', 'Gsap', 'Tailwind'],
+      liveLink: import.meta.env.VITE_LIVE_LINK_QUIZ || 'https://quiz.manthan.dev',
+      gitLink: import.meta.env.VITE_GITHUB_REPO_QUIZ || 'https://github.com/manthanut27/quiz',
+    },
+    {
       name: 'FitMirror',
       status: 'COMING SOON',
       accentColor: '#4B7002', // watermelon
@@ -137,9 +147,8 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode }) => {
       id="projects"
       data-kanji="作"
       data-label="WORK"
-      className={`relative w-full min-h-screen flex flex-col justify-center py-24 select-none overflow-hidden transition-colors duration-1000 ${
-        hiringManagerMode ? 'bg-slate-100 text-slate-900' : 'bg-brand-pink text-brand-navy'
-      }`}
+      className={`relative w-full min-h-screen flex flex-col justify-center py-24 select-none overflow-hidden transition-colors duration-1000 ${hiringManagerMode ? 'bg-slate-100 text-slate-900' : 'bg-brand-pink text-brand-navy'
+        }`}
     >
       <div className="container mx-auto px-6 lg:px-12 w-full flex flex-col flex-grow relative z-10">
         {/* Header Title */}
@@ -179,9 +188,8 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode }) => {
           onMouseLeave={handleMouseLeave}
           onMouseUp={handleMouseUp}
           onMouseMove={handleMouseMoveDrag}
-          className={`flex gap-8 overflow-x-auto no-scrollbar pb-12 pt-4 flex-grow items-center w-full cursor-grab active:cursor-grabbing select-none ${
-            isDragging ? '' : 'snap-x snap-mandatory'
-          }`}
+          className={`flex gap-8 overflow-x-auto no-scrollbar pb-12 pt-4 flex-grow items-center w-full cursor-grab active:cursor-grabbing select-none ${isDragging ? '' : 'snap-x snap-mandatory'
+            }`}
         >
           {projects.map((project) => {
             const isLive = project.status === 'LIVE';
@@ -201,11 +209,10 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode }) => {
                   {/* Status Badge */}
                   <div className="absolute top-4 right-4 z-20">
                     <span
-                      className={`text-[10px] md:text-xs font-space font-black px-3.5 py-1.5 rounded-full shadow-md ${
-                        isLive
-                          ? 'bg-brand-orange text-white'
-                          : 'bg-brand-navy text-brand-yellow'
-                      }`}
+                      className={`text-[10px] md:text-xs font-space font-black px-3.5 py-1.5 rounded-full shadow-md ${isLive
+                        ? 'bg-brand-orange text-white'
+                        : 'bg-brand-navy text-brand-yellow'
+                        }`}
                     >
                       {project.status}
                     </span>
