@@ -1,15 +1,22 @@
 import { useEffect, useState } from 'react';
 
+export interface ContributionDay {
+  date: string;
+  count: number;
+  level: number;
+}
+
 export interface GitHubStats {
   publicRepos: number;
   stars: number;
   contributions: number;
   evaBloomCommits: number;
+  heatmap?: ContributionDay[];
   loading: boolean;
 }
 
 const CACHE_KEY = 'gh_stats';
-const CACHE_TTL = 3600000; // 1 hour in milliseconds
+const CACHE_TTL = 300000; // 5 minutes in milliseconds
 
 // Mock stats for fallback in case of strict rate limits or network issues
 const fallbackStats: GitHubStats = {
@@ -81,13 +88,42 @@ export const useGitHubStats = (username = DEFAULT_USERNAME) => {
         }
 
         // Approximate contributions (since scraping requires token, we use a beautiful dynamic counter)
-        const contributions = user.public_repos * 15 + stars * 4 + 185; 
+        let contributions = user.public_repos * 15 + stars * 4 + 185;
+        let heatmap: ContributionDay[] | undefined = undefined;
+
+        try {
+          const heatmapRes = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}`);
+          if (heatmapRes.ok) {
+            const heatmapData = await heatmapRes.json();
+            if (heatmapData) {
+              if (Array.isArray(heatmapData.contributions)) {
+                // Sort chronologically by date since API returns blocks of years in reverse order
+                const sorted = [...heatmapData.contributions].sort((a, b) =>
+                  a.date.localeCompare(b.date)
+                );
+                // Filter out future dates to make the heatmap end on today's date (rolling 1-year view)
+                const todayStr = new Date().toISOString().split('T')[0];
+                const pastAndPresent = (sorted as ContributionDay[]).filter(
+                  (day) => day.date <= todayStr
+                );
+                heatmap = pastAndPresent.slice(-364);
+              }
+              const currentYear = new Date().getFullYear().toString();
+              if (heatmapData.total && typeof heatmapData.total[currentYear] === 'number') {
+                contributions = heatmapData.total[currentYear];
+              }
+            }
+          }
+        } catch (heatmapErr) {
+          console.warn('GitHub Contributions API fetch failed:', heatmapErr);
+        }
 
         const freshData: GitHubStats = {
           publicRepos: user.public_repos,
           stars,
           contributions,
           evaBloomCommits,
+          heatmap,
           loading: false,
         };
 

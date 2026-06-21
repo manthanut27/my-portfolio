@@ -10,7 +10,7 @@ interface AboutProps {
 
 export const About: React.FC<AboutProps> = ({ hiringManagerMode }) => {
   const { tier } = usePerformanceTier();
-  const { publicRepos, stars, contributions, evaBloomCommits, loading: ghLoading } = useGitHubStats();
+  const { publicRepos, stars, contributions, evaBloomCommits, heatmap, loading: ghLoading } = useGitHubStats();
   const [mounted, setMounted] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -165,21 +165,45 @@ export const About: React.FC<AboutProps> = ({ hiringManagerMode }) => {
     const totalCells = 52 * 7;
 
     for (let i = 0; i < totalCells; i++) {
-      // Generate some deterministic pseudorandom commit weights
-      const val = Math.floor(Math.sin(i * 0.05) * 5 + Math.cos(i * 0.1) * 3 + Math.random() * 4);
       let bg = 'rgba(12,74,110,0.08)'; // 0 commits
+      let titleText = 'No contributions';
 
-      if (val >= 1 && val <= 3) bg = '#CBEF9A'; // 1-3 commits
-      else if (val >= 4 && val <= 7) bg = '#D9F99D'; // 4-7 commits
-      else if (val >= 8 && val <= 14) bg = 'rgba(254, 99, 52, 0.6)'; // 8-14 commits (60% orange)
-      else if (val >= 15) bg = '#FE6334'; // 15+ commits
+      if (heatmap && heatmap[i]) {
+        const day = heatmap[i];
+        const val = day.count;
+        const level = day.level;
+
+        // Map level (0 to 4) to our brand colors
+        if (level === 1) bg = '#CBEF9A';
+        else if (level === 2) bg = '#D9F99D';
+        else if (level === 3) bg = 'rgba(254, 99, 52, 0.6)';
+        else if (level >= 4) bg = '#FE6334';
+
+        // Format the date nicely
+        const formattedDate = new Date(day.date).toLocaleDateString(undefined, {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric'
+        });
+        titleText = `${val === 0 ? 'No' : val} contribution${val === 1 ? '' : 's'} on ${formattedDate}`;
+      } else {
+        // Fallback: Generate some deterministic pseudorandom commit weights
+        const val = Math.floor(Math.sin(i * 0.05) * 5 + Math.cos(i * 0.1) * 3 + Math.random() * 4);
+
+        if (val >= 1 && val <= 3) bg = '#CBEF9A'; // 1-3 commits
+        else if (val >= 4 && val <= 7) bg = '#D9F99D'; // 4-7 commits
+        else if (val >= 8 && val <= 14) bg = 'rgba(254, 99, 52, 0.6)'; // 8-14 commits (60% orange)
+        else if (val >= 15) bg = '#FE6334'; // 15+ commits
+
+        titleText = `${val === 0 ? 'No' : val} commits`;
+      }
 
       cells.push(
         <div
           key={i}
           className="heatmap-cell"
           style={{ backgroundColor: bg }}
-          title={`${val === 0 ? 'No' : val} commits`}
+          title={titleText}
         />
       );
     }
@@ -297,9 +321,16 @@ export const About: React.FC<AboutProps> = ({ hiringManagerMode }) => {
                 <div className="flex flex-col gap-2 mt-2">
                   <div className="flex justify-between items-center text-xs font-bold text-brand-navy/60 px-1">
                     <span>Contribution Stream</span>
-                    <span className="flex items-center gap-1">
-                      <Activity className="w-3.5 h-3.5 text-brand-orange" /> Live Matrix
-                    </span>
+                    <button
+                      onClick={() => {
+                        localStorage.removeItem('gh_stats');
+                        window.location.reload();
+                      }}
+                      className="flex items-center gap-1 hover:text-brand-orange hover:scale-105 active:scale-95 transition-all cursor-pointer font-bold"
+                      title="Force refresh GitHub data"
+                    >
+                      <Activity className="w-3.5 h-3.5 text-brand-orange animate-pulse" /> Live Matrix (refresh)
+                    </button>
                   </div>
                   <div className="bg-white/10 p-4 rounded-xl border border-white/20">
                     {renderHeatmap()}
