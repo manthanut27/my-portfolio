@@ -1,0 +1,16 @@
+C:\Users\manthan\Desktop\dev projects\my-portfolio\.agents\rules\graphify.md
+C:\Users\manthan\Desktop\dev projects\my-portfolio\.agents\workflows\graphify.md
+C:\Users\manthan\Desktop\dev projects\my-portfolio\README.md
+C:\Users\manthan\Desktop\dev projects\my-portfolio\docs\INFORMATION ARCHITECTURE.md
+C:\Users\manthan\Desktop\dev projects\my-portfolio\docs\SYSTEM ARCHITECTURE.md
+C:\Users\manthan\Desktop\dev projects\my-portfolio\docs\USER STORIES & ACCEPTANCE CRITERIA.md
+C:\Users\manthan\Desktop\dev projects\my-portfolio\docs\prd.md
+C:\Users\manthan\Desktop\dev projects\my-portfolio\index.html
+C:\Users\manthan\Desktop\dev projects\my-portfolio\public\resume.pdf
+C:\Users\manthan\Desktop\dev projects\my-portfolio\public\favicon.svg
+C:\Users\manthan\Desktop\dev projects\my-portfolio\public\icons.svg
+C:\Users\manthan\Desktop\dev projects\my-portfolio\public\quiz-image.png
+C:\Users\manthan\Desktop\dev projects\my-portfolio\public\react-animation.png
+C:\Users\manthan\Desktop\dev projects\my-portfolio\src\assets\hero.png
+C:\Users\manthan\Desktop\dev projects\my-portfolio\src\assets\react.svg
+C:\Users\manthan\Desktop\dev projects\my-portfolio\src\assets\vite.svg

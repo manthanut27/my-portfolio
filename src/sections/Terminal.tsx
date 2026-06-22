@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useGitHubStats } from '../hooks/useGitHubStats';
 import { useCommandHistory } from '../hooks/useCommandHistory';
+import { useGitHubStats } from '../hooks/useGitHubStats';
 
 
 interface CommandOutput {
@@ -19,7 +19,7 @@ export const Terminal: React.FC<TerminalProps> = ({ hiringManagerMode }) => {
   const githubUsername = import.meta.env.VITE_GITHUB_USERNAME || 'manthanut27';
   const linkedinUrlRaw = import.meta.env.VITE_LINKEDIN_URL || 'https://linkedin.com/in/utkmanthan';
   const linkedinDisplay = linkedinUrlRaw.replace(/^(https?:\/\/)?(www\.)?/, '');
-  const contactEmail = import.meta.env.VITE_CONTACT_EMAIL || 'manthanutekar27@gmail.com';
+  const contactEmail = import.meta.env.VITE_CONTACT_EMAIL || 'manthanut27@gmail.com';
 
   const [activeTab, setActiveTab] = useState<'cinematic' | 'cli' | 'stats'>('cinematic');
   const [glitchActive, setGlitchActive] = useState(false);
@@ -45,10 +45,9 @@ export const Terminal: React.FC<TerminalProps> = ({ hiringManagerMode }) => {
     `> fetching user profile data... loaded [${githubUsername}]`,
     '> loading creative assets... React, Node, GSAP, Three.js',
     '// THE STORY',
-    'I started coding at 16, curious about how the web worked.',
-    'Built my first commercial e-commerce app (Eva Bloom) at 17.',
-    'Won Hawkathon 2026 under intense 36-hour timelines.',
-    'Now I am 18, searching for full-time creative engineering opportunities.',
+    'I started coding at 18, curious about how the web worked.',
+    'Built my first commercial e-commerce app (Eva Bloom) at 19.',
+    'Now I am 19, searching for full-time creative engineering opportunities.',
     'Let us write some clean code together.'
   ];
 

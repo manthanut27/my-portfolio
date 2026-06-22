@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, ExternalLink, Github } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
 
 
 interface Project {
@@ -56,19 +56,23 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode }) => {
       gitLink: import.meta.env.VITE_GITHUB_REPO_QUIZ || 'https://github.com/manthanut27/quiz',
     },
     {
+      name: 'React Animations',
+      status: 'LIVE',
+      accentColor: '#06B6D4', // cyan
+      desc: 'An immersive web animation and WebGL showcase featuring a split-column curtain reveal, circular clip-path transitions, and a scroll-pinned 3D circular card carousel.',
+      tech: [],
+      liveLink: import.meta.env.VITE_LIVE_LINK_REACT_ANIMATIONS || 'https://react-animation-xi.vercel.app',
+      gitLink: import.meta.env.VITE_GITHUB_REPO_REACT_ANIMATIONS || 'https://github.com/manthanut27/react-animation.git',
+    },
+    {
       name: 'FitMirror',
       status: 'COMING SOON',
       accentColor: '#4B7002', // watermelon
       desc: 'AI-powered fitness tracking application utilizing pose estimation to provide real-time form correction and workout analytics.',
       tech: ['TensorFlow.js', 'React Native', 'Expo', 'Python'],
     },
-    {
-      name: 'Tokyo SPA',
-      status: 'COMING SOON',
-      accentColor: '#690B3D', // berry
-      desc: 'Japanese-inspired single page application for a luxury wellness center, featuring serene animations, local map APIs, and booking schedulers.',
-      tech: ['React', 'GSAP', 'Tailwind', 'Vite'],
-    },
+
+
   ];
 
   // Update progress bar width on horizontal scroll
