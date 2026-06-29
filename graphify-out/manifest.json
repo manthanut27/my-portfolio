@@ -115,9 +115,9 @@
     "semantic_hash": "b766a3064a481d79cde9ce454b4c7733"
   },
   "src/sections/Projects.tsx": {
-    "mtime": 1782122785.3536637,
-    "ast_hash": "9a86f25352b742d01bf3629822085313",
-    "semantic_hash": "9a86f25352b742d01bf3629822085313"
+    "mtime": 1782720926.8104432,
+    "ast_hash": "a5870369941b1fae78315af4cb472842",
+    "semantic_hash": ""
   },
   "src/sections/ShadowPage.tsx": {
     "mtime": 1782022574.9317493,

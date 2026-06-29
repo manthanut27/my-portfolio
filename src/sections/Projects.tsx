@@ -58,20 +58,12 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode }) => {
     {
       name: 'React Animations',
       status: 'LIVE',
-<<<<<<< HEAD
       accentColor: '#06B6D4', // cyan
-      desc: 'An immersive web animation and WebGL showcase featuring a split-column curtain reveal, circular clip-path transitions, and a scroll-pinned 3D circular card carousel.',
-      tech: [],
-      liveLink: import.meta.env.VITE_LIVE_LINK_REACT_ANIMATIONS || 'https://react-animation-xi.vercel.app',
-      gitLink: import.meta.env.VITE_GITHUB_REPO_REACT_ANIMATIONS || 'https://github.com/manthanut27/react-animation.git',
-=======
-      accentColor: '#06B6D4',
       desc: 'An immersive web animation and WebGL showcase featuring a split-column curtain reveal, circular clip-path transitions, and a scroll-pinned 3D circular card carousel.',
       image: '/react-animation.png',
       tech: ['React', 'Three.js', 'R3F', 'GSAP', 'Lenis', 'GLSL'],
       liveLink: import.meta.env.VITE_LIVE_LINK_REACT_ANIMATIONS || 'https://react-animation-xi.vercel.app',
       gitLink: import.meta.env.VITE_GITHUB_REPO_REACT_ANIMATIONS || 'https://github.com/manthanut27/react-animation',
->>>>>>> dc2b955a9d5c03c74292556f6578ad1fd851a634
     },
     {
       name: 'FitMirror',
