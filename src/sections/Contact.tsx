@@ -32,6 +32,14 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
 
   const contactEmail = import.meta.env.VITE_CONTACT_EMAIL || 'manthanut27@gmail.com';
 
+  const [copiedEmail, setCopiedEmail] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(contactEmail);
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2500);
+  };
+
   const handleSubmit = async () => {
     // Reset validation errors, shakes and apiErrors
     setNameError('');
@@ -43,7 +51,7 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
 
     // 1. Validate name
     if (!name || name.trim().length < 2) {
-      setNameError('Name must be at least 2 characters.');
+      setNameError('Please enter your name (at least 2 characters).');
       setShakeName(true);
       setTimeout(() => setShakeName(false), 400);
       hasError = true;
@@ -52,7 +60,7 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
     // 2. Validate email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email || !emailRegex.test(email)) {
-      setEmailError('Please enter a valid email address.');
+      setEmailError('Please enter a valid email address (e.g. alex@company.com).');
       setShakeEmail(true);
       setTimeout(() => setShakeEmail(false), 400);
       hasError = true;
@@ -60,7 +68,7 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
 
     // 3. Validate message
     if (!message || message.trim().length < 10) {
-      setMessageError('Message must be at least 10 characters.');
+      setMessageError('Message is too brief. Please enter at least 10 characters.');
       setShakeMessage(true);
       setTimeout(() => setShakeMessage(false), 400);
       hasError = true;
@@ -154,30 +162,30 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
       id="contact"
       data-kanji="連"
       data-label="CONNECT"
-      className={`relative w-full min-h-screen flex flex-col justify-center px-6 md:px-16 py-24 select-none transition-colors duration-1000 ${styles.sectionBg}`}
+      className={`relative w-full min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-16 py-20 md:py-24 select-none transition-colors duration-1000 ${styles.sectionBg}`}
     >
-      <div className="max-w-4xl mx-auto w-full flex flex-col gap-10 relative z-10">
+      <div className="max-w-4xl mx-auto w-full flex flex-col gap-8 md:gap-10 relative z-10">
         {/* Section Heading */}
         <div className="text-center relative">
           {!hiringManagerMode && (
-            <div className="text-brand-navy/15 text-8xl font-black mb-2 pointer-events-none select-none">
+            <div className="text-brand-navy/15 text-6xl sm:text-7xl md:text-8xl font-black mb-1 md:mb-2 pointer-events-none select-none">
               連
             </div>
           )}
-          <h2 className="font-syne font-black text-5xl md:text-7xl uppercase tracking-tighter text-brand-navy leading-none">
+          <h2 className="font-syne font-black text-4xl sm:text-5xl md:text-7xl uppercase tracking-tighter text-brand-navy leading-none">
             Get in touch
           </h2>
-          <p className="mt-4 font-label text-sm md:text-base font-medium text-brand-navy/70 max-w-lg mx-auto">
+          <p className="mt-2 md:mt-4 font-label text-sm md:text-base font-medium text-brand-navy/70 max-w-lg mx-auto">
             Drop me a line. Let us collaborate on your next premium project.
           </p>
         </div>
 
         {/* Outer Wrapper */}
-        <div className={`w-full max-w-xl mx-auto rounded-[20px] p-8 md:p-[32px] transition-all duration-500 ${styles.outerWrapper}`}>
+        <div className={`w-full max-w-xl mx-auto rounded-[20px] p-5 sm:p-8 md:p-[32px] transition-all duration-500 ${styles.outerWrapper}`}>
           
           {status === 'success' ? (
             /* Success State Card */
-            <div className={`w-full rounded-[16px] p-7 md:p-[28px] flex flex-col items-center justify-center text-center gap-4 min-h-[300px] transition-all duration-500 ${styles.successCardBg}`}>
+            <div className={`w-full rounded-[16px] p-6 sm:p-7 md:p-[28px] flex flex-col items-center justify-center text-center gap-4 min-h-[300px] transition-all duration-500 ${styles.successCardBg}`}>
               <div className={`w-16 h-16 rounded-full flex items-center justify-center animate-bounce shadow-sm transition-colors duration-500 ${styles.checkCircleIcon}`}>
                 <CheckCircle className="w-9 h-9" />
               </div>
@@ -185,18 +193,18 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
                 Message sent!
               </h3>
               <p className={`font-body text-sm font-semibold max-w-xs leading-relaxed transition-colors duration-500 ${hiringManagerMode ? 'text-slate-600' : 'text-[#5a8a6a]/95'}`}>
-                I'll get back to you soon, {submittedName}.
+                Thank you, {submittedName}! I'll review your note and get back to you shortly.
               </p>
               <button
                 onClick={() => setStatus('idle')}
                 className={`mt-2 px-6 py-3 font-mono font-bold text-xs uppercase tracking-widest rounded-[12px] shadow-sm hover:shadow-md active:scale-95 transition-all cursor-pointer ${styles.sendAnotherBtn}`}
               >
-                Send Another
+                Send Another Note
               </button>
             </div>
           ) : (
             /* Standard Contact Form view */
-            <div className={`w-full rounded-[16px] p-7 md:p-[28px] flex flex-col gap-5 text-left transition-all duration-500 ${styles.cardBg}`}>
+            <div className={`w-full rounded-[16px] p-5 sm:p-7 md:p-[28px] flex flex-col gap-5 text-left transition-all duration-500 ${styles.cardBg}`}>
               
               {/* Full Name field */}
               <div className="flex flex-col gap-1.5 w-full">
@@ -205,7 +213,7 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
                 </label>
                 <input
                   type="text"
-                  placeholder="John Doe"
+                  placeholder="Alex Rivera"
                   value={name}
                   onChange={(e) => {
                     setName(e.target.value);
@@ -230,7 +238,7 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
                 <div className="relative w-full">
                   <input
                     type="email"
-                    placeholder="john@example.com"
+                    placeholder="alex@company.com"
                     value={email}
                     onChange={(e) => {
                       setEmail(e.target.value);
@@ -280,9 +288,32 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
 
               {/* API error banner */}
               {apiError && (
-                <div className="w-full p-3.5 bg-red-100 border border-red-200 text-red-700 rounded-[12px] text-[13px] font-semibold text-center flex items-center justify-center gap-2">
-                  <AlertTriangle className="w-4 h-4 shrink-0" />
-                  <span>Something went wrong. Please try again.</span>
+                <div className="w-full p-4 bg-red-50 border-2 border-red-300 text-red-800 rounded-[12px] text-xs sm:text-sm font-medium text-left flex flex-col gap-2">
+                  <div className="flex items-center gap-2 font-bold text-red-900">
+                    <AlertTriangle className="w-4 h-4 shrink-0 text-red-600" />
+                    <span>Submission Notice</span>
+                  </div>
+                  <p>
+                    Unable to connect to the mail gateway right now. You can email directly to{' '}
+                    <a href={`mailto:${contactEmail}`} className="underline font-bold">
+                      {contactEmail}
+                    </a>
+                    .
+                  </p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <button
+                      onClick={handleSubmit}
+                      className="px-3 py-1 bg-red-100 hover:bg-red-200 text-red-900 rounded-lg text-xs font-bold border border-red-300 cursor-pointer"
+                    >
+                      Retry Send
+                    </button>
+                    <button
+                      onClick={handleCopyEmail}
+                      className="px-3 py-1 bg-white hover:bg-red-50 text-red-900 rounded-lg text-xs font-bold border border-red-300 cursor-pointer"
+                    >
+                      {copiedEmail ? 'Copied to Clipboard!' : 'Copy Email Address'}
+                    </button>
+                  </div>
                 </div>
               )}
 
@@ -290,7 +321,7 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
               <button
                 onClick={handleSubmit}
                 disabled={loading}
-                className={`w-full h-[52px] flex items-center justify-center gap-2.5 font-mono font-bold text-sm uppercase tracking-widest cursor-pointer disabled:cursor-not-allowed shadow-md hover:shadow-lg active:scale-98 transition-all duration-300 ${styles.submitBtn}`}
+                className={`w-full h-[52px] flex items-center justify-center gap-2.5 font-mono font-bold text-sm uppercase tracking-widest cursor-pointer disabled:cursor-not-allowed shadow-md hover:shadow-lg active:scale-98 transition-all duration-300 rounded-[12px] ${styles.submitBtn}`}
               >
                 {loading ? (
                   <>
@@ -313,12 +344,13 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
           <div className="font-space text-xs font-bold text-brand-navy/60 tracking-widest uppercase">
             FIND ME AROUND THE WEB
           </div>
-          <div className="flex justify-center items-center gap-6">
+          <div className="flex justify-center items-center gap-4 sm:gap-6">
             <a
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center w-12 h-12 rounded-full border border-brand-navy/15 text-brand-navy hover:bg-brand-orange hover:text-white active:scale-90 hover:border-transparent transition-all duration-200 cursor-pointer"
+              className="flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-brand-navy/15 text-brand-navy hover:bg-brand-orange hover:text-white active:scale-90 hover:border-transparent transition-all duration-200 cursor-pointer shadow-sm"
+              aria-label="GitHub Profile"
             >
               <Github className="w-5 h-5" />
             </a>
@@ -326,16 +358,19 @@ export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
               href={linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center w-12 h-12 rounded-full border border-brand-navy/15 text-brand-navy hover:bg-brand-orange hover:text-white active:scale-90 hover:border-transparent transition-all duration-200 cursor-pointer"
+              className="flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-brand-navy/15 text-brand-navy hover:bg-brand-orange hover:text-white active:scale-90 hover:border-transparent transition-all duration-200 cursor-pointer shadow-sm"
+              aria-label="LinkedIn Profile"
             >
               <Linkedin className="w-5 h-5" />
             </a>
-            <a
-              href={`mailto:${contactEmail}`}
-              className="flex items-center justify-center w-12 h-12 rounded-full border border-brand-navy/15 text-brand-navy hover:bg-brand-orange hover:text-white active:scale-90 hover:border-transparent transition-all duration-200 cursor-pointer"
+            <button
+              onClick={handleCopyEmail}
+              className="flex items-center justify-center gap-1 px-3 sm:px-4 h-11 sm:h-12 rounded-full border border-brand-navy/15 text-brand-navy hover:bg-brand-orange hover:text-white active:scale-90 hover:border-transparent transition-all duration-200 cursor-pointer shadow-sm font-mono text-xs font-bold"
+              aria-label="Copy Contact Email"
             >
-              <Mail className="w-5 h-5" />
-            </a>
+              <Mail className="w-4 h-4" />
+              <span>{copiedEmail ? 'Copied!' : 'Copy Email'}</span>
+            </button>
           </div>
         </div>
       </div>

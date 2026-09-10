@@ -228,15 +228,15 @@ export const About: React.FC<AboutProps> = ({ hiringManagerMode }) => {
         {/* Header Title */}
         <div className="text-center relative">
           {!hiringManagerMode && (
-            <div className="text-brand-navy/15 text-8xl font-black mb-2 pointer-events-none select-none">
+            <div className="text-brand-navy/15 text-6xl sm:text-7xl md:text-8xl font-black mb-1 md:mb-2 pointer-events-none select-none">
               創
             </div>
           )}
-          <h2 className="font-space text-5xl md:text-7xl font-bold uppercase tracking-tighter text-brand-navy">
+          <h2 className="font-space text-4xl sm:text-5xl md:text-7xl font-bold uppercase tracking-tighter text-brand-navy">
             About Me
           </h2>
-          <p className="mt-4 font-label text-base md:text-lg font-medium text-brand-navy/70 max-w-lg mx-auto">
-            I turn coffee into performant personal and commercial products.
+          <p className="mt-2 md:mt-4 font-label text-base md:text-lg font-medium text-brand-navy/70 max-w-lg mx-auto">
+            I turn ideas into performant personal and commercial products.
           </p>
         </div>
 
@@ -245,9 +245,9 @@ export const About: React.FC<AboutProps> = ({ hiringManagerMode }) => {
           {/* Left Bio + frosted cards column */}
           <div className="lg:col-span-7 flex flex-col gap-8">
             {/* Bio hardcoded text */}
-            <div className="text-lg md:text-xl font-medium leading-relaxed text-brand-navy/95 max-w-2xl text-left bg-white/20 p-6 rounded-2xl border border-white/30 backdrop-blur-sm">
+            <div className="text-base sm:text-lg md:text-xl font-medium leading-relaxed text-brand-navy/95 max-w-2xl text-left bg-white/20 p-5 sm:p-6 rounded-2xl border border-white/30 backdrop-blur-sm">
               <p className="mb-4">
-                Hey, I'm <span className="font-bold text-brand-orange">Manthan Utekar</span>, an 18-year-old developer based in Mumbai. I build premium, animations-heavy, modern web experiences that look gorgeous and run blazingly fast.
+                Hey, I'm <span className="font-bold text-brand-orange">Manthan Utekar</span>, a creative developer and full-stack engineer based in Mumbai. I craft high-performance, animation-rich, modern web applications that look stunning and run blazingly fast.
               </p>
               <p>
                 Whether it is building custom e-commerce engines, complex 3D configurators in WebGL, or low-latency serverless endpoints, I focus on performance, accessibility, and visual aesthetics.

@@ -15,6 +15,9 @@ import { Projects } from './sections/Projects';
 import { Contact } from './sections/Contact';
 import { Footer } from './sections/Footer';
 import { ShadowPage } from './sections/ShadowPage';
+import { NotFound } from './sections/NotFound';
+import { EmptyStatePage } from './sections/EmptyStatePage';
+import { useSEO } from './hooks/useSEO';
 
 const About = React.lazy(() => import('./sections/About'));
 const Terminal = React.lazy(() => import('./sections/Terminal'));
@@ -61,6 +64,63 @@ const MainPortfolio: React.FC = () => {
     }
   }, [hiringManagerMode]);
 
+  // Synchronize dynamic tab titles & meta descriptions based on active section & mode
+  const getSectionSEO = () => {
+    if (hiringManagerMode) {
+      return {
+        title: 'Resume & Case Studies | Manthan Utekar — Full-Stack Engineer',
+        description:
+          'Explore Manthan Utekar’s engineering credentials, architecture case studies, system performance stats, and full-stack technical background.',
+      };
+    }
+
+    switch (activeSection) {
+      case 'about':
+        return {
+          title: 'About — Manthan Utekar | Creative Developer',
+          description:
+            'Learn about Manthan Utekar, a creative developer and engineer building high-impact interactive systems, 3D WebGL experiences, and scalable web apps.',
+        };
+      case 'skills':
+        return {
+          title: 'Skills & Tech Stack — Manthan Utekar',
+          description:
+            'Technical stack and competencies of Manthan Utekar: React, Three.js, GSAP, Node.js, TypeScript, Tailwind CSS, Supabase, and WebGL.',
+        };
+      case 'projects':
+        return {
+          title: 'Projects & Works — Manthan Utekar',
+          description:
+            'Featured production applications, interactive 3D WebGL showcases, and full-stack projects built by Manthan Utekar.',
+        };
+      case 'terminal':
+        return {
+          title: 'Interactive Terminal — Manthan Utekar',
+          description:
+            'Interactive CLI terminal environment. Execute commands, explore hidden logs, check system specs, and discover easter eggs.',
+        };
+      case 'contact':
+        return {
+          title: 'Contact & Connect — Manthan Utekar',
+          description:
+            'Get in touch with Manthan Utekar for full-time software engineering roles, high-end creative development projects, or collaborations.',
+        };
+      case 'hero':
+      default:
+        return {
+          title: 'Manthan Utekar | Creative Developer & Full-Stack Engineer',
+          description:
+            'Portfolio of Manthan Utekar — Creative Developer & Full-Stack Engineer based in Mumbai. Specializing in high-performance web applications, interactive 3D WebGL experiences, and scalable full-stack architectures with React, Three.js, GSAP, and Node.js.',
+        };
+    }
+  };
+
+  const currentSEO = getSectionSEO();
+  useSEO({
+    title: currentSEO.title,
+    description: currentSEO.description,
+  });
+
   return (
     <div
       className={`min-h-screen flex flex-col transition-all duration-1000 ${
@@ -93,7 +153,17 @@ const MainPortfolio: React.FC = () => {
       {/* 4. Main Site Layout */}
       {loaded && (
         <>
-          <Navbar activeSection={activeSection} hiringManagerMode={hiringManagerMode} />
+          <Navbar
+            activeSection={activeSection}
+            hiringManagerMode={hiringManagerMode}
+            onToggleHMMode={() => {
+              setHiringManagerMode(!hiringManagerMode);
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+              });
+            }}
+          />
 
           {/* Section Stack */}
           <Hero hiringManagerMode={hiringManagerMode} />
@@ -143,10 +213,17 @@ const MainPortfolio: React.FC = () => {
 export const App: React.FC = () => {
   return (
     <PerformanceTierProvider>
-      <Router>
+      <Router
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
+      >
         <Routes>
           <Route path="/" element={<MainPortfolio />} />
           <Route path="/shadow" element={<ShadowPage />} />
+          <Route path="/empty" element={<EmptyStatePage />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </PerformanceTierProvider>

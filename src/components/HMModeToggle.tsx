@@ -10,21 +10,24 @@ export const HMModeToggle: React.FC<HMModeToggleProps> = ({ active, onToggle }) 
   return (
     <button
       onClick={onToggle}
-      className={`fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3 rounded-full font-label font-bold text-sm md:text-base shadow-2xl transition-all duration-300 transform hover:scale-105 active:scale-95 cursor-pointer border ${
+      className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center gap-2 sm:gap-2.5 px-3.5 py-2.5 sm:px-5 sm:py-3 rounded-full font-space font-bold text-xs sm:text-sm shadow-xl transition-all duration-300 transform hover:scale-105 active:scale-95 cursor-pointer border-2 ${
         active
-          ? 'bg-brand-navy text-white border-white/20'
-          : 'bg-white text-brand-navy border-brand-navy/10 hover:bg-brand-navy/5'
+          ? 'bg-brand-navy text-white border-white/40 shadow-[4px_4px_0px_#FE6334]'
+          : 'bg-white text-brand-navy border-brand-navy shadow-[4px_4px_0px_#0C4A6E] hover:bg-brand-yellow/30'
       }`}
+      aria-label={active ? 'Exit Recruiter Mode' : 'Enter Recruiter Mode'}
     >
       {active ? (
         <>
-          <Sliders className="w-5 h-5 animate-pulse text-brand-orange" />
-          <span>Exit Hiring Manager Mode</span>
+          <Sliders className="w-4 h-4 text-brand-orange animate-pulse" />
+          <span className="hidden sm:inline">Exit Recruiter Mode</span>
+          <span className="sm:hidden">Exit Mode</span>
         </>
       ) : (
         <>
-          <Briefcase className="w-5 h-5 text-brand-orange" />
-          <span>👔 Hiring Manager Mode</span>
+          <Briefcase className="w-4 h-4 text-brand-orange" />
+          <span className="hidden sm:inline">Recruiter Mode</span>
+          <span className="sm:hidden">Recruiter</span>
         </>
       )}
     </button>

@@ -45,10 +45,10 @@ export const Terminal: React.FC<TerminalProps> = ({ hiringManagerMode }) => {
     `> fetching user profile data... loaded [${githubUsername}]`,
     '> loading creative assets... React, Node, GSAP, Three.js',
     '// THE STORY',
-    'I started coding at 18, curious about how the web worked.',
-    'Built my first commercial e-commerce app (Eva Bloom) at 19.',
-    'Now I am 19, searching for full-time creative engineering opportunities.',
-    'Let us write some clean code together.'
+    'Curious about modern web engineering, 3D WebGL, and interactive systems.',
+    'Built commercial e-commerce platforms (Eva Bloom) and interactive 3D showrooms.',
+    'Currently open for full-time creative engineering & full-stack developer roles.',
+    'Let us write clean, performant code together.'
   ];
 
   // 1. Cinematic typing triggers on scroll / tab change
@@ -178,9 +178,10 @@ export const Terminal: React.FC<TerminalProps> = ({ hiringManagerMode }) => {
         output = (
           <div className="flex flex-col gap-2">
             <div>1. **Eva Bloom** [LIVE] - Premium jewelry store. Link: evabloom.in</div>
-            <div>2. **BMW M4 GT3** [LIVE] - WebGL interactive showroom. Link: bmw-m4.manthan.dev</div>
-            <div>3. **FitMirror** [COMING SOON] - AI pose form correction.</div>
-            <div>4. **Tokyo SPA** [COMING SOON] - Serene wellness spa platform.</div>
+            <div>2. **BMW M4 GT3** [LIVE] - WebGL interactive showroom. Link: bmw-m4.manthanut.site</div>
+            <div>3. **Quiz Application** [LIVE] - Interactive technical quiz. Link: quiz.manthanut.site</div>
+            <div>4. **React Animations** [LIVE] - 3D animations showcase. Link: react-animation-xi.vercel.app</div>
+            <div>5. **FitMirror** [IN PROGRESS] - AI pose tracking & analytics.</div>
           </div>
         );
         break;
@@ -215,13 +216,20 @@ export const Terminal: React.FC<TerminalProps> = ({ hiringManagerMode }) => {
           ]);
         }, 5000);
         break;
+      case 'sudo':
+        output = (
+          <div className="text-yellow-400">
+            [sudo] guest is not in the sudoers file. However, curious explorers might find secrets at /shadow.
+          </div>
+        );
+        break;
       case 'clear':
         setCliHistory([]);
         return;
       default:
         output = isJapanese
           ? `コマンドが見つかりません: "${cleanCmd}"。 "help"を入力してください。`
-          : `Command not found: "${cleanCmd}". Type "help" for support.`;
+          : `Command not found: "${cleanCmd}". Available commands: help, bio, skills, projects, contact, stats, clear, sudo.`;
     }
 
     setCliHistory((prev) => [...prev, { command: cmdText, output }]);

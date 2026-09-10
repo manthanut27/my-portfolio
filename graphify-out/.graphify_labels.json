@@ -1,7 +1,6 @@
 {
   "0": "Global Features and Interlays",
   "1": "Package Dependencies & Build Tooling",
-  "2": "Loading & Performance Tiers",
   "3": "Application TypeScript Config",
   "4": "GitHub Stats & Command History",
   "5": "Node TypeScript Config",
@@ -9,7 +8,7 @@
   "7": "Development Linters & Styling",
   "8": "Portfolio Project Showcases",
   "9": "Hiring Manager Mode Toggle",
-  "10": "Portfolio Contact Interface",
+  "10": "Community 10",
   "11": "User Story Requirements",
   "12": "Vercel Edge Contact API",
   "13": "Vercel Email Transporter",
@@ -21,6 +20,5 @@
   "19": "Vercel Deployment Rewrites",
   "20": "Vite Bundler Configuration",
   "21": "ESLint Linting Rules",
-  "22": "Graphify Workflow Scripts",
-  "23": "Community 23"
+  "22": "Graphify Workflow Scripts"
 }

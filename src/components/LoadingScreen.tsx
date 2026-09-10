@@ -68,7 +68,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
   ];
 
   return (
-    <div className="fixed inset-0 w-screen h-screen z-[9999] flex items-center justify-center bg-black overflow-hidden select-none">
+    <div className="fixed inset-0 w-full h-full z-[9999] flex items-center justify-center bg-black overflow-hidden select-none">
       <AnimatePresence mode="wait">
         {variant === 'A' ? (
           <motion.div
