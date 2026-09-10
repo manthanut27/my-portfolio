@@ -141,7 +141,7 @@ VALIDATION (server-side, mirrors client)
 SUCCESS FLOW
 ├── Validate → call Resend SDK
 ├── Resend.emails.send({
-│     from: "portfolio@manthan.dev",
+│     from: "portfolio@manthanut.site",
 │     to: "manthan@personal-email.com",
 │     replyTo: req.body.email,
 │     subject: `Portfolio contact: ${req.body.name}`,

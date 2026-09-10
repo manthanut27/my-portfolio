@@ -25,7 +25,7 @@ export const KanjiOverlay: React.FC<KanjiOverlayProps> = ({ trigger, onComplete 
           animate={{ opacity: 0.95 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
-          className="fixed inset-0 w-screen h-screen bg-brand-navy z-[9998] flex flex-col items-center justify-center pointer-events-none select-none"
+          className="fixed inset-0 w-full h-full bg-brand-navy z-[9998] flex flex-col items-center justify-center pointer-events-none select-none"
         >
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}

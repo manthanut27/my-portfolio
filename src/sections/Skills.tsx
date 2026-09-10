@@ -106,29 +106,29 @@ export const Skills: React.FC<SkillsProps> = ({ hiringManagerMode }) => {
       id="skills"
       data-kanji="技"
       data-label="SKILLS"
-      className={`relative w-full min-h-screen flex flex-col justify-center px-6 md:px-16 py-24 select-none overflow-hidden transition-colors duration-1000 ${
+      className={`relative w-full min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-16 py-20 md:py-24 select-none overflow-hidden transition-colors duration-1000 ${
         hiringManagerMode ? 'bg-slate-50 text-slate-900' : 'bg-brand-cyan text-brand-navy'
       }`}
     >
-      <div className="max-w-7xl mx-auto w-full flex flex-col items-center gap-12 relative z-10">
+      <div className="max-w-7xl mx-auto w-full flex flex-col items-center gap-8 md:gap-12 relative z-10">
         {/* Header Title */}
         <div className="text-center relative">
           {!hiringManagerMode && (
-            <div className="text-brand-navy/15 text-8xl font-black mb-2 pointer-events-none select-none">
+            <div className="text-brand-navy/15 text-6xl sm:text-7xl md:text-8xl font-black mb-1 md:mb-2 pointer-events-none select-none">
               技
             </div>
           )}
-          <h2 className="font-space text-5xl md:text-7xl font-bold uppercase tracking-tighter text-brand-navy">
+          <h2 className="font-space text-4xl sm:text-5xl md:text-7xl font-bold uppercase tracking-tighter text-brand-navy">
             Skills
           </h2>
-          <p className="mt-4 font-label text-base md:text-lg font-medium text-brand-navy/70 max-w-lg mx-auto">
+          <p className="mt-2 md:mt-4 font-label text-sm sm:text-base md:text-lg font-medium text-brand-navy/70 max-w-lg mx-auto">
             An orbital view of my technical ecosystem.
           </p>
         </div>
 
-        {/* Skills Orbit Layout / Static grid fallback */}
+        {/* Skills Orbit Layout for Desktop (lg+) / Responsive Card Grid for Mobile & Tablets */}
         {!isMobileOrLow ? (
-          <div className="relative w-[700px] h-[700px] mx-auto flex items-center justify-center scale-90 md:scale-100">
+          <div className="hidden lg:flex relative w-[700px] h-[700px] mx-auto items-center justify-center scale-90 md:scale-100">
             {/* Center Monogram */}
             <div className="absolute w-28 h-28 bg-white rounded-full flex items-center justify-center shadow-2xl z-30 border-[6px] border-brand-cyan group hover:scale-115 transition-transform duration-300">
               <span className="font-syne font-black text-4xl text-brand-navy">MU</span>
@@ -158,14 +158,15 @@ export const Skills: React.FC<SkillsProps> = ({ hiringManagerMode }) => {
               )}
             </div>
           </div>
-        ) : (
-          // Responsive 3-Column static grid fallback (for Mobile/Low performance/Hiring Manager Mode)
-          <div className="w-full max-w-4xl grid grid-cols-2 md:grid-cols-3 gap-6 mt-8">
-            {allSkills.map((skill) => (
-              <div
-                key={skill.name}
-                className="glass-card p-5 rounded-2xl flex items-center gap-4 text-left border border-white/40 shadow-sm"
-              >
+        ) : null}
+
+        {/* Responsive Grid View: always on for mobile/tablets or when in low/recruiter tier */}
+        <div className={`w-full max-w-4xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mt-4 md:mt-8 ${!isMobileOrLow ? 'lg:hidden' : ''}`}>
+          {allSkills.map((skill) => (
+            <div
+              key={skill.name}
+              className="glass-card p-4 sm:p-5 rounded-2xl flex items-center gap-4 text-left border border-white/40 shadow-sm"
+            >
                 <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border border-brand-navy/10 text-brand-navy shadow-sm">
                   {skill.icon}
                 </div>
@@ -189,9 +190,8 @@ export const Skills: React.FC<SkillsProps> = ({ hiringManagerMode }) => {
               </div>
             ))}
           </div>
-        )}
-      </div>
-    </section>
+        </div>
+      </section>
   );
 };
 export default Skills;

@@ -1,6 +1,7 @@
 {
   "0": "Global Features and Interlays",
   "1": "Package Dependencies & Build Tooling",
+  "2": "Loading & Performance Tiers",
   "3": "Application TypeScript Config",
   "4": "GitHub Stats & Command History",
   "5": "Node TypeScript Config",

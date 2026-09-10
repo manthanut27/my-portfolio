@@ -20,8 +20,8 @@
     "semantic_hash": "056c8e9c77d270a888a6f4bb1f13bd89"
   },
   "src/App.tsx": {
-    "mtime": 1789048210.524394,
-    "ast_hash": "9134806cedc7ddc339086dfe3b2016a8",
+    "mtime": 1789047013.5713184,
+    "ast_hash": "28907696aa4a575f2eda3fbd96b290d7",
     "semantic_hash": ""
   },
   "src/components/HMModeToggle.tsx": {
@@ -115,8 +115,8 @@
     "semantic_hash": ""
   },
   "src/sections/Projects.tsx": {
-    "mtime": 1789048563.0188324,
-    "ast_hash": "2a9a294b166da971ee3b4045a0dd5616",
+    "mtime": 1789047038.6421962,
+    "ast_hash": "bfb7baffef68067d462256e49d9ca4c7",
     "semantic_hash": ""
   },
   "src/sections/ShadowPage.tsx": {
@@ -170,9 +170,9 @@
     "semantic_hash": "637776aa6f7496d069afe7520c845c8a"
   },
   "README.md": {
-    "mtime": 1789047786.009465,
-    "ast_hash": "efadf436c313121d068525206f796eda",
-    "semantic_hash": ""
+    "mtime": 1782022574.90125,
+    "ast_hash": "1fd1975c826313d9af82af3562df872f",
+    "semantic_hash": "1fd1975c826313d9af82af3562df872f"
   },
   "docs/INFORMATION ARCHITECTURE.md": {
     "mtime": 1782022574.9046445,
