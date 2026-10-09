@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+                            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd
+                            http://www.google.com/schemas/sitemap-image/1.1
+                            http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd">
+
+  <!-- Main Homepage / Portfolio -->
+  <url>
+    <loc>https://manthanut.site/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+
+    <!-- Visual assets for Google Image crawler -->
+    <image:image>
+      <image:loc>https://manthanut.site/og-image.png</image:loc>
+      <image:title>Manthan Utekar — Creative Developer &amp; Full-Stack Engineer</image:title>
+      <image:caption>Interactive WebGL showcases and scalable full-stack applications portfolio preview</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://manthanut.site/quiz-image.png</image:loc>
+      <image:title>Interactive Quiz Application Showcase</image:title>
+      <image:caption>Web-based quiz application evaluating frontend engineering skills</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://manthanut.site/react-animation.png</image:loc>
+      <image:title>React 3D Animations &amp; WebGL Showcase</image:title>
+      <image:caption>Curtain reveals, circular clip-path transitions, and 3D card carousel</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Resume PDF Document for Search Bots -->
+  <url>
+    <loc>https://manthanut.site/resume.pdf</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>

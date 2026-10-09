@@ -1,0 +1,21 @@
+# https://manthanut.site robots.txt
+# Directives for search crawlers and Googlebot
+
+User-agent: Googlebot
+Allow: /
+Disallow: /empty
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.svg$
+Allow: /*.webp$
+
+User-agent: *
+Allow: /
+Disallow: /empty
+
+# XML Sitemap Location
+Sitemap: https://manthanut.site/sitemap.xml

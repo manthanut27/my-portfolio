@@ -195,8 +195,8 @@
     "semantic_hash": "f14b2646b87832230b06026ec806719e"
   },
   "index.html": {
-    "mtime": 1789046554.5951383,
-    "ast_hash": "ace962b9b9f5c2dbeb30bbb03734c719",
+    "mtime": 1791535899.594485,
+    "ast_hash": "da884050533a847e88515211e4707d99",
     "semantic_hash": ""
   },
   "public/resume.pdf": {
@@ -267,6 +267,11 @@
   "src/sections/EmptyStatePage.tsx": {
     "mtime": 1789047227.968983,
     "ast_hash": "4f7b9c37394a38311f4fc6c71b1c78c1",
+    "semantic_hash": ""
+  },
+  "public/robots.txt": {
+    "mtime": 1791535886.9292977,
+    "ast_hash": "4c253615e567c0b616a53360d96caa2d",
     "semantic_hash": ""
   }
 }
