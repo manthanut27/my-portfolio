@@ -234,9 +234,9 @@
     "semantic_hash": ""
   },
   "public/favicon.svg": {
-    "mtime": 1789046610.2674093,
-    "seen": 1795095877.899552,
-    "ast_hash": "095abcca6d50f7a710835acfc4a8f741",
+    "mtime": 1795099197.5905168,
+    "seen": 1795099233.0326638,
+    "ast_hash": "3e82a49caeacfbf53b72c69316bacf45",
     "semantic_hash": ""
   },
   "public/icons.svg": {
@@ -288,9 +288,9 @@
     "semantic_hash": ""
   },
   "public/apple-touch-icon.png": {
-    "mtime": 1789046610.4118354,
-    "seen": 1795095877.8995492,
-    "ast_hash": "c8b10bd0c5a139a3ff5ad5fbc70a5248",
+    "mtime": 1795099210.6375852,
+    "seen": 1795099233.0326617,
+    "ast_hash": "5d36d281f20c52a02061059acaf6da85",
     "semantic_hash": ""
   },
   "public/og-image.png": {
