@@ -10,15 +10,11 @@ export const Contact: React.FC<ContactProps> = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
-  // Validation & shake state
+  // Validation state
   const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [messageError, setMessageError] = useState('');
   const [apiError, setApiError] = useState(false);
-
-  const [shakeName, setShakeName] = useState(false);
-  const [shakeEmail, setShakeEmail] = useState(false);
-  const [shakeMessage, setShakeMessage] = useState(false);
 
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<'idle' | 'success'>('idle');
@@ -51,8 +47,6 @@ export const Contact: React.FC<ContactProps> = () => {
     // 1. Validate name
     if (!name || name.trim().length < 2) {
       setNameError('Please enter your name (at least 2 characters).');
-      setShakeName(true);
-      setTimeout(() => setShakeName(false), 400);
       hasError = true;
     }
 
@@ -60,16 +54,12 @@ export const Contact: React.FC<ContactProps> = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email || !emailRegex.test(email)) {
       setEmailError('Please enter a valid email address (e.g. alex@company.com).');
-      setShakeEmail(true);
-      setTimeout(() => setShakeEmail(false), 400);
       hasError = true;
     }
 
     // 3. Validate message
     if (!message || message.trim().length < 10) {
       setMessageError('Message is too brief. Please enter at least 10 characters.');
-      setShakeMessage(true);
-      setTimeout(() => setShakeMessage(false), 400);
       hasError = true;
     }
 
@@ -132,19 +122,16 @@ export const Contact: React.FC<ContactProps> = () => {
   return (
     <section
       id="contact"
-      className="relative w-full min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-16 py-24 bg-slate-50 text-slate-900 border-t border-slate-200/60 overflow-hidden"
+      className="relative w-full min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-16 py-24 bg-slate-50 text-slate-900 border-t border-slate-200/60"
     >
-      {/* Background Subtle Gradient */}
-      <div className="absolute bottom-0 right-1/4 w-[600px] h-[350px] bg-brand-orange/5 rounded-full blur-3xl pointer-events-none" />
-
       <div className="max-w-6xl mx-auto w-full flex flex-col gap-12 relative z-10">
         {/* Section Header */}
         <div className="flex flex-col items-center text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange font-mono text-xs font-bold uppercase tracking-wider mb-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-orange animate-pulse" />
-            <span>04 // INITIATE CONTACT</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-brand-orange font-mono text-xs font-medium mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-orange" />
+            <span>04 / Contact</span>
           </div>
-          <h2 className="font-space text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight text-slate-900 max-w-3xl">
+          <h2 className="font-space text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 max-w-3xl">
             Let's build something remarkable.
           </h2>
           <p className="mt-3 font-body text-base md:text-lg text-slate-600 max-w-2xl font-normal leading-relaxed">
@@ -162,26 +149,26 @@ export const Contact: React.FC<ContactProps> = () => {
                 <Mail className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400">
-                  DIRECT EMAIL
+                <span className="text-[11px] font-mono font-medium uppercase tracking-wider text-slate-400">
+                  Direct email
                 </span>
-                <div className="font-space font-bold text-slate-900 text-base mt-0.5 break-all">
+                <div className="font-space font-semibold text-slate-900 text-base mt-0.5 break-all">
                   {contactEmail}
                 </div>
               </div>
               <button
                 onClick={handleCopyEmail}
-                className="mt-1 flex items-center justify-center gap-1.5 py-2 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-mono font-bold transition-all cursor-pointer active:scale-95"
+                className="mt-1 flex items-center justify-center gap-1.5 py-2 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-mono font-medium transition-all cursor-pointer active:scale-95"
               >
                 {copiedEmail ? (
                   <>
                     <Check className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>Copied to Clipboard!</span>
+                    <span>Copied to clipboard</span>
                   </>
                 ) : (
                   <>
                     <Copy className="w-3.5 h-3.5 text-slate-500" />
-                    <span>Copy Email Address</span>
+                    <span>Copy email address</span>
                   </>
                 )}
               </button>
@@ -192,14 +179,14 @@ export const Contact: React.FC<ContactProps> = () => {
               <div className="bg-white/95 backdrop-blur-md rounded-2xl border border-slate-200/90 p-5 shadow-xs">
                 <div className="flex items-center gap-2 text-slate-400 mb-1.5">
                   <MapPin className="w-4 h-4 text-brand-orange" />
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider">
-                    LOCATION
+                  <span className="text-[10px] font-mono font-medium uppercase tracking-wider">
+                    Location
                   </span>
                 </div>
-                <div className="font-space font-bold text-sm text-slate-900">
+                <div className="font-space font-semibold text-sm text-slate-900">
                   Mumbai, India
                 </div>
-                <div className="text-[10px] font-mono text-slate-500 mt-0.5">
+                <div className="text-[10px] font-mono text-slate-500 mt-0.5 tabular-nums">
                   IST (UTC+5:30)
                 </div>
               </div>
@@ -207,23 +194,23 @@ export const Contact: React.FC<ContactProps> = () => {
               <div className="bg-white/95 backdrop-blur-md rounded-2xl border border-slate-200/90 p-5 shadow-xs">
                 <div className="flex items-center gap-2 text-slate-400 mb-1.5">
                   <Clock className="w-4 h-4 text-emerald-500" />
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider">
-                    RESPONSE TIME
+                  <span className="text-[10px] font-mono font-medium uppercase tracking-wider">
+                    Response time
                   </span>
                 </div>
-                <div className="font-space font-bold text-sm text-slate-900">
-                  &lt; 24 Hours
+                <div className="font-space font-semibold text-sm text-slate-900 tabular-nums">
+                  &lt; 24 hours
                 </div>
-                <div className="text-[10px] font-mono text-emerald-600 font-semibold mt-0.5">
-                  ● Fast turnaround
+                <div className="text-[10px] font-mono text-emerald-700 font-medium mt-0.5">
+                  Fast turnaround
                 </div>
               </div>
             </div>
 
             {/* Social Network Channels */}
             <div className="bg-white/95 backdrop-blur-md rounded-2xl border border-slate-200/90 p-5 shadow-xs flex items-center justify-between">
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500">
-                SOCIAL CONNECT
+              <span className="text-xs font-mono font-medium uppercase tracking-wider text-slate-500">
+                Social links
               </span>
               <div className="flex items-center gap-2">
                 <a
@@ -254,20 +241,20 @@ export const Contact: React.FC<ContactProps> = () => {
               {status === 'success' ? (
                 /* Success View */
                 <div className="flex flex-col items-center justify-center text-center py-8 gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center shadow-xs animate-bounce">
+                  <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center shadow-xs">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h3 className="font-syne font-black text-2xl text-slate-900">
-                    Message Delivered!
+                  <h3 className="font-space font-semibold text-2xl text-slate-900">
+                    Message sent
                   </h3>
                   <p className="font-body text-sm text-slate-600 max-w-sm leading-relaxed">
-                    Thank you, <strong className="text-slate-900">{submittedName}</strong>! Your note has landed directly in my inbox. I'll get back to you shortly.
+                    Thank you, <strong className="text-slate-900">{submittedName}</strong>. Your note has landed directly in my inbox. I'll get back to you shortly.
                   </p>
                   <button
                     onClick={() => setStatus('idle')}
-                    className="mt-2 px-6 py-2.5 rounded-xl bg-slate-900 hover:bg-brand-orange text-white font-mono text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                    className="mt-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-mono text-xs font-medium transition-colors cursor-pointer"
                   >
-                    Send Another Note
+                    Send another message
                   </button>
                 </div>
               ) : (
@@ -275,8 +262,8 @@ export const Contact: React.FC<ContactProps> = () => {
                 <div className="flex flex-col gap-4 text-left">
                   {/* Name field */}
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-600">
-                      Your Name
+                    <label className="text-[11px] font-mono font-medium uppercase tracking-wider text-slate-600">
+                      Your name
                     </label>
                     <input
                       type="text"
@@ -286,12 +273,12 @@ export const Contact: React.FC<ContactProps> = () => {
                         setName(e.target.value);
                         if (nameError) setNameError('');
                       }}
-                      className={`w-full px-4 h-12 rounded-xl bg-slate-50 border border-slate-200 outline-none font-body text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/10 transition-all ${
-                        shakeName ? 'animate-shake border-red-500 ring-2 ring-red-200' : ''
-                      }`}
+                      className={`w-full px-4 h-11 rounded-xl bg-slate-50 border ${
+                        nameError ? 'border-red-400 focus:border-red-500' : 'border-slate-200 focus:border-slate-400'
+                      } outline-none font-body text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white transition-all`}
                     />
                     {nameError && (
-                      <span className="text-xs text-red-600 font-semibold mt-0.5 ml-1 animate-pulse">
+                      <span className="text-xs text-red-600 font-medium mt-0.5 ml-1">
                         {nameError}
                       </span>
                     )}
@@ -299,8 +286,8 @@ export const Contact: React.FC<ContactProps> = () => {
 
                   {/* Email field */}
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-600">
-                      Email Address
+                    <label className="text-[11px] font-mono font-medium uppercase tracking-wider text-slate-600">
+                      Email address
                     </label>
                     <div className="relative">
                       <input
@@ -311,14 +298,14 @@ export const Contact: React.FC<ContactProps> = () => {
                           setEmail(e.target.value);
                           if (emailError) setEmailError('');
                         }}
-                        className={`w-full pl-4 pr-10 h-12 rounded-xl bg-slate-50 border border-slate-200 outline-none font-body text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/10 transition-all ${
-                          shakeEmail ? 'animate-shake border-red-500 ring-2 ring-red-200' : ''
-                        }`}
+                        className={`w-full pl-4 pr-10 h-11 rounded-xl bg-slate-50 border ${
+                          emailError ? 'border-red-400 focus:border-red-500' : 'border-slate-200 focus:border-slate-400'
+                        } outline-none font-body text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white transition-all`}
                       />
                       <Mail className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
                     </div>
                     {emailError && (
-                      <span className="text-xs text-red-600 font-semibold mt-0.5 ml-1 animate-pulse">
+                      <span className="text-xs text-red-600 font-medium mt-0.5 ml-1">
                         {emailError}
                       </span>
                     )}
@@ -327,10 +314,10 @@ export const Contact: React.FC<ContactProps> = () => {
                   {/* Message field */}
                   <div className="flex flex-col gap-1.5">
                     <div className="flex justify-between items-center">
-                      <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-600">
+                      <label className="text-[11px] font-mono font-medium uppercase tracking-wider text-slate-600">
                         Message
                       </label>
-                      <span className="text-[11px] font-mono text-slate-400">
+                      <span className="text-[11px] font-mono text-slate-400 tabular-nums">
                         {message.length} / 1000
                       </span>
                     </div>
@@ -342,12 +329,12 @@ export const Contact: React.FC<ContactProps> = () => {
                         setMessage(e.target.value);
                         if (messageError) setMessageError('');
                       }}
-                      className={`w-full p-4 h-32 rounded-xl resize-none bg-slate-50 border border-slate-200 outline-none font-body text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/10 transition-all ${
-                        shakeMessage ? 'animate-shake border-red-500 ring-2 ring-red-200' : ''
-                      }`}
+                      className={`w-full p-4 h-32 rounded-xl resize-none bg-slate-50 border ${
+                        messageError ? 'border-red-400 focus:border-red-500' : 'border-slate-200 focus:border-slate-400'
+                      } outline-none font-body text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white transition-all`}
                     />
                     {messageError && (
-                      <span className="text-xs text-red-600 font-semibold mt-0.5 ml-1 animate-pulse">
+                      <span className="text-xs text-red-600 font-medium mt-0.5 ml-1">
                         {messageError}
                       </span>
                     )}
@@ -356,13 +343,13 @@ export const Contact: React.FC<ContactProps> = () => {
                   {/* API Failure Notice */}
                   {apiError && (
                     <div className="p-4 bg-red-50 border border-red-200 text-red-800 rounded-xl text-xs flex flex-col gap-2">
-                      <div className="flex items-center gap-2 font-bold text-red-900">
+                      <div className="flex items-center gap-2 font-medium text-red-900">
                         <AlertTriangle className="w-4 h-4 shrink-0 text-red-600" />
-                        <span>Submission Notice</span>
+                        <span>Submission notice</span>
                       </div>
                       <p>
                         Unable to connect to the mail gateway right now. You can email directly to{' '}
-                        <a href={`mailto:${contactEmail}`} className="underline font-bold">
+                        <a href={`mailto:${contactEmail}`} className="underline font-medium">
                           {contactEmail}
                         </a>
                         .
@@ -370,15 +357,15 @@ export const Contact: React.FC<ContactProps> = () => {
                       <div className="flex items-center gap-2 mt-1">
                         <button
                           onClick={handleSubmit}
-                          className="px-3 py-1 bg-red-100 hover:bg-red-200 text-red-900 rounded-lg text-xs font-bold border border-red-300 cursor-pointer"
+                          className="px-3 py-1 bg-red-100 hover:bg-red-200 text-red-900 rounded-lg text-xs font-medium border border-red-300 cursor-pointer"
                         >
-                          Retry Send
+                          Retry send
                         </button>
                         <button
                           onClick={handleCopyEmail}
-                          className="px-3 py-1 bg-white hover:bg-red-50 text-red-900 rounded-lg text-xs font-bold border border-red-300 cursor-pointer"
+                          className="px-3 py-1 bg-white hover:bg-red-50 text-red-900 rounded-lg text-xs font-medium border border-red-300 cursor-pointer"
                         >
-                          {copiedEmail ? 'Copied!' : 'Copy Email'}
+                          {copiedEmail ? 'Copied' : 'Copy email'}
                         </button>
                       </div>
                     </div>
@@ -388,17 +375,17 @@ export const Contact: React.FC<ContactProps> = () => {
                   <button
                     onClick={handleSubmit}
                     disabled={loading}
-                    className="w-full h-12 flex items-center justify-center gap-2 font-mono font-bold text-xs uppercase tracking-wider bg-slate-900 hover:bg-brand-orange text-white rounded-xl shadow-xs hover:shadow-md transition-all active:scale-98 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="w-full h-11 flex items-center justify-center gap-2 font-mono font-medium text-xs bg-slate-900 hover:bg-slate-800 text-white rounded-xl shadow-xs transition-all active:scale-[0.99] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {loading ? (
                       <>
                         <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin shrink-0" />
-                        <span>DELIVERING NOTE...</span>
+                        <span>Sending...</span>
                       </>
                     ) : (
                       <>
                         <Send className="w-3.5 h-3.5 shrink-0" />
-                        <span>SEND MESSAGE</span>
+                        <span>Send message</span>
                       </>
                     )}
                   </button>

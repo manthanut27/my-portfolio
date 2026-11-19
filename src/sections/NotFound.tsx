@@ -12,42 +12,39 @@ export const NotFound: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white font-body flex flex-col items-center justify-center p-6 relative select-none overflow-hidden">
-      {/* Background Ambient Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-orange/10 rounded-full blur-3xl pointer-events-none" />
-
+    <div className="min-h-screen bg-slate-950 text-white font-body flex flex-col items-center justify-center p-6 relative select-none">
       {/* Modern Card */}
-      <div className="max-w-md w-full bg-slate-900/90 backdrop-blur-xl border border-slate-800 shadow-2xl rounded-3xl p-8 text-center relative z-10">
+      <div className="max-w-md w-full bg-slate-900 border border-slate-800 shadow-xl rounded-2xl p-8 text-center relative z-10">
         {/* Top decorative bar */}
-        <div className="flex items-center justify-between pb-4 mb-6 border-b border-slate-800 font-mono text-xs text-slate-400 uppercase tracking-wider">
-          <span className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-brand-orange animate-pulse" />
-            SYS_STATUS: 404
+        <div className="flex items-center justify-between pb-4 mb-6 border-b border-slate-800 font-mono text-xs text-slate-400">
+          <span className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-orange" />
+            <span>Status 404</span>
           </span>
-          <span>HTTP_NOT_FOUND</span>
+          <span>Not found</span>
         </div>
 
         {/* 404 Headline */}
-        <div className="font-space font-black text-7xl md:text-8xl text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-amber-400 mb-2 tracking-tighter">
+        <div className="font-space font-bold text-6xl text-slate-100 mb-2 tracking-tight">
           404
         </div>
 
-        <h1 className="font-syne font-bold text-2xl text-white mb-2">
-          Lost in Cyberspace
+        <h1 className="font-space font-semibold text-xl text-white mb-2">
+          Page not found
         </h1>
 
         <p className="text-slate-400 text-sm mb-8 leading-relaxed">
-          The coordinate you navigated to doesn't exist or has dissolved into the digital ether.
+          The coordinate you navigated to doesn't exist or has moved.
         </p>
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <button
             onClick={() => navigate('/')}
-            className="flex items-center justify-center gap-2 px-5 py-2.5 bg-brand-orange hover:bg-white hover:text-slate-950 text-white font-mono font-bold text-xs uppercase tracking-wider transition-all rounded-xl shadow-xs active:scale-95 cursor-pointer"
+            className="flex items-center justify-center gap-2 px-5 py-2.5 bg-slate-100 hover:bg-white text-slate-900 font-mono font-medium text-xs rounded-xl shadow-xs active:scale-95 cursor-pointer transition-colors"
           >
             <Home className="w-4 h-4" />
-            <span>Return to Portfolio</span>
+            <span>Return to portfolio</span>
           </button>
         </div>
       </div>

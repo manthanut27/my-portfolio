@@ -60,9 +60,9 @@
     "semantic_hash": "47e42fbe48c7d5c070e00bfc336d5a2d"
   },
   "src/components/Navbar.tsx": {
-    "mtime": 1795096863.2131445,
-    "seen": 1795097070.445628,
-    "ast_hash": "532878beed7837322418fec008f30c4f",
+    "mtime": 1795099532.1058142,
+    "seen": 1795099816.1650417,
+    "ast_hash": "5c0f18f81e837795db377a65330c9e51",
     "semantic_hash": ""
   },
   "src/context/PerformanceTier.tsx": {
@@ -114,21 +114,21 @@
     "semantic_hash": "df3369963799e47ef5a77cdca932abf0"
   },
   "src/sections/About.tsx": {
-    "mtime": 1795096982.1510231,
-    "seen": 1795097070.4456558,
-    "ast_hash": "549c36b9b712cbea9af9152486baa633",
+    "mtime": 1795099579.079738,
+    "seen": 1795099816.1650612,
+    "ast_hash": "b2c5ef3bb647d1689258a36893aba995",
     "semantic_hash": ""
   },
   "src/sections/Contact.tsx": {
-    "mtime": 1795097013.9796815,
-    "seen": 1795097070.4456582,
-    "ast_hash": "03bba94283b6964d493186cde13b7771",
+    "mtime": 1795099786.1560793,
+    "seen": 1795099816.1650624,
+    "ast_hash": "52707ca128956e512e2a8d07eb2e73e1",
     "semantic_hash": ""
   },
   "src/sections/Footer.tsx": {
-    "mtime": 1795096872.7622156,
-    "seen": 1795097070.4456637,
-    "ast_hash": "b74e2d495d742f8a1221309b5b646541",
+    "mtime": 1795099738.4170933,
+    "seen": 1795099816.165066,
+    "ast_hash": "9c55a535958d77ce40fc70e7aa590a80",
     "semantic_hash": ""
   },
   "src/sections/Hero.tsx": {
@@ -138,9 +138,9 @@
     "semantic_hash": ""
   },
   "src/sections/Projects.tsx": {
-    "mtime": 1795097000.385757,
-    "seen": 1795097070.4456713,
-    "ast_hash": "d55712400bfd6eb899f0701be7547ed6",
+    "mtime": 1795099793.828064,
+    "seen": 1795099816.1650703,
+    "ast_hash": "1263f59218a08102f15e75c512cb8012",
     "semantic_hash": ""
   },
   "src/sections/ShadowPage.tsx": {
@@ -150,9 +150,9 @@
     "semantic_hash": ""
   },
   "src/sections/Skills.tsx": {
-    "mtime": 1795096991.1851494,
-    "seen": 1795097070.4456766,
-    "ast_hash": "2ac3999b3be8bff6fce9627ede92b0db",
+    "mtime": 1795099614.832868,
+    "seen": 1795099816.1650732,
+    "ast_hash": "9f2304818a52723174297f4b77fa88f3",
     "semantic_hash": ""
   },
   "src/sections/Terminal.tsx": {
@@ -228,15 +228,15 @@
     "semantic_hash": ""
   },
   "public/resume.pdf": {
-    "mtime": 1795097655.926809,
-    "seen": 1795097986.1408114,
-    "ast_hash": "d81531e776873cebf71df6ce2c367873",
+    "mtime": 1795100149.7059586,
+    "seen": 1795100195.8306022,
+    "ast_hash": "cab945b541fc5916e97f9a70f9ab9df3",
     "semantic_hash": ""
   },
   "public/favicon.svg": {
-    "mtime": 1795099197.5905168,
-    "seen": 1795099233.0326638,
-    "ast_hash": "3e82a49caeacfbf53b72c69316bacf45",
+    "mtime": 1795099310.8936164,
+    "seen": 1795099816.165098,
+    "ast_hash": "a01c6de31579c6570940cff2d941aec9",
     "semantic_hash": ""
   },
   "public/icons.svg": {
@@ -282,9 +282,9 @@
     "semantic_hash": ""
   },
   "src/sections/NotFound.tsx": {
-    "mtime": 1789046095.8414376,
-    "seen": 1795095877.8995087,
-    "ast_hash": "1454dea0cd937a6b2714900af28f6857",
+    "mtime": 1795099789.751593,
+    "seen": 1795099816.1650689,
+    "ast_hash": "ed119ff6e75f02d8dd8fea25fd9f46b0",
     "semantic_hash": ""
   },
   "public/apple-touch-icon.png": {
@@ -300,9 +300,9 @@
     "semantic_hash": ""
   },
   "src/components/EmptyState.tsx": {
-    "mtime": 1789046996.9720423,
-    "seen": 1795095877.8994572,
-    "ast_hash": "5ed2f96be766bea2aba109b2cd2cd513",
+    "mtime": 1795099760.2377217,
+    "seen": 1795099816.1650302,
+    "ast_hash": "65b9d6791987a1002acf5ea40a292222",
     "semantic_hash": ""
   },
   "src/sections/EmptyStatePage.tsx": {

@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, ExternalLink, Github, Search, Sparkles, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ExternalLink, Github, Search, X } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 import { EmptyState } from '../components/EmptyState';
 
@@ -6,7 +6,6 @@ interface Project {
   name: string;
   category: 'Full-Stack' | 'Creative & 3D' | 'AI & Mobile';
   status: 'LIVE' | 'COMING SOON';
-  accentColor: string;
   desc: string;
   image?: string;
   tech: string[];
@@ -23,7 +22,6 @@ export const Projects: React.FC<ProjectsProps> = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // High-performance non-render momentum tracking
   const isDraggingRef = useRef(false);
   const startXRef = useRef(0);
   const scrollLeftRef = useRef(0);
@@ -33,8 +31,7 @@ export const Projects: React.FC<ProjectsProps> = () => {
   const momentumAnimRef = useRef<number | null>(null);
   const hasDraggedRef = useRef(false);
 
-  // Search & Filter state
-  const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [comingSoonNotice, setComingSoonNotice] = useState<string | null>(null);
 
@@ -43,8 +40,7 @@ export const Projects: React.FC<ProjectsProps> = () => {
       name: 'Eva Bloom',
       category: 'Full-Stack',
       status: 'LIVE',
-      accentColor: '#572981', // grape
-      desc: "India's premium jewelry e-commerce platform featuring dynamic product galleries, secure checkout, and real-time inventory management.",
+      desc: "Jewelry e-commerce store with product galleries, dynamic cart, secure Razorpay checkout, and real-time inventory management.",
       image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDJqSrkr-blVDlX-HqAMtgVWLBL_yE--HjGpwbLYv6e0b58ziTzsUEeO9T4iKqnLasMR-ECqRhV6Lx0UJ_uoLT91MSU0lGZGNYRSS7JPXPOy5lZjtcg4nAU_JThBCHXjCNeXC6nJqHvgRpzopKgDI0cRFohcnwUU71SMmOk2x8j5WrAirP5djf3ARtOmsw38pmDQSZWvQbRQqmZesJqoSGyIt6mZIUBWTNjIULtYqu8eGL3IuV5kn1f7oGMDsd6jRAngLDOQos6QOE',
       tech: ['React', 'Node.js', 'Supabase', 'Prisma', 'Razorpay', 'Resend', 'Redis'],
       liveLink: import.meta.env.VITE_LIVE_LINK_EVA_BLOOM || 'https://evabloom.in',
@@ -54,8 +50,7 @@ export const Projects: React.FC<ProjectsProps> = () => {
       name: 'BMW M4 GT3',
       category: 'Creative & 3D',
       status: 'LIVE',
-      accentColor: '#710523', // cherry
-      desc: 'Immersive 3D car showcase with interactive configuration, 360-degree rotation, and performance specs visualization using WebGL and R3F.',
+      desc: 'Interactive 3D motorsport showcase with 360-degree rotation, paint customizer, and performance specs visualization using WebGL and R3F.',
       image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDRtINeOCqG1mM8fr76lQr2CjlqlFZNlgd6LpvVspmJRDpL8s2qCs132OdeZbjN1C1Om-VyUZNZ_7BKL8AR71FbfpNNkDF0WqgM7PZ_qxFjGSwCv73QvcMloRcfIB9H9n-GZf2N-r7WSGa-RPycEYMU4O4f0Td-xZjXxyo7Ho8PPr4oRxWY95LN0_Ep1NJd1cWvaQ8pAqR2RlLz61XKZOmHUsLJhjsKBGQ-fG1f5Miv6_HV920SF72i6LpFzlAAyNYpJwHmqwLRgjU',
       tech: ['Next.js', 'R3F', 'GSAP', 'Framer', 'Tailwind'],
       liveLink: import.meta.env.VITE_LIVE_LINK_BMW || 'https://bmw-m4.manthanut.site',
@@ -65,8 +60,7 @@ export const Projects: React.FC<ProjectsProps> = () => {
       name: 'Quiz Application',
       category: 'Full-Stack',
       status: 'LIVE',
-      accentColor: '#500171', // purple
-      desc: 'An interactive web-based quiz that tests foundational knowledge of HTML, CSS, and JavaScript through a series of timed challenges.',
+      desc: 'Interactive quiz application covering HTML, CSS, and modern JavaScript with persistent score storage and animated transitions.',
       image: '/quiz-image.png',
       tech: ['React', 'GSAP', 'Tailwind CSS'],
       liveLink: import.meta.env.VITE_LIVE_LINK_QUIZ || 'https://quiz.manthanut.site',
@@ -76,8 +70,7 @@ export const Projects: React.FC<ProjectsProps> = () => {
       name: 'React Animations',
       category: 'Creative & 3D',
       status: 'LIVE',
-      accentColor: '#06B6D4', // cyan
-      desc: 'An immersive web animation and WebGL showcase featuring a split-column curtain reveal, circular clip-path transitions, and a scroll-pinned 3D circular card carousel.',
+      desc: 'WebGL and scroll animation showcase featuring split-column curtain reveals, clip-path transitions, and a scroll-pinned circular carousel.',
       image: '/react-animation.png',
       tech: ['React', 'Three.js', 'R3F', 'GSAP', 'Lenis', 'GLSL'],
       liveLink: import.meta.env.VITE_LIVE_LINK_REACT_ANIMATIONS || 'https://react-animation-xi.vercel.app',
@@ -87,19 +80,21 @@ export const Projects: React.FC<ProjectsProps> = () => {
       name: 'FitMirror',
       category: 'AI & Mobile',
       status: 'COMING SOON',
-      accentColor: '#FE6334', // brand orange
-      desc: 'AI-powered fitness tracking application utilizing pose estimation to provide real-time form correction, rep tracking, and workout analytics.',
+      desc: 'Mobile fitness tracking application with real-time pose estimation for form feedback and workout repetition counting.',
       tech: ['TensorFlow.js', 'React Native', 'Expo', 'Python'],
     },
   ];
 
-  const categories = ['ALL', 'FULL-STACK', 'CREATIVE & 3D', 'AI & MOBILE'];
+  const categories = [
+    { label: 'All', value: 'All' },
+    { label: 'Full-stack', value: 'Full-Stack' },
+    { label: 'Creative & 3D', value: 'Creative & 3D' },
+    { label: 'AI & mobile', value: 'AI & Mobile' },
+  ];
 
-  // Filter projects by category and query
   const filteredProjects = projects.filter((p) => {
     const matchesCategory =
-      selectedCategory === 'ALL' ||
-      p.category.toUpperCase() === selectedCategory;
+      selectedCategory === 'All' || p.category === selectedCategory;
 
     const q = searchQuery.trim().toLowerCase();
     const matchesQuery =
@@ -111,7 +106,6 @@ export const Projects: React.FC<ProjectsProps> = () => {
     return matchesCategory && matchesQuery;
   });
 
-  // Reset active index and scroll position when filter or query changes
   useEffect(() => {
     setActiveIndex(0);
     if (scrollRef.current) {
@@ -119,7 +113,6 @@ export const Projects: React.FC<ProjectsProps> = () => {
     }
   }, [selectedCategory, searchQuery]);
 
-  // Smooth snap to closest card
   const snapToNearestCard = () => {
     const container = scrollRef.current;
     if (!container) return;
@@ -177,7 +170,6 @@ export const Projects: React.FC<ProjectsProps> = () => {
     }
   };
 
-  // Scroll to explicit index
   const scrollToIndex = (index: number) => {
     const container = scrollRef.current;
     if (!container) return;
@@ -200,7 +192,6 @@ export const Projects: React.FC<ProjectsProps> = () => {
     setActiveIndex(index);
   };
 
-  // Step scroll with Next / Previous controls
   const scrollStep = (direction: 'left' | 'right') => {
     const nextIdx =
       direction === 'left'
@@ -209,7 +200,6 @@ export const Projects: React.FC<ProjectsProps> = () => {
     scrollToIndex(nextIdx);
   };
 
-  // Update active index accurately on scroll
   const handleScroll = () => {
     if (!scrollRef.current) return;
     const container = scrollRef.current;
@@ -258,7 +248,6 @@ export const Projects: React.FC<ProjectsProps> = () => {
     setActiveIndex(bestIndex);
   };
 
-  // Mouse dragging handlers
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!scrollRef.current) return;
     if (momentumAnimRef.current) {
@@ -336,7 +325,6 @@ export const Projects: React.FC<ProjectsProps> = () => {
     }
   };
 
-  // Smooth mouse wheel translation to horizontal scroll
   useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
@@ -383,91 +371,80 @@ export const Projects: React.FC<ProjectsProps> = () => {
   return (
     <section
       id="projects"
-      className="relative w-full min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-16 py-24 bg-slate-50 text-slate-900 border-t border-slate-200/60 overflow-hidden"
+      className="w-full min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-16 py-20 bg-slate-50 text-slate-900 border-t border-slate-200/80"
     >
-      <div className="max-w-7xl mx-auto w-full flex flex-col gap-10 relative z-10">
-        {/* Section Header with Controls */}
-        <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-6 text-center md:text-left">
-          <div className="flex flex-col items-center md:items-start">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange font-mono text-xs font-bold uppercase tracking-wider mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-brand-orange animate-pulse" />
-              <span>03 // FEATURED WORK & CASE STUDIES</span>
-            </div>
-            <h2 className="font-space text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight text-slate-900">
-              Selected Projects
+      <div className="max-w-7xl mx-auto w-full flex flex-col gap-8">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 text-left">
+          <div className="flex flex-col items-start max-w-xl">
+            <span className="font-mono text-xs text-slate-500 uppercase tracking-wider mb-2">
+              03 — Work
+            </span>
+            <h2 className="font-space text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-slate-900">
+              Selected projects and case studies
             </h2>
-            <p className="mt-2 font-body text-base md:text-lg text-slate-600 max-w-xl">
-              Production architectures, interactive 3D WebGL builds, and cutting-edge software experiments.
+            <p className="mt-2 text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
+              Production architectures, interactive WebGL applications, and developer tools.
             </p>
           </div>
 
-          {/* Desktop Arrow Controls & Project Counter */}
+          {/* Stepper Controls */}
           {filteredProjects.length > 0 && (
-            <div className="hidden md:flex items-center gap-3">
-              <span className="font-mono text-xs font-bold px-3 py-1.5 bg-white rounded-full border border-slate-200 text-slate-700 shadow-xs">
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-xs text-slate-500 tabular-nums px-2.5 py-1 bg-white border border-slate-200 rounded-md">
                 {String(activeIndex + 1).padStart(2, '0')} / {String(filteredProjects.length).padStart(2, '0')}
               </span>
               <button
                 onClick={() => scrollStep('left')}
                 disabled={activeIndex === 0}
-                className={`w-10 h-10 rounded-full border border-slate-200 bg-white hover:bg-slate-900 hover:text-white transition-all flex items-center justify-center text-slate-700 shadow-xs active:scale-95 ${
-                  activeIndex === 0
-                    ? 'opacity-40 cursor-not-allowed hover:bg-white hover:text-slate-700'
-                    : 'cursor-pointer'
-                }`}
+                className="w-8 h-8 rounded-lg border border-slate-200 bg-white text-slate-700 flex items-center justify-center hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
                 aria-label="Previous project"
               >
-                <ArrowLeft className="w-4 h-4" />
+                <ArrowLeft className="w-3.5 h-3.5" />
               </button>
               <button
                 onClick={() => scrollStep('right')}
                 disabled={activeIndex === filteredProjects.length - 1}
-                className={`w-10 h-10 rounded-full border border-slate-200 bg-white hover:bg-slate-900 hover:text-white transition-all flex items-center justify-center text-slate-700 shadow-xs active:scale-95 ${
-                  activeIndex === filteredProjects.length - 1
-                    ? 'opacity-40 cursor-not-allowed hover:bg-white hover:text-slate-700'
-                    : 'cursor-pointer'
-                }`}
+                className="w-8 h-8 rounded-lg border border-slate-200 bg-white text-slate-700 flex items-center justify-center hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
                 aria-label="Next project"
               >
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
           )}
         </div>
 
         {/* Filter & Search Bar */}
-        <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 bg-white/80 backdrop-blur-md p-2.5 rounded-2xl border border-slate-200/90 shadow-xs">
-          {/* Category Tabs */}
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar w-full sm:w-auto pb-1 sm:pb-0">
+        <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-3 bg-white p-2 rounded-xl border border-slate-200">
+          <div className="flex items-center gap-1 overflow-x-auto no-scrollbar w-full sm:w-auto pb-1 sm:pb-0">
             {categories.map((cat) => (
               <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-3.5 py-1.5 rounded-xl font-mono font-bold text-xs uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
-                  selectedCategory === cat
-                    ? 'bg-slate-900 text-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
+                key={cat.value}
+                onClick={() => setSelectedCategory(cat.value)}
+                className={`px-3 py-1.5 rounded-lg font-mono text-xs transition-colors shrink-0 cursor-pointer ${
+                  selectedCategory === cat.value
+                    ? 'bg-slate-900 text-white font-medium'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                 }`}
               >
-                {cat}
+                {cat.label}
               </button>
             ))}
           </div>
 
-          {/* Search Input Box */}
-          <div className="relative w-full sm:w-72">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <div className="relative w-full sm:w-64">
+            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
             <input
               type="text"
-              placeholder="Search tech or project..."
+              placeholder="Search projects..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-8 py-2 bg-slate-50 border border-slate-200 rounded-xl font-body text-xs text-slate-800 placeholder:text-slate-400 outline-none focus:bg-white focus:border-brand-orange transition-all"
+              className="w-full pl-8 pr-7 py-1.5 bg-slate-50 border border-slate-200 rounded-lg font-body text-xs text-slate-800 placeholder:text-slate-400 outline-none focus:bg-white focus:border-slate-400 transition-colors"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
                 aria-label="Clear search"
               >
                 <X className="w-3.5 h-3.5" />
@@ -476,33 +453,28 @@ export const Projects: React.FC<ProjectsProps> = () => {
           </div>
         </div>
 
-        {/* Coming Soon Alert Notification */}
+        {/* Notification Banner */}
         {comingSoonNotice && (
-          <div className="w-full p-4 bg-slate-900 text-white border border-slate-800 rounded-2xl flex items-center justify-between gap-4 shadow-lg animate-fadeIn">
-            <div className="flex items-center gap-3">
-              <Sparkles className="w-5 h-5 text-brand-orange shrink-0 animate-pulse" />
-              <span className="font-mono text-xs md:text-sm font-medium text-slate-200">
-                {comingSoonNotice}
-              </span>
-            </div>
+          <div className="w-full p-3 bg-slate-900 text-white rounded-lg flex items-center justify-between gap-3 text-xs font-mono">
+            <span>{comingSoonNotice}</span>
             <button
               onClick={() => setComingSoonNotice(null)}
-              className="p-1 hover:bg-white/10 rounded-lg text-slate-400 hover:text-white transition-colors"
+              className="text-slate-400 hover:text-white"
             >
-              <X className="w-4 h-4" />
+              <X className="w-3.5 h-3.5" />
             </button>
           </div>
         )}
 
-        {/* Projects Carousel View or Empty State */}
+        {/* Carousel or Empty State */}
         {filteredProjects.length === 0 ? (
           <EmptyState
-            title="No Matching Projects"
-            description={`No projects found matching "${searchQuery}" in ${selectedCategory}. Try resetting your search filter.`}
-            actionLabel="Reset Search & Filters"
+            title="No matching projects"
+            description={`No projects found matching "${searchQuery}" in ${selectedCategory}.`}
+            actionLabel="Reset search"
             onAction={() => {
               setSearchQuery('');
-              setSelectedCategory('ALL');
+              setSelectedCategory('All');
             }}
           />
         ) : (
@@ -510,7 +482,7 @@ export const Projects: React.FC<ProjectsProps> = () => {
             ref={scrollRef}
             tabIndex={0}
             role="region"
-            aria-label="Projects horizontal carousel"
+            aria-label="Projects carousel"
             onMouseDown={handleMouseDown}
             onMouseLeave={handleMouseUp}
             onMouseUp={handleMouseUp}
@@ -530,15 +502,12 @@ export const Projects: React.FC<ProjectsProps> = () => {
                 scrollStep('right');
               }
             }}
-            className={`flex gap-5 sm:gap-6 md:gap-7 overflow-x-auto pb-6 pt-2 no-scrollbar touch-pan-x w-full select-none outline-none focus-visible:ring-2 focus-visible:ring-brand-orange rounded-2xl ${
-              isDragging ? 'cursor-grabbing select-none' : 'cursor-grab'
+            className={`flex gap-5 overflow-x-auto pb-4 pt-1 no-scrollbar touch-pan-x w-full select-none outline-none ${
+              isDragging ? 'cursor-grabbing' : 'cursor-grab'
             }`}
             style={{
               scrollSnapType: isDragging ? 'none' : 'x proximity',
               scrollBehavior: isDragging ? 'auto' : 'smooth',
-              WebkitOverflowScrolling: 'touch',
-              overscrollBehaviorX: 'contain',
-              scrollPaddingInline: '1.5rem',
             }}
           >
             {filteredProjects.map((project, idx) => {
@@ -548,34 +517,31 @@ export const Projects: React.FC<ProjectsProps> = () => {
               return (
                 <div
                   key={project.name}
-                  className="project-card-container snap-center shrink-0 w-[88vw] sm:w-[380px] md:w-[450px] h-[540px] md:h-[580px] flex items-center transition-transform duration-300"
+                  className="project-card-container snap-center shrink-0 w-[85vw] sm:w-[360px] md:w-[420px] h-[520px] flex items-center"
                 >
                   <div
-                    className={`bg-white rounded-2xl border flex flex-col h-full w-full overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 group ${
-                      isFocused
-                        ? 'border-slate-400 shadow-md scale-[1.01]'
-                        : 'border-slate-200/90'
+                    className={`bg-white rounded-xl border flex flex-col h-full w-full overflow-hidden transition-colors ${
+                      isFocused ? 'border-slate-400 shadow-sm' : 'border-slate-200'
                     }`}
                   >
                     {/* Media Thumbnail Frame */}
-                    <div className="h-48 md:h-56 overflow-hidden relative border-b border-slate-100 bg-slate-900 flex items-center justify-center">
-                      {/* Top Badges: Category & Status */}
-                      <div className="absolute top-3 left-3 z-20">
-                        <span className="font-mono text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-white border border-white/10 uppercase tracking-wider">
+                    <div className="h-44 md:h-48 overflow-hidden relative border-b border-slate-100 bg-slate-900 flex items-center justify-center">
+                      <div className="absolute top-3 left-3 z-10">
+                        <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-slate-900/80 text-slate-200 border border-slate-700">
                           {project.category}
                         </span>
                       </div>
 
-                      <div className="absolute top-3 right-3 z-20">
+                      <div className="absolute top-3 right-3 z-10">
                         <span
-                          className={`text-[10px] font-mono font-bold px-2.5 py-1 rounded-full shadow-xs flex items-center gap-1.5 ${
+                          className={`text-[10px] font-mono font-medium px-2 py-0.5 rounded flex items-center gap-1.5 ${
                             isLive
-                              ? 'bg-emerald-500 text-white'
-                              : 'bg-brand-orange text-white'
+                              ? 'bg-emerald-600 text-white'
+                              : 'bg-slate-800 text-slate-300 border border-slate-700'
                           }`}
                         >
-                          <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                          <span>{project.status}</span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-white" />
+                          <span>{project.status === 'LIVE' ? 'Live' : 'In development'}</span>
                         </span>
                       </div>
 
@@ -584,41 +550,31 @@ export const Projects: React.FC<ProjectsProps> = () => {
                           src={project.image}
                           alt={project.name}
                           loading="lazy"
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none pointer-events-none"
+                          className="w-full h-full object-cover select-none pointer-events-none"
                         />
                       ) : (
-                        <div className="w-full h-full flex flex-col items-center justify-center bg-slate-950 text-slate-300 font-mono text-center p-6 select-none relative">
-                          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fe6334_1px,transparent_1px)] [background-size:16px_16px]" />
-                          <Sparkles className="w-8 h-8 text-brand-orange mb-2 animate-pulse" />
-                          <span className="text-xs tracking-widest uppercase font-bold text-slate-400">
-                            R&D IN PROGRESS
-                          </span>
-                          <span className="text-lg font-syne font-black text-white mt-1">
-                            FitMirror Pose Engine
-                          </span>
-                          <span className="text-[10px] text-slate-500 mt-2">
-                            [ Real-Time Pose Estimation ]
-                          </span>
+                        <div className="w-full h-full flex flex-col items-center justify-center bg-slate-950 text-slate-400 font-mono text-center p-4">
+                          <span className="text-xs uppercase text-slate-500">Architecture in progress</span>
+                          <span className="text-sm font-space text-white mt-1">Pose estimation engine</span>
                         </div>
                       )}
                     </div>
 
-                    {/* Card Body */}
-                    <div className="p-5 md:p-7 flex flex-col flex-grow text-left justify-between">
+                    {/* Card Content */}
+                    <div className="p-5 flex flex-col flex-grow text-left justify-between">
                       <div>
-                        <h3 className="font-syne font-black text-xl md:text-2xl text-slate-900 group-hover:text-brand-orange transition-colors mb-2">
+                        <h3 className="font-space font-semibold text-lg text-slate-900 mb-1.5">
                           {project.name}
                         </h3>
-                        <p className="font-body text-slate-600 text-xs md:text-sm leading-relaxed mb-4 line-clamp-3 md:line-clamp-4">
+                        <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-3 line-clamp-3">
                           {project.desc}
                         </p>
 
-                        {/* Tech Pills */}
-                        <div className="flex flex-wrap gap-1.5 mb-6">
+                        <div className="flex flex-wrap gap-1 mb-4">
                           {project.tech.map((t) => (
                             <span
                               key={t}
-                              className="bg-slate-100 text-slate-700 font-mono text-[10px] md:text-xs px-2.5 py-0.5 rounded-md border border-slate-200/80 font-medium"
+                              className="bg-slate-100 text-slate-600 font-mono text-[10px] px-2 py-0.5 rounded border border-slate-200"
                             >
                               {t}
                             </span>
@@ -626,24 +582,23 @@ export const Projects: React.FC<ProjectsProps> = () => {
                         </div>
                       </div>
 
-                      {/* Call to Action Buttons */}
-                      <div className="flex gap-2.5 pt-4 border-t border-slate-100">
+                      <div className="flex gap-2 pt-3 border-t border-slate-100">
                         {isLive ? (
                           <>
                             <a
                               href={project.liveLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex-1 bg-brand-orange hover:bg-slate-900 text-white text-center py-2.5 rounded-xl font-mono font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-xs hover:shadow-md active:scale-98"
+                              className="flex-1 bg-slate-900 hover:bg-slate-800 text-white text-center py-2 rounded-lg font-mono text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                             >
                               <ExternalLink className="w-3.5 h-3.5" />
-                              <span>Live Demo</span>
+                              <span>Live demo</span>
                             </a>
                             <a
                               href={project.gitLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex-1 bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 text-center py-2.5 rounded-xl font-mono font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer active:scale-98"
+                              className="flex-1 bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 text-center py-2 rounded-lg font-mono text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                             >
                               <Github className="w-3.5 h-3.5" />
                               <span>GitHub</span>
@@ -653,13 +608,12 @@ export const Projects: React.FC<ProjectsProps> = () => {
                           <button
                             onClick={() =>
                               setComingSoonNotice(
-                                `${project.name} is in active R&D! Pose estimation model is undergoing latency testing on mobile GPUs.`
+                                `${project.name} is currently in local benchmarking for pose detection latency.`
                               )
                             }
-                            className="w-full bg-slate-900 hover:bg-brand-orange text-white py-2.5 rounded-xl font-mono font-bold text-xs flex items-center justify-center gap-2 cursor-pointer transition-colors shadow-xs active:scale-98"
+                            className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 py-2 rounded-lg font-mono text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                           >
-                            <Sparkles className="w-3.5 h-3.5 text-brand-yellow" />
-                            <span>Preview Roadmap</span>
+                            <span>Status details</span>
                           </button>
                         )}
                       </div>
@@ -673,20 +627,17 @@ export const Projects: React.FC<ProjectsProps> = () => {
 
         {/* Carousel Pagination Dots */}
         {filteredProjects.length > 1 && (
-          <div className="flex items-center justify-center gap-2 mt-2">
+          <div className="flex items-center justify-center gap-1.5 mt-1">
             {filteredProjects.map((proj, idx) => {
               const isActive = activeIndex === idx;
               return (
                 <button
                   key={proj.name}
                   onClick={() => scrollToIndex(idx)}
-                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                    isActive
-                      ? 'w-8 bg-brand-orange shadow-xs'
-                      : 'w-2 bg-slate-300 hover:bg-slate-400'
+                  className={`h-1.5 rounded-full transition-all cursor-pointer ${
+                    isActive ? 'w-6 bg-slate-800' : 'w-1.5 bg-slate-300 hover:bg-slate-400'
                   }`}
-                  aria-label={`Jump to project ${idx + 1}: ${proj.name}`}
-                  aria-current={isActive ? 'true' : undefined}
+                  aria-label={`Jump to ${proj.name}`}
                 />
               );
             })}

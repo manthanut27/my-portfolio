@@ -9,10 +9,7 @@ import {
   Activity,
   Terminal,
   MapPin,
-  Sparkles,
-  Cpu,
   RefreshCw,
-  CheckCircle2,
 } from 'lucide-react';
 
 interface AboutProps {
@@ -23,12 +20,10 @@ export const About: React.FC<AboutProps> = () => {
   const { publicRepos, stars, contributions, evaBloomCommits, heatmap, loading: ghLoading } = useGitHubStats();
   const [mounted, setMounted] = useState(false);
 
-  // Client-side mount check
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Generate 52x7 Contribution heatmap cells with modern tech styling
   const renderHeatmap = () => {
     if (!mounted) return null;
 
@@ -36,7 +31,7 @@ export const About: React.FC<AboutProps> = () => {
     const totalCells = 52 * 7;
 
     for (let i = 0; i < totalCells; i++) {
-      let bg = 'rgba(15, 23, 42, 0.05)'; // 0 commits (subtle slate dot)
+      let bg = '#e2e8f0'; // 0 commits
       let titleText = 'No contributions';
 
       if (heatmap && heatmap[i]) {
@@ -44,7 +39,6 @@ export const About: React.FC<AboutProps> = () => {
         const val = day.count;
         const level = day.level;
 
-        // Map level (0 to 4) to sleek modern palette
         if (level === 1) bg = 'rgba(254, 99, 52, 0.25)';
         else if (level === 2) bg = 'rgba(254, 99, 52, 0.50)';
         else if (level === 3) bg = 'rgba(254, 99, 52, 0.75)';
@@ -57,13 +51,11 @@ export const About: React.FC<AboutProps> = () => {
         });
         titleText = `${val === 0 ? 'No' : val} contribution${val === 1 ? '' : 's'} on ${formattedDate}`;
       } else {
-        // Deterministic fallback commits
         const val = Math.floor(Math.sin(i * 0.05) * 5 + Math.cos(i * 0.1) * 3 + Math.random() * 4);
         if (val >= 1 && val <= 3) bg = 'rgba(254, 99, 52, 0.25)';
         else if (val >= 4 && val <= 7) bg = 'rgba(254, 99, 52, 0.50)';
         else if (val >= 8 && val <= 14) bg = 'rgba(254, 99, 52, 0.75)';
         else if (val >= 15) bg = '#FE6334';
-
         titleText = `${val === 0 ? 'No' : val} commits`;
       }
 
@@ -78,7 +70,7 @@ export const About: React.FC<AboutProps> = () => {
     }
 
     return (
-      <div className="grid grid-flow-col grid-cols-52 grid-rows-7 gap-[3px] md:gap-[3.5px] w-full overflow-x-auto no-scrollbar py-1">
+      <div className="grid grid-flow-col grid-cols-52 grid-rows-7 gap-[3px] w-full overflow-x-auto no-scrollbar py-1">
         {cells}
       </div>
     );
@@ -87,173 +79,151 @@ export const About: React.FC<AboutProps> = () => {
   return (
     <section
       id="about"
-      className="relative w-full min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-16 py-24 bg-slate-50 text-slate-900 overflow-hidden"
+      className="w-full min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-16 py-20 bg-slate-50 text-slate-900"
     >
-      {/* Background Subtle Tech Ambient Gradients */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-brand-orange/5 via-slate-200/20 to-transparent rounded-full blur-3xl pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto w-full flex flex-col gap-12 relative z-10">
+      <div className="max-w-7xl mx-auto w-full flex flex-col gap-10">
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange font-mono text-xs font-bold uppercase tracking-wider mb-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-orange animate-pulse" />
-            <span>01 // ABOUT THE ENGINEER</span>
-          </div>
-          <h2 className="font-space text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight text-slate-900 max-w-3xl">
-            Architecting scalable systems & interactive web experiences.
+        <div className="flex flex-col items-start max-w-2xl text-left">
+          <span className="font-mono text-xs text-slate-500 uppercase tracking-wider mb-2">
+            01 — Background
+          </span>
+          <h2 className="font-space text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-slate-900">
+            Full-stack developer building production web applications and 3D interfaces
           </h2>
-          <p className="mt-3 font-body text-base md:text-lg text-slate-600 max-w-2xl font-normal leading-relaxed">
-            Full-Stack Developer based in Mumbai, turning complex business logic and visual ambition into resilient production code.
+          <p className="mt-2 text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
+            Based in Mumbai, focused on performant frontend architecture, real-time data pipelines, and responsive web experiences.
           </p>
         </div>
 
-        {/* Two-Column Grid: Left (Bio & Metrics) + Right (Obsidian Tech Radar & Credentials) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Column: Narrative Bio, 4x Stats, and GitHub Live Activity */}
-          <div className="lg:col-span-7 flex flex-col gap-6">
+        {/* Two-Column Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          {/* Left Column: Narrative Bio & Stat Cards */}
+          <div className="lg:col-span-7 flex flex-col gap-5">
             {/* Bio Card */}
-            <div className="bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/90 p-6 md:p-8 shadow-xs hover:shadow-md transition-shadow">
-              <h3 className="font-syne font-bold text-xl text-slate-900 mb-3 flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-brand-orange" />
-                <span>Engineering Philosophy</span>
+            <div className="bg-white rounded-xl border border-slate-200 p-6 text-left">
+              <h3 className="font-space font-semibold text-base text-slate-900 mb-2">
+                Engineering focus
               </h3>
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-4">
-                Hey, I'm <strong className="text-slate-900 font-semibold">Manthan Utekar</strong>, a creative developer and full-stack engineer based in Mumbai. I specialize in building high-performance, animation-rich, modern web applications that look stunning and run blazingly fast.
+              <p className="text-slate-600 text-sm leading-relaxed mb-3">
+                I'm <strong className="text-slate-900 font-medium">Manthan Utekar</strong>, a full-stack engineer based in Mumbai. I develop animation-rich, responsive web applications with a focus on code structure, fast load times, and accessibility.
               </p>
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                Whether it is building custom e-commerce engines, complex 3D configurators in WebGL, or low-latency serverless endpoints, I focus on performance, accessibility, and visual aesthetics.
+              <p className="text-slate-600 text-sm leading-relaxed">
+                My recent work includes custom e-commerce checkout flows (Eva Bloom), 3D vehicle configurators in WebGL (BMW M4 GT3), and real-time backend integrations using Supabase, Node.js, and Redis.
               </p>
 
-              {/* Core Strengths Pills */}
-              <div className="flex flex-wrap gap-2 mt-6 pt-6 border-t border-slate-100">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-100 text-slate-800 text-xs font-mono font-medium">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-brand-orange" />
-                  Full-Stack Architecture
+              {/* Skills Tags */}
+              <div className="flex flex-wrap gap-2 mt-5 pt-4 border-t border-slate-100 text-xs font-mono text-slate-700">
+                <span className="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">
+                  Full-stack architecture
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-100 text-slate-800 text-xs font-mono font-medium">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-brand-orange" />
-                  WebGL & Creative 3D
+                <span className="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">
+                  WebGL & Three.js
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-100 text-slate-800 text-xs font-mono font-medium">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-brand-orange" />
-                  Performance Optimization
+                <span className="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">
+                  Performance & SEO
                 </span>
               </div>
             </div>
 
-            {/* 4x Metric Cards */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-              {/* Card 1: Projects Shipped */}
-              <div className="bg-white/90 backdrop-blur-md p-5 rounded-2xl border border-slate-200/90 shadow-xs flex flex-col items-center text-center group hover:border-brand-orange/40 transition-colors">
-                <div className="w-9 h-9 rounded-xl bg-orange-50 text-brand-orange flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
-                  <Briefcase className="w-4 h-4" />
-                </div>
-                <span className="font-space font-black text-2xl text-slate-900">6</span>
-                <span className="font-mono text-[11px] text-slate-500 font-semibold uppercase tracking-wider mt-1">
-                  Projects Shipped
+            {/* 4x Stat Cards */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="bg-white p-4 rounded-xl border border-slate-200 flex flex-col items-start text-left">
+                <Briefcase className="w-4 h-4 text-slate-400 mb-2" />
+                <span className="font-space font-semibold text-xl text-slate-900 tabular-nums">6</span>
+                <span className="font-mono text-[11px] text-slate-500 mt-0.5">
+                  Shipped projects
                 </span>
               </div>
 
-              {/* Card 2: Hawkathon */}
-              <div className="bg-white/90 backdrop-blur-md p-5 rounded-2xl border border-slate-200/90 shadow-xs flex flex-col items-center text-center group hover:border-brand-orange/40 transition-colors">
-                <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
-                  <Trophy className="w-4 h-4" />
-                </div>
-                <span className="font-space font-black text-2xl text-slate-900">1</span>
-                <span className="font-mono text-[11px] text-slate-500 font-semibold uppercase tracking-wider mt-1">
+              <div className="bg-white p-4 rounded-xl border border-slate-200 flex flex-col items-start text-left">
+                <Trophy className="w-4 h-4 text-slate-400 mb-2" />
+                <span className="font-space font-semibold text-xl text-slate-900 tabular-nums">1</span>
+                <span className="font-mono text-[11px] text-slate-500 mt-0.5">
                   Hawkathon 2026
                 </span>
               </div>
 
-              {/* Card 3: Freelance */}
-              <div className="bg-white/90 backdrop-blur-md p-5 rounded-2xl border border-slate-200/90 shadow-xs flex flex-col items-center text-center group hover:border-brand-orange/40 transition-colors">
-                <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
-                  <Layers className="w-4 h-4" />
-                </div>
-                <span className="font-space font-black text-2xl text-slate-900">2</span>
-                <span className="font-mono text-[11px] text-slate-500 font-semibold uppercase tracking-wider mt-1">
-                  Freelance Clients
+              <div className="bg-white p-4 rounded-xl border border-slate-200 flex flex-col items-start text-left">
+                <Layers className="w-4 h-4 text-slate-400 mb-2" />
+                <span className="font-space font-semibold text-xl text-slate-900 tabular-nums">2</span>
+                <span className="font-mono text-[11px] text-slate-500 mt-0.5">
+                  Freelance clients
                 </span>
               </div>
 
-              {/* Card 4: Eva Bloom Commits */}
-              <div className="bg-white/90 backdrop-blur-md p-5 rounded-2xl border border-slate-200/90 shadow-xs flex flex-col items-center text-center group hover:border-brand-orange/40 transition-colors">
-                <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
-                  <FileCode className="w-4 h-4" />
-                </div>
-                <span className="font-space font-black text-2xl text-slate-900">
-                  {ghLoading ? '...' : evaBloomCommits}
+              <div className="bg-white p-4 rounded-xl border border-slate-200 flex flex-col items-start text-left">
+                <FileCode className="w-4 h-4 text-slate-400 mb-2" />
+                <span className="font-space font-semibold text-xl text-slate-900 tabular-nums">
+                  {ghLoading ? '—' : evaBloomCommits}
                 </span>
-                <span className="font-mono text-[11px] text-slate-500 font-semibold uppercase tracking-wider mt-1">
-                  Eva Bloom Commits
+                <span className="font-mono text-[11px] text-slate-500 mt-0.5">
+                  Eva Bloom commits
                 </span>
               </div>
             </div>
 
-            {/* GitHub Live Activity Card */}
-            <div className="bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-slate-200/90 shadow-xs flex flex-col gap-5">
+            {/* GitHub Activity Card */}
+            <div className="bg-white p-5 rounded-xl border border-slate-200 flex flex-col gap-4 text-left">
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div className="flex items-center gap-2">
-                  <Github className="w-5 h-5 text-slate-900" />
-                  <span className="font-space font-bold text-sm text-slate-900 tracking-wider uppercase">
-                    GitHub Live Activity
+                  <Github className="w-4 h-4 text-slate-700" />
+                  <span className="font-mono text-xs font-semibold text-slate-800">
+                    GitHub activity
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200/80">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>SYNCED</span>
+                <span className="text-[11px] font-mono text-slate-500">
+                  Updated today
+                </span>
+              </div>
+
+              {/* Counts */}
+              <div className="grid grid-cols-3 gap-3 text-left">
+                <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                  <div className="font-space font-semibold text-lg text-slate-900 tabular-nums">
+                    {ghLoading ? '—' : publicRepos}
+                  </div>
+                  <div className="text-[11px] font-mono text-slate-500 mt-0.5">
+                    Public repositories
+                  </div>
+                </div>
+                <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                  <div className="font-space font-semibold text-lg text-slate-900 tabular-nums">
+                    {ghLoading ? '—' : stars}
+                  </div>
+                  <div className="text-[11px] font-mono text-slate-500 mt-0.5">
+                    Stars received
+                  </div>
+                </div>
+                <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                  <div className="font-space font-semibold text-lg text-slate-900 tabular-nums">
+                    {ghLoading ? '—' : contributions}
+                  </div>
+                  <div className="text-[11px] font-mono text-slate-500 mt-0.5">
+                    Commits in 2026
+                  </div>
                 </div>
               </div>
 
-              {/* Live Numbers Grid */}
-              <div className="grid grid-cols-3 gap-4 text-center">
-                <div className="flex flex-col bg-slate-50 p-3 rounded-xl border border-slate-100">
-                  <span className="font-space font-black text-2xl text-slate-900">
-                    {ghLoading ? '...' : publicRepos}
-                  </span>
-                  <span className="text-[11px] font-mono font-semibold text-slate-500 mt-1 uppercase">
-                    Public Repos
-                  </span>
-                </div>
-                <div className="flex flex-col bg-slate-50 p-3 rounded-xl border border-slate-100">
-                  <span className="font-space font-black text-2xl text-slate-900">
-                    {ghLoading ? '...' : stars}
-                  </span>
-                  <span className="text-[11px] font-mono font-semibold text-slate-500 mt-1 uppercase">
-                    Total Stars
-                  </span>
-                </div>
-                <div className="flex flex-col bg-slate-50 p-3 rounded-xl border border-slate-100">
-                  <span className="font-space font-black text-2xl text-slate-900">
-                    {ghLoading ? '...' : contributions}
-                  </span>
-                  <span className="text-[11px] font-mono font-semibold text-slate-500 mt-1 uppercase">
-                    Commits (2026)
-                  </span>
-                </div>
-              </div>
-
-              {/* Contribution Heatmap Container */}
-              <div className="flex flex-col gap-2 mt-1">
-                <div className="flex justify-between items-center text-xs font-mono font-semibold text-slate-500 px-1">
+              {/* Heatmap */}
+              <div className="flex flex-col gap-1.5 mt-1">
+                <div className="flex justify-between items-center text-xs font-mono text-slate-500 px-0.5">
                   <span className="flex items-center gap-1.5">
-                    <Activity className="w-3.5 h-3.5 text-brand-orange" />
-                    <span>52-Week Contribution Matrix</span>
+                    <Activity className="w-3.5 h-3.5 text-slate-400" />
+                    <span>52-week contribution matrix</span>
                   </span>
                   <button
                     onClick={() => {
                       localStorage.removeItem('gh_stats');
                       window.location.reload();
                     }}
-                    className="flex items-center gap-1 text-[11px] text-slate-500 hover:text-brand-orange transition-colors cursor-pointer"
-                    title="Force refresh GitHub cache"
+                    className="flex items-center gap-1 text-[11px] text-slate-500 hover:text-slate-900 transition-colors cursor-pointer"
                   >
                     <RefreshCw className="w-3 h-3" />
                     <span>Refresh</span>
                   </button>
                 </div>
 
-                <div className="bg-slate-50 p-3 rounded-xl border border-slate-200/80">
+                <div className="bg-slate-50 p-3 rounded-lg border border-slate-200/80">
                   {renderHeatmap()}
                   <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-200/60 text-[10px] font-mono text-slate-400">
                     <span>Less</span>
@@ -271,34 +241,24 @@ export const About: React.FC<AboutProps> = () => {
             </div>
           </div>
 
-          {/* Right Column: Obsidian Tech Radar & Developer Profile */}
-          <div className="lg:col-span-5 w-full flex flex-col gap-6">
-            {/* Obsidian Terminal Card */}
-            <div className="w-full bg-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-xl relative overflow-hidden flex flex-col justify-between group">
-              {/* Corner ambient glow */}
-              <div className="absolute -top-16 -right-16 w-48 h-48 bg-brand-orange/20 rounded-full blur-3xl pointer-events-none group-hover:bg-brand-orange/30 transition-all duration-700" />
-
+          {/* Right Column: Clean Code Specification & Scope */}
+          <div className="lg:col-span-5 w-full">
+            <div className="bg-slate-900 text-white rounded-xl p-6 border border-slate-800 text-left flex flex-col justify-between">
               <div>
-                {/* IDE Window Header */}
-                <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-6 font-mono text-xs text-slate-400">
-                  <div className="flex items-center gap-2">
-                    <span className="w-3 h-3 rounded-full bg-red-500/80" />
-                    <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                    <span className="w-3 h-3 rounded-full bg-green-500/80" />
-                  </div>
-                  <span className="flex items-center gap-1.5 text-slate-400">
-                    <Terminal className="w-3.5 h-3.5 text-brand-orange" />
+                <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4 font-mono text-xs text-slate-400">
+                  <span className="flex items-center gap-1.5 text-slate-300">
+                    <Terminal className="w-3.5 h-3.5 text-slate-400" />
                     developer_profile.ts
                   </span>
-                  <span className="text-[10px] text-slate-500">UTF-8</span>
+                  <span>TypeScript</span>
                 </div>
 
-                {/* Code Representation */}
-                <div className="font-mono text-xs sm:text-[13px] leading-relaxed text-slate-300 flex flex-col gap-1.5 bg-slate-950/60 p-4 rounded-xl border border-slate-800/80">
-                  <div className="text-slate-500">// Candidate Profile Specifications</div>
+                {/* Code Block */}
+                <div className="font-mono text-xs leading-relaxed text-slate-300 bg-slate-950 p-4 rounded-lg border border-slate-800">
+                  <div className="text-slate-500">// Candidate specification</div>
                   <div>
                     <span className="text-purple-400">interface</span>{' '}
-                    <span className="text-amber-300">SoftwareEngineer</span> {'{'}
+                    <span className="text-slate-100 font-semibold">Engineer</span> {'{'}
                   </div>
                   <div className="pl-4">
                     name: <span className="text-emerald-400">"Manthan Utekar"</span>;
@@ -310,50 +270,47 @@ export const About: React.FC<AboutProps> = () => {
                     location: <span className="text-emerald-400">"Mumbai, India"</span>;
                   </div>
                   <div className="pl-4">
-                    focus: <span className="text-brand-orange font-bold">"FitMirror (AI Pose Analytics)"</span>;
+                    currentFocus: <span className="text-slate-100">"FitMirror (Pose estimation)"</span>;
                   </div>
                   <div className="pl-4">
-                    primaryStack: [
-                    <span className="text-cyan-300">"React"</span>,{' '}
-                    <span className="text-cyan-300">"Node.js"</span>,{' '}
-                    <span className="text-cyan-300">"TypeScript"</span>,{' '}
-                    <span className="text-cyan-300">"Supabase"</span>];
+                    coreStack: [
+                    <span className="text-slate-100">"React"</span>,{' '}
+                    <span className="text-slate-100">"Node.js"</span>,{' '}
+                    <span className="text-slate-100">"TypeScript"</span>,{' '}
+                    <span className="text-slate-100">"Supabase"</span>];
                   </div>
                   <div className="pl-4">
-                    status: <span className="text-emerald-400 font-bold">"Open to Opportunities"</span>;
+                    status: <span className="text-emerald-400 font-medium">"Available for hire"</span>;
                   </div>
                   <div>{'}'}</div>
                 </div>
 
-                {/* Engineering Highlights */}
-                <div className="flex flex-col gap-3 mt-6">
-                  <div className="text-xs font-mono font-bold uppercase text-slate-400 tracking-wider">
-                    Core Architectural Competencies
+                {/* Systems Architecture */}
+                <div className="flex flex-col gap-2 mt-5">
+                  <div className="text-xs font-mono text-slate-400">
+                    Core technical practices
                   </div>
-                  <div className="grid grid-cols-1 gap-2 text-xs font-mono">
-                    <div className="flex items-center gap-2 p-2.5 rounded-lg bg-slate-800/60 border border-slate-700/60 text-slate-300">
-                      <Cpu className="w-4 h-4 text-brand-orange shrink-0" />
-                      <span>Event-driven, low-latency API design</span>
+                  <div className="grid grid-cols-1 gap-2 text-xs font-mono text-slate-300">
+                    <div className="p-2.5 rounded-lg bg-slate-800/60 border border-slate-700/60">
+                      • Strict TypeScript with Zod runtime validation
                     </div>
-                    <div className="flex items-center gap-2 p-2.5 rounded-lg bg-slate-800/60 border border-slate-700/60 text-slate-300">
-                      <Sparkles className="w-4 h-4 text-brand-yellow shrink-0" />
-                      <span>WebGL & GPU particle pipeline rendering</span>
+                    <div className="p-2.5 rounded-lg bg-slate-800/60 border border-slate-700/60">
+                      • Shader and WebGL pipeline optimization
                     </div>
-                    <div className="flex items-center gap-2 p-2.5 rounded-lg bg-slate-800/60 border border-slate-700/60 text-slate-300">
-                      <Layers className="w-4 h-4 text-cyan-400 shrink-0" />
-                      <span>Strict TypeScript, Zod validation & Prisma ORM</span>
+                    <div className="p-2.5 rounded-lg bg-slate-800/60 border border-slate-700/60">
+                      • Relational database modeling with Prisma and PostgreSQL
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Bottom Card Footer */}
-              <div className="flex items-center justify-between border-t border-slate-800 pt-5 mt-6 text-xs font-mono text-slate-400">
+              <div className="flex items-center justify-between border-t border-slate-800 pt-4 mt-6 text-xs font-mono text-slate-400">
                 <div className="flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-brand-orange" />
-                  <span>MUMBAI, IN · HYBRID / REMOTE</span>
+                  <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                  <span>Mumbai, India (IST)</span>
                 </div>
-                <span className="text-slate-500 font-bold">AVAILABLE NOW</span>
+                <span className="text-slate-400">Hybrid / Remote</span>
               </div>
             </div>
           </div>
