@@ -22,10 +22,10 @@ interface SkillItem {
 }
 
 interface SkillsProps {
-  hiringManagerMode: boolean;
+  hiringManagerMode?: boolean;
 }
 
-export const Skills: React.FC<SkillsProps> = ({ hiringManagerMode }) => {
+export const Skills: React.FC<SkillsProps> = ({ hiringManagerMode = true }) => {
   const { tier } = usePerformanceTier();
 
   // Skills organized by rings

@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 
 interface HeroProps {
-  hiringManagerMode: boolean;
+  hiringManagerMode?: boolean;
 }
 
 // Subtitle typewriter options (declared outside to maintain static reference)
@@ -16,7 +16,7 @@ const subtitles = [
   'Currently open to full-time roles in Mumbai / Remote',
 ];
 
-export const Hero: React.FC<HeroProps> = ({ hiringManagerMode }) => {
+export const Hero: React.FC<HeroProps> = () => {
   const age = useLiveAge();
   const [availability, setAvailability] = useState<'open' | 'busy'>('open');
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
@@ -79,63 +79,11 @@ export const Hero: React.FC<HeroProps> = ({ hiringManagerMode }) => {
   return (
     <section
       id="hero"
-      className={`relative w-full min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-16 pt-24 pb-12 overflow-hidden select-none transition-colors duration-1000 ${
-        hiringManagerMode ? 'bg-slate-50 text-slate-900' : 'bg-brand-yellow text-brand-navy'
-      }`}
+      className="relative w-full min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-16 pt-24 pb-12 overflow-hidden select-none bg-slate-50 text-slate-900 transition-colors duration-500"
     >
-      {/* Background Graphic blobs (hidden in Hiring Manager Mode) */}
-      {!hiringManagerMode && (
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          {/* Outer dashed spinning ring */}
-          <div className="absolute top-[20%] right-[-100px] md:right-[5%] w-[450px] md:w-[600px] h-[450px] md:h-[600px] rounded-full border-[3px] border-dashed border-brand-navy/10 animate-spin-slow" />
-          {/* Middle spinning ring */}
-          <div className="absolute top-[22%] right-[-80px] md:right-[6%] w-[400px] md:w-[500px] h-[400px] md:h-[500px] rounded-full border-[2px] border-brand-navy/10 animate-spin-slow-reverse" />
-
-          {/* Floating Blobs with floating animations */}
-          <motion.div
-            animate={{
-              y: [0, -30, 0],
-              x: [0, 20, 0],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            className="absolute top-[25%] right-[10%] w-[180px] h-[180px] bg-brand-pink/40 rounded-full blur-2xl"
-          />
-          <motion.div
-            animate={{
-              y: [0, 40, 0],
-              x: [0, -25, 0],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            className="absolute top-[40%] right-[18%] w-[200px] h-[200px] bg-brand-lavender/40 rounded-full blur-2xl"
-          />
-          <motion.div
-            animate={{
-              y: [-10, 20, -10],
-              x: [10, -10, 10],
-            }}
-            transition={{
-              duration: 7,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            className="absolute top-[35%] right-[5%] w-[150px] h-[150px] bg-brand-cyan/40 rounded-full blur-2xl"
-          />
-        </div>
-      )}
-
       {/* Main Container */}
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center z-10">
-        {/* Left Text Block */}
-        <div className="lg:col-span-7 flex flex-col items-start gap-5 sm:gap-6 text-left">
-          {/* Badges Row */}
+      <div className="max-w-4xl mx-auto w-full flex flex-col items-start gap-5 sm:gap-6 text-left z-10">
+        {/* Badges Row */}
           <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             {/* Building status */}
             <span className="flex items-center gap-1.5 bg-brand-navy text-white text-[11px] sm:text-xs md:text-sm font-label font-bold px-3 py-1.5 rounded-full shadow-sm">
@@ -208,21 +156,6 @@ export const Hero: React.FC<HeroProps> = ({ hiringManagerMode }) => {
               <span>DOWNLOAD CV</span>
             </a>
           </div>
-        </div>
-
-        {/* Right Graphic Blobs Container (CSS-only) */}
-        {!hiringManagerMode && (
-          <div className="hidden lg:col-span-5 lg:flex items-center justify-center relative">
-            <div className="w-[320px] h-[320px] bg-white rounded-full flex items-center justify-center shadow-2xl border-[12px] border-brand-yellow/85 relative z-20 group hover:scale-105 transition-transform duration-500">
-              <span className="font-syne font-black text-[120px] text-brand-navy leading-none tracking-tighter hover:text-brand-orange transition-colors duration-300 select-none">
-                MU
-              </span>
-              {/* Spinning orbiting accent dots */}
-              <div className="absolute top-[10px] left-[10px] w-6 h-6 rounded-full bg-brand-grape border-2 border-white shadow-md animate-bounce" />
-              <div className="absolute bottom-[20px] right-[20px] w-5 h-5 rounded-full bg-brand-cherry border-2 border-white shadow-md animate-ping duration-1000" />
-            </div>
-          </div>
-        )}
       </div>
 
       {/* Down Scroll Indicator (hides after 100px scroll) */}

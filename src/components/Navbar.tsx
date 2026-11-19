@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X, FileText, Github, Linkedin, Mail, Briefcase } from 'lucide-react';
+import { Menu, X, FileText, Github, Linkedin, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface NavbarProps {
   activeSection: string;
-  hiringManagerMode: boolean;
-  onToggleHMMode?: () => void;
+  hiringManagerMode?: boolean;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   activeSection,
-  hiringManagerMode,
-  onToggleHMMode,
+  hiringManagerMode = true,
 }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -61,8 +59,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { name: 'About', id: 'about', num: '01' },
     { name: 'Skills', id: 'skills', num: '02' },
     { name: 'Projects', id: 'projects', num: '03' },
-    { name: 'Terminal', id: 'terminal', num: '04' },
-    { name: 'Contact', id: 'contact', num: '05' },
+    { name: 'Contact', id: 'contact', num: '04' },
   ];
 
   const handleScrollTo = (id: string) => {
@@ -112,26 +109,24 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Desktop Navigation Links */}
-        {!hiringManagerMode && (
-          <nav className="hidden md:flex items-center gap-8 font-syne font-black uppercase text-sm tracking-wide">
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.id;
-              return (
-                <button
-                  key={link.id}
-                  onClick={() => handleScrollTo(link.id)}
-                  className={`relative py-1 border-b-2 transition-all duration-300 text-brand-navy cursor-pointer ${
-                    isActive
-                      ? 'border-brand-orange text-brand-orange'
-                      : 'border-transparent hover:text-brand-orange'
-                  }`}
-                >
-                  {link.name}
-                </button>
-              );
-            })}
-          </nav>
-        )}
+        <nav className="hidden md:flex items-center gap-8 font-syne font-black uppercase text-sm tracking-wide">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
+            return (
+              <button
+                key={link.id}
+                onClick={() => handleScrollTo(link.id)}
+                className={`relative py-1 border-b-2 transition-all duration-300 text-brand-navy cursor-pointer ${
+                  isActive
+                    ? 'border-brand-orange text-brand-orange'
+                    : 'border-transparent hover:text-brand-orange'
+                }`}
+              >
+                {link.name}
+              </button>
+            );
+          })}
+        </nav>
 
         {/* Actions Button Bar */}
         <div className="flex items-center gap-2 sm:gap-3">
@@ -207,22 +202,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {/* Bottom Drawer Actions */}
             <div className="flex flex-col gap-4 pt-4 border-t border-current/15">
-              {/* Mode Toggle inside Mobile Drawer if handler provided */}
-              {onToggleHMMode && (
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onToggleHMMode();
-                  }}
-                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-mono text-xs font-bold tracking-wider uppercase bg-brand-navy text-white hover:bg-brand-orange transition-colors border border-white/20 shadow-sm"
-                >
-                  <Briefcase className="w-4 h-4 text-brand-orange" />
-                  <span>
-                    {hiringManagerMode ? 'Switch to Creative Mode' : 'Switch to Recruiter Mode'}
-                  </span>
-                </button>
-              )}
-
               {/* Social shortcuts */}
               <div className="flex items-center justify-center gap-4 py-2">
                 <a

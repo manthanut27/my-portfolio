@@ -15,10 +15,10 @@ interface Project {
 }
 
 interface ProjectsProps {
-  hiringManagerMode: boolean;
+  hiringManagerMode?: boolean;
 }
 
-export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode }) => {
+export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode = true }) => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);

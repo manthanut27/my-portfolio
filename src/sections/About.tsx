@@ -5,10 +5,10 @@ import { Github, Trophy, Briefcase, FileCode, Star, Layers, Activity } from 'luc
 import * as THREE from 'three';
 
 interface AboutProps {
-  hiringManagerMode: boolean;
+  hiringManagerMode?: boolean;
 }
 
-export const About: React.FC<AboutProps> = ({ hiringManagerMode }) => {
+export const About: React.FC<AboutProps> = ({ hiringManagerMode = true }) => {
   const { tier } = usePerformanceTier();
   const { publicRepos, stars, contributions, evaBloomCommits, heatmap, loading: ghLoading } = useGitHubStats();
   const [mounted, setMounted] = useState(false);
@@ -350,18 +350,18 @@ export const About: React.FC<AboutProps> = ({ hiringManagerMode }) => {
               </div>
             </div>
           ) : (
-            // Mobile/Low performance tier Static Fallback: beautiful minimal styled card
-            <div className="lg:col-span-5 w-full h-[320px] rounded-3xl bg-brand-navy text-brand-yellow p-8 flex flex-col justify-between text-left relative overflow-hidden shadow-2xl border border-brand-yellow/10">
+            // Professional Hiring Manager card
+            <div className="lg:col-span-5 w-full h-[320px] rounded-3xl bg-slate-900 text-white p-8 flex flex-col justify-between text-left relative overflow-hidden shadow-xl border border-slate-800">
               <div className="flex flex-col gap-4">
-                <div className="text-6xl font-black opacity-10 select-none">MU</div>
-                <h4 className="font-space text-2xl font-bold tracking-tight">MANTHAN UTEKAR // CREATIVE DEVELOPER</h4>
-                <p className="font-body text-sm text-brand-lime leading-relaxed">
-                  "Creative and high-fidelity React applications optimized for fast loading and immersive animations."
+                <div className="text-6xl font-black text-slate-800 select-none">MU</div>
+                <h4 className="font-space text-2xl font-bold tracking-tight text-white">MANTHAN UTEKAR // FULL-STACK ENGINEER</h4>
+                <p className="font-body text-sm text-slate-300 leading-relaxed">
+                  "Crafting scalable, high-performance web applications, resilient backend architectures, and elegant user interfaces."
                 </p>
               </div>
-              <div className="flex items-center gap-2 border-t border-brand-yellow/10 pt-4 text-xs font-space tracking-wider">
+              <div className="flex items-center gap-2 border-t border-slate-800 pt-4 text-xs font-space tracking-wider text-slate-400">
                 <Star className="w-4 h-4 text-brand-orange animate-spin-slow" />
-                <span>MUMBAI, IN // 2D STATIC PERFORMANCE FALLBACK</span>
+                <span>MUMBAI, IN // FULL-STACK ENGINEER & DEVELOPER</span>
               </div>
             </div>
           )}

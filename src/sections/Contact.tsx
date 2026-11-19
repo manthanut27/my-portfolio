@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Send, CheckCircle, AlertTriangle, Github, Linkedin, Mail } from 'lucide-react';
 
 interface ContactProps {
-  hiringManagerMode: boolean;
+  hiringManagerMode?: boolean;
 }
 
-export const Contact: React.FC<ContactProps> = ({ hiringManagerMode }) => {
+export const Contact: React.FC<ContactProps> = ({ hiringManagerMode = true }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
