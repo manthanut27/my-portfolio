@@ -60,9 +60,9 @@
     "semantic_hash": "47e42fbe48c7d5c070e00bfc336d5a2d"
   },
   "src/components/Navbar.tsx": {
-    "mtime": 1795100542.6130297,
-    "seen": 1795100969.2793229,
-    "ast_hash": "598a0d927a6d150411e3b2ceaa9553d5",
+    "mtime": 1795106130.710155,
+    "seen": 1795106210.6506588,
+    "ast_hash": "0c1386513f40dd4e4daea5baa02e4a7f",
     "semantic_hash": ""
   },
   "src/context/PerformanceTier.tsx": {
@@ -114,21 +114,21 @@
     "semantic_hash": "df3369963799e47ef5a77cdca932abf0"
   },
   "src/sections/About.tsx": {
-    "mtime": 1795100578.0668614,
-    "seen": 1795100969.2793512,
-    "ast_hash": "86cd8ee1b5639c29fba24e924d99f78c",
+    "mtime": 1795105594.536651,
+    "seen": 1795106210.6507041,
+    "ast_hash": "f92bb6565eef2bc85d8a777db5e9ffde",
     "semantic_hash": ""
   },
   "src/sections/Contact.tsx": {
-    "mtime": 1795100874.5396028,
-    "seen": 1795100969.2793543,
-    "ast_hash": "f706136aa90e7aea44f403d538e6b56a",
+    "mtime": 1795106095.19114,
+    "seen": 1795106210.6507068,
+    "ast_hash": "1e193c618db9de78ccaa8729cb943a26",
     "semantic_hash": ""
   },
   "src/sections/Footer.tsx": {
-    "mtime": 1795100904.0122905,
-    "seen": 1795100969.2793612,
-    "ast_hash": "b546220f915c22a7d85aa2785fc7756a",
+    "mtime": 1795106169.4345443,
+    "seen": 1795106210.6507115,
+    "ast_hash": "cf6ef1600116f75c5232f957a5ee77a0",
     "semantic_hash": ""
   },
   "src/sections/Hero.tsx": {
@@ -138,9 +138,9 @@
     "semantic_hash": ""
   },
   "src/sections/Projects.tsx": {
-    "mtime": 1795100668.3524199,
-    "seen": 1795100969.2793705,
-    "ast_hash": "b701312e35a4cd78a9110d70b7411136",
+    "mtime": 1795105812.1072707,
+    "seen": 1795106210.6507185,
+    "ast_hash": "e153b5ced3e9b6c75d4298373bdbf4ad",
     "semantic_hash": ""
   },
   "src/sections/ShadowPage.tsx": {
@@ -150,9 +150,9 @@
     "semantic_hash": ""
   },
   "src/sections/Skills.tsx": {
-    "mtime": 1795100619.5896623,
-    "seen": 1795100969.2793736,
-    "ast_hash": "b1b86eee263bf89724cb99c3e95aec02",
+    "mtime": 1795105884.8059196,
+    "seen": 1795106210.650723,
+    "ast_hash": "1494f20446d4337d6b505760ddc27664",
     "semantic_hash": ""
   },
   "src/sections/Terminal.tsx": {
@@ -339,6 +339,30 @@
     "mtime": 1795098206.117453,
     "seen": 1795098615.828255,
     "ast_hash": "ea1c194ee828369e6fcdde84b4d8b8ba",
+    "semantic_hash": ""
+  },
+  "src/components/ui/Magnetic.tsx": {
+    "mtime": 1795105322.649178,
+    "seen": 1795106210.6506624,
+    "ast_hash": "4b86ae2acd4a64086f48137ea0afbe9c",
+    "semantic_hash": ""
+  },
+  "src/components/ui/NumberTicker.tsx": {
+    "mtime": 1795105334.615636,
+    "seen": 1795106210.6506653,
+    "ast_hash": "62a3b229e2a7b9fd18632d4a2cea8d29",
+    "semantic_hash": ""
+  },
+  "src/components/ui/ScrollReveal.tsx": {
+    "mtime": 1795105346.2041612,
+    "seen": 1795106210.6506674,
+    "ast_hash": "5c5e07541869895b1d5ac64c3f86fe50",
+    "semantic_hash": ""
+  },
+  "src/components/ui/SpotlightCard.tsx": {
+    "mtime": 1795105312.0225282,
+    "seen": 1795106210.6506696,
+    "ast_hash": "2b15b0f06b739a550fc917d0d6c26345",
     "semantic_hash": ""
   }
 }

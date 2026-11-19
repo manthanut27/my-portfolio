@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, FileText, Github, Linkedin, Mail, ArrowUpRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Magnetic } from './ui/Magnetic';
 
 interface NavbarProps {
   activeSection: string;
@@ -154,17 +155,19 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
             </div>
 
             {/* Resume Button */}
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              download="Manthan_Utekar_Resume.pdf"
-              className="flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-white font-mono text-xs font-medium py-1.5 px-3.5 rounded-lg transition-colors cursor-pointer"
-            >
-              <FileText className="w-3.5 h-3.5 text-slate-300" />
-              <span>Resume</span>
-              <ArrowUpRight className="w-3 h-3 text-slate-400 hidden sm:inline-block" />
-            </a>
+            <Magnetic strength={0.2}>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                download="Manthan_Utekar_Resume.pdf"
+                className="flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-white font-mono text-xs font-medium py-1.5 px-3.5 rounded-lg transition-colors cursor-pointer"
+              >
+                <FileText className="w-3.5 h-3.5 text-slate-300" />
+                <span>Resume</span>
+                <ArrowUpRight className="w-3 h-3 text-slate-400 hidden sm:inline-block" />
+              </a>
+            </Magnetic>
 
             {/* Mobile Menu Button */}
             <button

@@ -13,6 +13,8 @@ import {
   LayoutGrid,
   Compass,
 } from 'lucide-react';
+import { SpotlightCard } from '../components/ui/SpotlightCard';
+import { ScrollReveal, ScrollRevealContainer, ScrollRevealItem } from '../components/ui/ScrollReveal';
 
 interface SkillItem {
   name: string;
@@ -113,63 +115,67 @@ export const Skills: React.FC<SkillsProps> = () => {
     >
       <div className="max-w-7xl mx-auto w-full flex flex-col items-start gap-8">
         {/* Section Header */}
-        <div className="flex flex-col items-start max-w-2xl text-left">
-          <span className="font-mono text-xs text-slate-500 uppercase tracking-wider mb-2">
-            02 — Stack
-          </span>
-          <h2 className="font-space text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-slate-900">
-            Skills and technical ecosystem
-          </h2>
-          <p className="mt-2 text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-            Frontend frameworks, backend services, databases, and animation libraries used across client and personal projects.
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="flex flex-col items-start max-w-2xl text-left">
+            <span className="font-mono text-xs text-slate-500 uppercase tracking-wider mb-2">
+              02 — Stack
+            </span>
+            <h2 className="font-space text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-slate-900">
+              Skills and technical ecosystem
+            </h2>
+            <p className="mt-2 text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
+              Frontend frameworks, backend services, databases, and animation libraries used across client and personal projects.
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* View Switcher & Category Tabs */}
-        <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-3 bg-white p-2 rounded-xl border border-slate-200">
-          {/* Category Tabs */}
-          <div className="flex items-center gap-1 overflow-x-auto no-scrollbar w-full sm:w-auto pb-1 sm:pb-0">
-            {categories.map((cat) => (
+        <ScrollReveal delay={0.05} className="w-full">
+          <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-3 bg-white p-2 rounded-xl border border-slate-200">
+            {/* Category Tabs */}
+            <div className="flex items-center gap-1 overflow-x-auto no-scrollbar w-full sm:w-auto pb-1 sm:pb-0">
+              {categories.map((cat) => (
+                <button
+                  key={cat.value}
+                  onClick={() => setActiveTab(cat.value)}
+                  className={`px-3 py-1.5 rounded-lg font-mono text-xs transition-colors cursor-pointer whitespace-nowrap ${
+                    activeTab === cat.value
+                      ? 'bg-slate-900 text-white font-medium'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Grid vs Orbit Mode Toggle */}
+            <div className="hidden lg:flex items-center gap-1 bg-slate-100 p-1 rounded-lg border border-slate-200 text-xs font-mono">
               <button
-                key={cat.value}
-                onClick={() => setActiveTab(cat.value)}
-                className={`px-3 py-1.5 rounded-lg font-mono text-xs transition-colors cursor-pointer whitespace-nowrap ${
-                  activeTab === cat.value
-                    ? 'bg-slate-900 text-white font-medium'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                onClick={() => setViewMode('grid')}
+                className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-colors cursor-pointer ${
+                  viewMode === 'grid'
+                    ? 'bg-white text-slate-900 font-medium shadow-xs'
+                    : 'text-slate-500 hover:text-slate-900'
                 }`}
               >
-                {cat.label}
+                <LayoutGrid className="w-3.5 h-3.5" />
+                <span>Grid</span>
               </button>
-            ))}
+              <button
+                onClick={() => setViewMode('orbit')}
+                className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-colors cursor-pointer ${
+                  viewMode === 'orbit'
+                    ? 'bg-white text-slate-900 font-medium shadow-xs'
+                    : 'text-slate-500 hover:text-slate-900'
+                }`}
+              >
+                <Compass className="w-3.5 h-3.5" />
+                <span>Orbit</span>
+              </button>
+            </div>
           </div>
-
-          {/* Grid vs Orbit Mode Toggle */}
-          <div className="hidden lg:flex items-center gap-1 bg-slate-100 p-1 rounded-lg border border-slate-200 text-xs font-mono">
-            <button
-              onClick={() => setViewMode('grid')}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-colors cursor-pointer ${
-                viewMode === 'grid'
-                  ? 'bg-white text-slate-900 font-medium shadow-xs'
-                  : 'text-slate-500 hover:text-slate-900'
-              }`}
-            >
-              <LayoutGrid className="w-3.5 h-3.5" />
-              <span>Grid</span>
-            </button>
-            <button
-              onClick={() => setViewMode('orbit')}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-colors cursor-pointer ${
-                viewMode === 'orbit'
-                  ? 'bg-white text-slate-900 font-medium shadow-xs'
-                  : 'text-slate-500 hover:text-slate-900'
-              }`}
-            >
-              <Compass className="w-3.5 h-3.5" />
-              <span>Orbit</span>
-            </button>
-          </div>
-        </div>
+        </ScrollReveal>
 
         {/* Orbit Mode (Desktop Only) */}
         {viewMode === 'orbit' ? (
@@ -201,49 +207,48 @@ export const Skills: React.FC<SkillsProps> = () => {
             </div>
           </div>
         ) : (
-          /* Grid View */
-          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+          /* Grid View with Spotlight Cards & Staggered Reveal */
+          <ScrollRevealContainer className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
             {filteredSkills.map((skill) => (
-              <div
-                key={skill.name}
-                className="bg-white p-4 rounded-xl border border-slate-200 flex flex-col justify-between text-left"
-              >
-                <div className="flex items-start justify-between gap-3 mb-2.5">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
-                      {skill.icon}
-                    </div>
-                    <div>
-                      <div className="font-space font-semibold text-sm text-slate-900">
-                        {skill.name}
+              <ScrollRevealItem key={skill.name}>
+                <SpotlightCard className="p-4 flex flex-col justify-between text-left h-full">
+                  <div className="flex items-start justify-between gap-3 mb-2.5">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                        {skill.icon}
                       </div>
-                      <div className="text-[11px] font-mono text-slate-500">
-                        {skill.category}
+                      <div>
+                        <div className="font-space font-semibold text-sm text-slate-900">
+                          {skill.name}
+                        </div>
+                        <div className="text-[11px] font-mono text-slate-500">
+                          {skill.category}
+                        </div>
                       </div>
                     </div>
+
+                    <span className="text-[11px] font-mono text-slate-500 px-2 py-0.5 rounded-md bg-slate-100 border border-slate-200">
+                      {skill.label}
+                    </span>
                   </div>
 
-                  <span className="text-[11px] font-mono text-slate-500 px-2 py-0.5 rounded-md bg-slate-100 border border-slate-200">
-                    {skill.label}
-                  </span>
-                </div>
-
-                {/* Single quiet meter */}
-                <div className="w-full flex flex-col gap-1 mt-1">
-                  <div className="flex justify-between items-center text-[11px] font-mono text-slate-500">
-                    <span>Proficiency</span>
-                    <span className="font-medium text-slate-800 tabular-nums">{skill.prof}%</span>
+                  {/* Single quiet meter */}
+                  <div className="w-full flex flex-col gap-1 mt-1">
+                    <div className="flex justify-between items-center text-[11px] font-mono text-slate-500">
+                      <span>Proficiency</span>
+                      <span className="font-medium text-slate-800 tabular-nums">{skill.prof}%</span>
+                    </div>
+                    <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-slate-700 rounded-full transition-all duration-700"
+                        style={{ width: `${skill.prof}%` }}
+                      />
+                    </div>
                   </div>
-                  <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-slate-700 rounded-full"
-                      style={{ width: `${skill.prof}%` }}
-                    />
-                  </div>
-                </div>
-              </div>
+                </SpotlightCard>
+              </ScrollRevealItem>
             ))}
-          </div>
+          </ScrollRevealContainer>
         )}
       </div>
     </section>

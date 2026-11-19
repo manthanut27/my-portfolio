@@ -1,6 +1,9 @@
 import { ArrowLeft, ArrowRight, ExternalLink, Github, Search, X } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 import { EmptyState } from '../components/EmptyState';
+import { SpotlightCard } from '../components/ui/SpotlightCard';
+import { Magnetic } from '../components/ui/Magnetic';
+import { ScrollReveal } from '../components/ui/ScrollReveal';
 
 interface Project {
   name: string;
@@ -375,83 +378,91 @@ export const Projects: React.FC<ProjectsProps> = () => {
     >
       <div className="max-w-7xl mx-auto w-full flex flex-col gap-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 text-left">
-          <div className="flex flex-col items-start max-w-xl">
-            <span className="font-mono text-xs text-slate-500 uppercase tracking-wider mb-2">
-              03 — Work
-            </span>
-            <h2 className="font-space text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-slate-900">
-              Selected projects and case studies
-            </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-              Production architectures, interactive WebGL applications, and developer tools.
-            </p>
-          </div>
-
-          {/* Stepper Controls */}
-          {filteredProjects.length > 0 && (
-            <div className="flex items-center gap-2">
-              <span className="font-mono text-xs text-slate-500 tabular-nums px-2.5 py-1 bg-white border border-slate-200 rounded-md">
-                {String(activeIndex + 1).padStart(2, '0')} / {String(filteredProjects.length).padStart(2, '0')}
+        <ScrollReveal>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 text-left">
+            <div className="flex flex-col items-start max-w-xl">
+              <span className="font-mono text-xs text-slate-500 uppercase tracking-wider mb-2">
+                03 — Work
               </span>
-              <button
-                onClick={() => scrollStep('left')}
-                disabled={activeIndex === 0}
-                className="w-8 h-8 rounded-lg border border-slate-200 bg-white text-slate-700 flex items-center justify-center hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
-                aria-label="Previous project"
-              >
-                <ArrowLeft className="w-3.5 h-3.5" />
-              </button>
-              <button
-                onClick={() => scrollStep('right')}
-                disabled={activeIndex === filteredProjects.length - 1}
-                className="w-8 h-8 rounded-lg border border-slate-200 bg-white text-slate-700 flex items-center justify-center hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
-                aria-label="Next project"
-              >
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
+              <h2 className="font-space text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-slate-900">
+                Selected projects and case studies
+              </h2>
+              <p className="mt-2 text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
+                Production architectures, interactive WebGL applications, and developer tools.
+              </p>
             </div>
-          )}
-        </div>
 
-        {/* Filter & Search Bar */}
-        <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-3 bg-white p-2 rounded-xl border border-slate-200">
-          <div className="flex items-center gap-1 overflow-x-auto no-scrollbar w-full sm:w-auto pb-1 sm:pb-0">
-            {categories.map((cat) => (
-              <button
-                key={cat.value}
-                onClick={() => setSelectedCategory(cat.value)}
-                className={`px-3 py-1.5 rounded-lg font-mono text-xs transition-colors shrink-0 cursor-pointer ${
-                  selectedCategory === cat.value
-                    ? 'bg-slate-900 text-white font-medium'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-
-          <div className="relative w-full sm:w-64">
-            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
-            <input
-              type="text"
-              placeholder="Search projects..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-8 pr-7 py-1.5 bg-slate-50 border border-slate-200 rounded-lg font-body text-xs text-slate-800 placeholder:text-slate-400 outline-none focus:bg-white focus:border-slate-400 transition-colors"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery('')}
-                className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
-                aria-label="Clear search"
-              >
-                <X className="w-3.5 h-3.5" />
-              </button>
+            {/* Stepper Controls */}
+            {filteredProjects.length > 0 && (
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-xs text-slate-500 tabular-nums px-2.5 py-1 bg-white border border-slate-200 rounded-md">
+                  {String(activeIndex + 1).padStart(2, '0')} / {String(filteredProjects.length).padStart(2, '0')}
+                </span>
+                <Magnetic strength={0.25}>
+                  <button
+                    onClick={() => scrollStep('left')}
+                    disabled={activeIndex === 0}
+                    className="w-8 h-8 rounded-lg border border-slate-200 bg-white text-slate-700 flex items-center justify-center hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                    aria-label="Previous project"
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5" />
+                  </button>
+                </Magnetic>
+                <Magnetic strength={0.25}>
+                  <button
+                    onClick={() => scrollStep('right')}
+                    disabled={activeIndex === filteredProjects.length - 1}
+                    className="w-8 h-8 rounded-lg border border-slate-200 bg-white text-slate-700 flex items-center justify-center hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                    aria-label="Next project"
+                  >
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </Magnetic>
+              </div>
             )}
           </div>
-        </div>
+        </ScrollReveal>
+
+        {/* Filter & Search Bar */}
+        <ScrollReveal delay={0.05}>
+          <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-3 bg-white p-2 rounded-xl border border-slate-200">
+            <div className="flex items-center gap-1 overflow-x-auto no-scrollbar w-full sm:w-auto pb-1 sm:pb-0">
+              {categories.map((cat) => (
+                <button
+                  key={cat.value}
+                  onClick={() => setSelectedCategory(cat.value)}
+                  className={`px-3 py-1.5 rounded-lg font-mono text-xs transition-colors shrink-0 cursor-pointer ${
+                    selectedCategory === cat.value
+                      ? 'bg-slate-900 text-white font-medium'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+
+            <div className="relative w-full sm:w-64">
+              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
+              <input
+                type="text"
+                placeholder="Search projects..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-8 pr-7 py-1.5 bg-slate-50 border border-slate-200 rounded-lg font-body text-xs text-slate-800 placeholder:text-slate-400 outline-none focus:bg-white focus:border-slate-400 transition-colors"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
+                  aria-label="Clear search"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+          </div>
+        </ScrollReveal>
 
         {/* Notification Banner */}
         {comingSoonNotice && (
@@ -519,9 +530,9 @@ export const Projects: React.FC<ProjectsProps> = () => {
                   key={project.name}
                   className="project-card-container snap-center shrink-0 w-[85vw] sm:w-[360px] md:w-[420px] h-[520px] flex items-center"
                 >
-                  <div
-                    className={`bg-white rounded-xl border flex flex-col h-full w-full overflow-hidden transition-colors ${
-                      isFocused ? 'border-slate-400 shadow-sm' : 'border-slate-200'
+                  <SpotlightCard
+                    className={`flex flex-col h-full w-full overflow-hidden transition-colors ${
+                      isFocused ? 'border-slate-400 shadow-md' : 'border-slate-200'
                     }`}
                   >
                     {/* Media Thumbnail Frame */}
@@ -585,24 +596,28 @@ export const Projects: React.FC<ProjectsProps> = () => {
                       <div className="flex gap-2 pt-3 border-t border-slate-100">
                         {isLive ? (
                           <>
-                            <a
-                              href={project.liveLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex-1 bg-slate-900 hover:bg-slate-800 text-white text-center py-2 rounded-lg font-mono text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
-                            >
-                              <ExternalLink className="w-3.5 h-3.5" />
-                              <span>Live demo</span>
-                            </a>
-                            <a
-                              href={project.gitLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex-1 bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 text-center py-2 rounded-lg font-mono text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
-                            >
-                              <Github className="w-3.5 h-3.5" />
-                              <span>GitHub</span>
-                            </a>
+                            <Magnetic strength={0.15} className="flex-1">
+                              <a
+                                href={project.liveLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full bg-slate-900 hover:bg-slate-800 text-white text-center py-2 rounded-lg font-mono text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                              >
+                                <ExternalLink className="w-3.5 h-3.5" />
+                                <span>Live demo</span>
+                              </a>
+                            </Magnetic>
+                            <Magnetic strength={0.15} className="flex-1">
+                              <a
+                                href={project.gitLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 text-center py-2 rounded-lg font-mono text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                              >
+                                <Github className="w-3.5 h-3.5" />
+                                <span>GitHub</span>
+                              </a>
+                            </Magnetic>
                           </>
                         ) : (
                           <button
@@ -618,7 +633,7 @@ export const Projects: React.FC<ProjectsProps> = () => {
                         )}
                       </div>
                     </div>
-                  </div>
+                  </SpotlightCard>
                 </div>
               );
             })}

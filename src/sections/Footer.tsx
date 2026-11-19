@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowUp, Github, Linkedin, Mail } from 'lucide-react';
+import { Magnetic } from '../components/ui/Magnetic';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -60,39 +61,47 @@ export const Footer: React.FC = () => {
 
           {/* Social Row & Back to Top */}
           <div className="flex items-center gap-3">
-            <a
-              href={githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 flex items-center justify-center transition-all"
-              aria-label="GitHub"
-            >
-              <Github className="w-4 h-4" />
-            </a>
-            <a
-              href={linkedinUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 flex items-center justify-center transition-all"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="w-4 h-4" />
-            </a>
-            <a
-              href={`mailto:${contactEmail}`}
-              className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 flex items-center justify-center transition-all"
-              aria-label="Email"
-            >
-              <Mail className="w-4 h-4" />
-            </a>
-            <button
-              onClick={scrollToTop}
-              className="flex items-center gap-1.5 px-3 h-9 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition-all font-mono text-xs font-medium cursor-pointer ml-2 active:scale-95"
-              aria-label="Scroll back to top"
-            >
-              <ArrowUp className="w-3.5 h-3.5" />
-              <span>Back to top</span>
-            </button>
+            <Magnetic strength={0.25}>
+              <a
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 flex items-center justify-center transition-all"
+                aria-label="GitHub"
+              >
+                <Github className="w-4 h-4" />
+              </a>
+            </Magnetic>
+            <Magnetic strength={0.25}>
+              <a
+                href={linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 flex items-center justify-center transition-all"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="w-4 h-4" />
+              </a>
+            </Magnetic>
+            <Magnetic strength={0.25}>
+              <a
+                href={`mailto:${contactEmail}`}
+                className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 flex items-center justify-center transition-all"
+                aria-label="Email"
+              >
+                <Mail className="w-4 h-4" />
+              </a>
+            </Magnetic>
+            <Magnetic strength={0.25}>
+              <button
+                onClick={scrollToTop}
+                className="flex items-center gap-1.5 px-3 h-9 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition-all font-mono text-xs font-medium cursor-pointer ml-2 active:scale-95"
+                aria-label="Scroll back to top"
+              >
+                <ArrowUp className="w-3.5 h-3.5" />
+                <span>Back to top</span>
+              </button>
+            </Magnetic>
           </div>
         </div>
 
