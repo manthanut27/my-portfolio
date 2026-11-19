@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, ExternalLink, Github, Search, Sparkles, X, Info } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ExternalLink, Github, Search, Sparkles, X } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 import { EmptyState } from '../components/EmptyState';
 
@@ -18,7 +18,7 @@ interface ProjectsProps {
   hiringManagerMode?: boolean;
 }
 
-export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode = true }) => {
+export const Projects: React.FC<ProjectsProps> = () => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -66,9 +66,9 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode = true }) 
       category: 'Full-Stack',
       status: 'LIVE',
       accentColor: '#500171', // purple
-      desc: 'An interactive web-based quiz that tests your foundational knowledge of HTML, CSS, and JavaScript through a series of multiple-choice questions.',
+      desc: 'An interactive web-based quiz that tests foundational knowledge of HTML, CSS, and JavaScript through a series of timed challenges.',
       image: '/quiz-image.png',
-      tech: ['React', 'Gsap', 'Tailwind'],
+      tech: ['React', 'GSAP', 'Tailwind CSS'],
       liveLink: import.meta.env.VITE_LIVE_LINK_QUIZ || 'https://quiz.manthanut.site',
       gitLink: import.meta.env.VITE_GITHUB_REPO_QUIZ || 'https://github.com/manthanut27/quiz',
     },
@@ -87,8 +87,8 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode = true }) 
       name: 'FitMirror',
       category: 'AI & Mobile',
       status: 'COMING SOON',
-      accentColor: '#4B7002', // watermelon
-      desc: 'AI-powered fitness tracking application utilizing pose estimation to provide real-time form correction and workout analytics.',
+      accentColor: '#FE6334', // brand orange
+      desc: 'AI-powered fitness tracking application utilizing pose estimation to provide real-time form correction, rep tracking, and workout analytics.',
       tech: ['TensorFlow.js', 'React Native', 'Expo', 'Python'],
     },
   ];
@@ -119,7 +119,7 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode = true }) 
     }
   }, [selectedCategory, searchQuery]);
 
-  // Smooth snap to closest card based on visible viewport overlap
+  // Smooth snap to closest card
   const snapToNearestCard = () => {
     const container = scrollRef.current;
     if (!container) return;
@@ -177,7 +177,7 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode = true }) 
     }
   };
 
-  // Scroll to explicit index with precise centering and boundary handling
+  // Scroll to explicit index
   const scrollToIndex = (index: number) => {
     const container = scrollRef.current;
     if (!container) return;
@@ -222,7 +222,6 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode = true }) 
 
     const scrollLeft = container.scrollLeft;
 
-    // Strict boundary checks for instant first/last dot activation
     if (scrollLeft <= 15) {
       setActiveIndex(0);
       return;
@@ -233,7 +232,6 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode = true }) 
       return;
     }
 
-    // Determine which card has the largest visible presence in the viewport
     const cards = container.querySelectorAll<HTMLElement>('.project-card-container');
     if (cards.length === 0) return;
 
@@ -260,64 +258,7 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode = true }) 
     setActiveIndex(bestIndex);
   };
 
-  // Smooth mouse wheel translation to horizontal scroll with edge passthrough
-  useEffect(() => {
-    const container = scrollRef.current;
-    if (!container) return;
-
-    const onWheel = (e: WheelEvent) => {
-      // If predominantly vertical scroll and horizontal overflow exists
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX) * 1.1) {
-        const maxScroll = container.scrollWidth - container.clientWidth;
-        if (maxScroll <= 0) return;
-
-        const isAtLeftEdge = container.scrollLeft <= 4 && e.deltaY < 0;
-        const isAtRightEdge = container.scrollLeft >= maxScroll - 4 && e.deltaY > 0;
-
-        // Only intercept when there is room to scroll horizontally
-        if (!isAtLeftEdge && !isAtRightEdge) {
-          e.preventDefault();
-          container.scrollBy({
-            left: e.deltaY * 1.15,
-            behavior: 'auto',
-          });
-        }
-      }
-    };
-
-    container.addEventListener('wheel', onWheel, { passive: false });
-    return () => {
-      container.removeEventListener('wheel', onWheel);
-      if (momentumAnimRef.current) {
-        cancelAnimationFrame(momentumAnimRef.current);
-      }
-    };
-  }, [filteredProjects]);
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (el) {
-      el.addEventListener('scroll', handleScroll);
-    }
-    return () => {
-      if (el) {
-        el.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, [filteredProjects]);
-
-  // Shimmer effect calculation
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (isDraggingRef.current) return;
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    card.style.setProperty('--mouse-x', `${x}px`);
-    card.style.setProperty('--mouse-y', `${y}px`);
-  };
-
-  // Smooth mouse dragging with velocity tracking and momentum glide
+  // Mouse dragging handlers
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!scrollRef.current) return;
     if (momentumAnimRef.current) {
@@ -395,78 +336,117 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode = true }) 
     }
   };
 
+  // Smooth mouse wheel translation to horizontal scroll
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const onWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX) * 1.1) {
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        if (maxScroll <= 0) return;
+
+        const isAtLeftEdge = container.scrollLeft <= 4 && e.deltaY < 0;
+        const isAtRightEdge = container.scrollLeft >= maxScroll - 4 && e.deltaY > 0;
+
+        if (!isAtLeftEdge && !isAtRightEdge) {
+          e.preventDefault();
+          container.scrollBy({
+            left: e.deltaY * 1.15,
+            behavior: 'auto',
+          });
+        }
+      }
+    };
+
+    container.addEventListener('wheel', onWheel, { passive: false });
+    return () => {
+      container.removeEventListener('wheel', onWheel);
+      if (momentumAnimRef.current) {
+        cancelAnimationFrame(momentumAnimRef.current);
+      }
+    };
+  }, [filteredProjects]);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (el) {
+      el.addEventListener('scroll', handleScroll);
+    }
+    return () => {
+      if (el) {
+        el.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, [filteredProjects]);
+
   return (
     <section
       id="projects"
-      data-kanji="作"
-      data-label="WORK"
-      className={`relative w-full min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-16 py-20 md:py-24 select-none overflow-hidden transition-colors duration-1000 ${
-        hiringManagerMode ? 'bg-slate-100 text-slate-900' : 'bg-brand-pink text-brand-navy'
-      }`}
+      className="relative w-full min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-16 py-24 bg-slate-50 text-slate-900 border-t border-slate-200/60 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto w-full flex flex-col gap-8 md:gap-10 relative z-10">
-        {/* Header Title with Navigation Arrows & Status Count */}
+      <div className="max-w-7xl mx-auto w-full flex flex-col gap-10 relative z-10">
+        {/* Section Header with Controls */}
         <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-6 text-center md:text-left">
-          <div className="relative">
-            {!hiringManagerMode && (
-              <div className="text-brand-navy/15 text-6xl sm:text-7xl md:text-8xl font-black mb-1 md:mb-2 pointer-events-none select-none">
-                作
-              </div>
-            )}
-            <h2 className="font-space text-4xl sm:text-5xl md:text-7xl font-bold uppercase tracking-tighter text-brand-navy">
-              Projects
+          <div className="flex flex-col items-center md:items-start">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange font-mono text-xs font-bold uppercase tracking-wider mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-orange animate-pulse" />
+              <span>03 // FEATURED WORK & CASE STUDIES</span>
+            </div>
+            <h2 className="font-space text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight text-slate-900">
+              Selected Projects
             </h2>
-            <p className="mt-2 md:mt-4 font-label text-sm sm:text-base md:text-lg font-medium text-brand-navy/70 max-w-lg">
-              Explore production applications, creative 3D WebGL builds, and prototypes.
+            <p className="mt-2 font-body text-base md:text-lg text-slate-600 max-w-xl">
+              Production architectures, interactive 3D WebGL builds, and cutting-edge software experiments.
             </p>
           </div>
 
-          {/* Desktop Arrow Controllers & Project Counter */}
+          {/* Desktop Arrow Controls & Project Counter */}
           {filteredProjects.length > 0 && (
             <div className="hidden md:flex items-center gap-3">
-              <span className="font-space text-xs font-bold px-3 py-1.5 bg-white/70 backdrop-blur-md rounded-full border border-brand-navy/15 text-brand-navy shadow-sm">
+              <span className="font-mono text-xs font-bold px-3 py-1.5 bg-white rounded-full border border-slate-200 text-slate-700 shadow-xs">
                 {String(activeIndex + 1).padStart(2, '0')} / {String(filteredProjects.length).padStart(2, '0')}
               </span>
               <button
                 onClick={() => scrollStep('left')}
                 disabled={activeIndex === 0}
-                className={`w-11 h-11 rounded-full border-2 border-brand-navy bg-white hover:bg-brand-orange hover:text-white transition-all flex items-center justify-center text-brand-navy shadow-[2px_2px_0px_#0C4A6E] active:translate-x-[1px] active:translate-y-[1px] ${
+                className={`w-10 h-10 rounded-full border border-slate-200 bg-white hover:bg-slate-900 hover:text-white transition-all flex items-center justify-center text-slate-700 shadow-xs active:scale-95 ${
                   activeIndex === 0
-                    ? 'opacity-40 cursor-not-allowed hover:bg-white hover:text-brand-navy'
+                    ? 'opacity-40 cursor-not-allowed hover:bg-white hover:text-slate-700'
                     : 'cursor-pointer'
                 }`}
                 aria-label="Previous project"
               >
-                <ArrowLeft className="w-5 h-5" />
+                <ArrowLeft className="w-4 h-4" />
               </button>
               <button
                 onClick={() => scrollStep('right')}
                 disabled={activeIndex === filteredProjects.length - 1}
-                className={`w-11 h-11 rounded-full border-2 border-brand-navy bg-white hover:bg-brand-orange hover:text-white transition-all flex items-center justify-center text-brand-navy shadow-[2px_2px_0px_#0C4A6E] active:translate-x-[1px] active:translate-y-[1px] ${
+                className={`w-10 h-10 rounded-full border border-slate-200 bg-white hover:bg-slate-900 hover:text-white transition-all flex items-center justify-center text-slate-700 shadow-xs active:scale-95 ${
                   activeIndex === filteredProjects.length - 1
-                    ? 'opacity-40 cursor-not-allowed hover:bg-white hover:text-brand-navy'
+                    ? 'opacity-40 cursor-not-allowed hover:bg-white hover:text-slate-700'
                     : 'cursor-pointer'
                 }`}
                 aria-label="Next project"
               >
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           )}
         </div>
 
         {/* Filter & Search Bar */}
-        <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 bg-white/40 backdrop-blur-md p-3 rounded-2xl border border-white/60 shadow-sm">
+        <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 bg-white/80 backdrop-blur-md p-2.5 rounded-2xl border border-slate-200/90 shadow-xs">
           {/* Category Tabs */}
           <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar w-full sm:w-auto pb-1 sm:pb-0">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3.5 py-1.5 rounded-xl font-space font-bold text-xs uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
+                className={`px-3.5 py-1.5 rounded-xl font-mono font-bold text-xs uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
                   selectedCategory === cat
-                    ? 'bg-brand-orange text-white shadow-sm'
-                    : 'bg-white/60 text-brand-navy hover:bg-white'
+                    ? 'bg-slate-900 text-white shadow-xs'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
                 }`}
               >
                 {cat}
@@ -475,19 +455,19 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode = true }) 
           </div>
 
           {/* Search Input Box */}
-          <div className="relative w-full sm:w-64 md:w-80">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-navy/50" />
+          <div className="relative w-full sm:w-72">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
               type="text"
               placeholder="Search tech or project..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-8 py-2 bg-white/80 border border-brand-navy/15 rounded-xl font-body text-xs text-brand-navy placeholder:text-brand-navy/40 outline-none focus:border-brand-orange transition-all"
+              className="w-full pl-9 pr-8 py-2 bg-slate-50 border border-slate-200 rounded-xl font-body text-xs text-slate-800 placeholder:text-slate-400 outline-none focus:bg-white focus:border-brand-orange transition-all"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-brand-navy/50 hover:text-brand-navy"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
                 aria-label="Clear search"
               >
                 <X className="w-3.5 h-3.5" />
@@ -496,18 +476,18 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode = true }) 
           </div>
         </div>
 
-        {/* Notification / Modal for Coming Soon Projects */}
+        {/* Coming Soon Alert Notification */}
         {comingSoonNotice && (
-          <div className="w-full p-4 bg-brand-yellow text-brand-navy border-2 border-brand-navy shadow-[4px_4px_0px_#0C4A6E] rounded-xl flex items-center justify-between gap-4 animate-fadeIn">
+          <div className="w-full p-4 bg-slate-900 text-white border border-slate-800 rounded-2xl flex items-center justify-between gap-4 shadow-lg animate-fadeIn">
             <div className="flex items-center gap-3">
-              <Info className="w-5 h-5 text-brand-orange shrink-0" />
-              <span className="font-space text-xs md:text-sm font-bold">
+              <Sparkles className="w-5 h-5 text-brand-orange shrink-0 animate-pulse" />
+              <span className="font-mono text-xs md:text-sm font-medium text-slate-200">
                 {comingSoonNotice}
               </span>
             </div>
             <button
               onClick={() => setComingSoonNotice(null)}
-              className="p-1 hover:bg-black/10 rounded-lg text-brand-navy"
+              className="p-1 hover:bg-white/10 rounded-lg text-slate-400 hover:text-white transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
@@ -518,8 +498,8 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode = true }) 
         {filteredProjects.length === 0 ? (
           <EmptyState
             title="No Matching Projects"
-            description={`No projects found matching "${searchQuery}" in ${selectedCategory}. Try resetting your search or filter.`}
-            actionLabel="Clear Filter & Search"
+            description={`No projects found matching "${searchQuery}" in ${selectedCategory}. Try resetting your search filter.`}
+            actionLabel="Reset Search & Filters"
             onAction={() => {
               setSearchQuery('');
               setSelectedCategory('ALL');
@@ -550,7 +530,7 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode = true }) 
                 scrollStep('right');
               }
             }}
-            className={`flex gap-4 sm:gap-6 md:gap-8 overflow-x-auto pb-6 pt-2 no-scrollbar touch-pan-x w-full select-none outline-none focus-visible:ring-2 focus-visible:ring-brand-orange rounded-2xl ${
+            className={`flex gap-5 sm:gap-6 md:gap-7 overflow-x-auto pb-6 pt-2 no-scrollbar touch-pan-x w-full select-none outline-none focus-visible:ring-2 focus-visible:ring-brand-orange rounded-2xl ${
               isDragging ? 'cursor-grabbing select-none' : 'cursor-grab'
             }`}
             style={{
@@ -568,32 +548,37 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode = true }) 
               return (
                 <div
                   key={project.name}
-                  className="project-card-container snap-center shrink-0 w-[88vw] sm:w-[380px] md:w-[460px] h-[540px] md:h-[580px] flex items-center transition-transform duration-300"
+                  className="project-card-container snap-center shrink-0 w-[88vw] sm:w-[380px] md:w-[450px] h-[540px] md:h-[580px] flex items-center transition-transform duration-300"
                 >
                   <div
-                    onMouseMove={handleMouseMove}
-                    className={`project-card glass-card rounded-2xl overflow-hidden flex flex-col h-full relative w-full shadow-xl transition-all duration-300 group border-2 ${
-                      isFocused ? 'border-brand-navy shadow-2xl scale-[1.01]' : 'border-white/60'
+                    className={`bg-white rounded-2xl border flex flex-col h-full w-full overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 group ${
+                      isFocused
+                        ? 'border-slate-400 shadow-md scale-[1.01]'
+                        : 'border-slate-200/90'
                     }`}
-                    style={{
-                      borderLeft: `6px solid ${project.accentColor}`,
-                    }}
                   >
-                    {/* Status Badge */}
-                    <div className="absolute top-4 right-4 z-20">
-                      <span
-                        className={`text-[10px] md:text-xs font-space font-black px-3 py-1 rounded-full shadow-md ${
-                          isLive
-                            ? 'bg-brand-orange text-white'
-                            : 'bg-brand-navy text-brand-yellow'
-                        }`}
-                      >
-                        {project.status}
-                      </span>
-                    </div>
+                    {/* Media Thumbnail Frame */}
+                    <div className="h-48 md:h-56 overflow-hidden relative border-b border-slate-100 bg-slate-900 flex items-center justify-center">
+                      {/* Top Badges: Category & Status */}
+                      <div className="absolute top-3 left-3 z-20">
+                        <span className="font-mono text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-white border border-white/10 uppercase tracking-wider">
+                          {project.category}
+                        </span>
+                      </div>
 
-                    {/* Thumbnail Cover image */}
-                    <div className="h-48 md:h-56 overflow-hidden relative border-b border-white/20 bg-black/5 flex items-center justify-center">
+                      <div className="absolute top-3 right-3 z-20">
+                        <span
+                          className={`text-[10px] font-mono font-bold px-2.5 py-1 rounded-full shadow-xs flex items-center gap-1.5 ${
+                            isLive
+                              ? 'bg-emerald-500 text-white'
+                              : 'bg-brand-orange text-white'
+                          }`}
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                          <span>{project.status}</span>
+                        </span>
+                      </div>
+
                       {project.image ? (
                         <img
                           src={project.image}
@@ -602,51 +587,54 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode = true }) 
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none pointer-events-none"
                         />
                       ) : (
-                        <div className="w-full h-full flex flex-col items-center justify-center bg-slate-950 text-brand-yellow font-space uppercase relative select-none">
-                          <div className="absolute inset-0 opacity-5 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:14px_24px] pointer-events-none" />
-                          <span className="text-[10px] tracking-[0.2em] font-black opacity-50 mb-1 text-slate-400">
-                            System Status
+                        <div className="w-full h-full flex flex-col items-center justify-center bg-slate-950 text-slate-300 font-mono text-center p-6 select-none relative">
+                          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fe6334_1px,transparent_1px)] [background-size:16px_16px]" />
+                          <Sparkles className="w-8 h-8 text-brand-orange mb-2 animate-pulse" />
+                          <span className="text-xs tracking-widest uppercase font-bold text-slate-400">
+                            R&D IN PROGRESS
                           </span>
-                          <span className="text-base md:text-lg tracking-widest font-black text-brand-orange animate-pulse">
-                            Coming Soon
+                          <span className="text-lg font-syne font-black text-white mt-1">
+                            FitMirror Pose Engine
                           </span>
-                          <span className="text-[8px] font-mono tracking-widest opacity-30 mt-2 text-slate-500">
-                            [ DEVELOPMENT GATE ACTIVE ]
+                          <span className="text-[10px] text-slate-500 mt-2">
+                            [ Real-Time Pose Estimation ]
                           </span>
                         </div>
                       )}
                     </div>
 
-                    {/* Body Content */}
-                    <div className="p-5 md:p-7 flex flex-col flex-grow relative text-left">
-                      <h3 className="font-syne font-black text-xl md:text-2xl text-brand-navy mb-2">
-                        {project.name}
-                      </h3>
-                      <p className="font-body text-brand-navy/80 text-xs md:text-sm leading-relaxed mb-4 flex-grow line-clamp-3 md:line-clamp-4">
-                        {project.desc}
-                      </p>
+                    {/* Card Body */}
+                    <div className="p-5 md:p-7 flex flex-col flex-grow text-left justify-between">
+                      <div>
+                        <h3 className="font-syne font-black text-xl md:text-2xl text-slate-900 group-hover:text-brand-orange transition-colors mb-2">
+                          {project.name}
+                        </h3>
+                        <p className="font-body text-slate-600 text-xs md:text-sm leading-relaxed mb-4 line-clamp-3 md:line-clamp-4">
+                          {project.desc}
+                        </p>
 
-                      {/* Tech Pills */}
-                      <div className="flex flex-wrap gap-1.5 mb-6">
-                        {project.tech.map((t) => (
-                          <span
-                            key={t}
-                            className="bg-white/50 text-brand-navy font-space text-[10px] md:text-xs px-2.5 py-0.5 rounded-full border border-white/60"
-                          >
-                            {t}
-                          </span>
-                        ))}
+                        {/* Tech Pills */}
+                        <div className="flex flex-wrap gap-1.5 mb-6">
+                          {project.tech.map((t) => (
+                            <span
+                              key={t}
+                              className="bg-slate-100 text-slate-700 font-mono text-[10px] md:text-xs px-2.5 py-0.5 rounded-md border border-slate-200/80 font-medium"
+                            >
+                              {t}
+                            </span>
+                          ))}
+                        </div>
                       </div>
 
                       {/* Call to Action Buttons */}
-                      <div className="flex gap-3">
+                      <div className="flex gap-2.5 pt-4 border-t border-slate-100">
                         {isLive ? (
                           <>
                             <a
                               href={project.liveLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex-1 bg-brand-orange hover:bg-brand-navy text-white text-center py-2.5 md:py-3 rounded-xl font-headline font-bold text-xs md:text-sm flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-md"
+                              className="flex-1 bg-brand-orange hover:bg-slate-900 text-white text-center py-2.5 rounded-xl font-mono font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-xs hover:shadow-md active:scale-98"
                             >
                               <ExternalLink className="w-3.5 h-3.5" />
                               <span>Live Demo</span>
@@ -655,7 +643,7 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode = true }) 
                               href={project.gitLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex-1 bg-white hover:bg-brand-navy/5 text-brand-navy border-2 border-brand-navy text-center py-2.5 md:py-3 rounded-xl font-headline font-bold text-xs md:text-sm flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                              className="flex-1 bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 text-center py-2.5 rounded-xl font-mono font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer active:scale-98"
                             >
                               <Github className="w-3.5 h-3.5" />
                               <span>GitHub</span>
@@ -665,13 +653,13 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode = true }) 
                           <button
                             onClick={() =>
                               setComingSoonNotice(
-                                `${project.name} is in active R&D! Pose estimation engine is undergoing testing. Check GitHub or Terminal for roadmap updates.`
+                                `${project.name} is in active R&D! Pose estimation model is undergoing latency testing on mobile GPUs.`
                               )
                             }
-                            className="w-full bg-white hover:bg-brand-yellow text-brand-navy border-2 border-brand-navy py-2.5 md:py-3 rounded-xl font-headline font-bold text-xs md:text-sm flex items-center justify-center gap-2 cursor-pointer transition-colors shadow-sm"
+                            className="w-full bg-slate-900 hover:bg-brand-orange text-white py-2.5 rounded-xl font-mono font-bold text-xs flex items-center justify-center gap-2 cursor-pointer transition-colors shadow-xs active:scale-98"
                           >
-                            <Sparkles className="w-4 h-4 text-brand-orange" />
-                            <span>Roadmap & Preview Details</span>
+                            <Sparkles className="w-3.5 h-3.5 text-brand-yellow" />
+                            <span>Preview Roadmap</span>
                           </button>
                         )}
                       </div>
@@ -683,19 +671,19 @@ export const Projects: React.FC<ProjectsProps> = ({ hiringManagerMode = true }) 
           </div>
         )}
 
-        {/* Interactive Pagination Dots (Line loading removed) */}
+        {/* Carousel Pagination Dots */}
         {filteredProjects.length > 1 && (
-          <div className="flex items-center justify-center gap-2.5 mt-4">
+          <div className="flex items-center justify-center gap-2 mt-2">
             {filteredProjects.map((proj, idx) => {
               const isActive = activeIndex === idx;
               return (
                 <button
                   key={proj.name}
                   onClick={() => scrollToIndex(idx)}
-                  className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                     isActive
-                      ? 'w-8 bg-brand-orange shadow-md'
-                      : 'w-2.5 bg-brand-navy/25 hover:bg-brand-navy/50 hover:scale-125'
+                      ? 'w-8 bg-brand-orange shadow-xs'
+                      : 'w-2 bg-slate-300 hover:bg-slate-400'
                   }`}
                   aria-label={`Jump to project ${idx + 1}: ${proj.name}`}
                   aria-current={isActive ? 'true' : undefined}

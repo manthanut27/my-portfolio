@@ -24,26 +24,26 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
 }) => {
   return (
     <div
-      className={`w-full max-w-lg mx-auto bg-white border-3 border-brand-navy shadow-[6px_6px_0px_#0C4A6E] rounded-2xl p-8 md:p-10 text-center flex flex-col items-center select-none ${className}`}
+      className={`w-full max-w-lg mx-auto bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-2xl p-8 md:p-10 text-center flex flex-col items-center select-none shadow-xs ${className}`}
     >
       {/* Top micro status bar */}
-      <div className="w-full flex items-center justify-between pb-3 mb-6 border-b border-brand-navy/15 font-mono text-[11px] font-bold text-brand-navy/60 uppercase tracking-widest">
+      <div className="w-full flex items-center justify-between pb-3 mb-6 border-b border-slate-100 font-mono text-[11px] font-bold text-slate-400 uppercase tracking-widest">
         <span>STATUS // 0_MATCHES</span>
         <span>QUERY_EMPTY</span>
       </div>
 
       {/* Decorative Icon Badge */}
-      <div className="w-16 h-16 rounded-2xl bg-brand-yellow border-2 border-brand-navy shadow-[3px_3px_0px_#0C4A6E] flex items-center justify-center text-brand-navy mb-5 animate-pulse">
-        {icon || <SearchX className="w-8 h-8 text-brand-orange" />}
+      <div className="w-14 h-14 rounded-2xl bg-orange-50 border border-orange-200/80 flex items-center justify-center text-brand-orange mb-4 shadow-xs">
+        {icon || <SearchX className="w-7 h-7" />}
       </div>
 
       {/* Headline */}
-      <h3 className="font-syne font-black text-2xl md:text-3xl text-brand-navy tracking-tight mb-2">
+      <h3 className="font-space font-bold text-xl md:text-2xl text-slate-900 tracking-tight mb-2">
         {title}
       </h3>
 
       {/* Description */}
-      <p className="font-body text-sm md:text-base text-brand-navy/75 max-w-sm mb-8 leading-relaxed">
+      <p className="font-body text-sm text-slate-600 max-w-sm mb-6 leading-relaxed">
         {description}
       </p>
 
@@ -52,7 +52,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
         {onAction && actionLabel && (
           <button
             onClick={onAction}
-            className="flex items-center justify-center gap-2 px-6 py-3 bg-brand-orange hover:bg-brand-navy text-white font-syne font-bold text-xs uppercase tracking-wider rounded-xl shadow-[3px_3px_0px_#0C4A6E] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all cursor-pointer border border-brand-navy"
+            className="flex items-center justify-center gap-2 px-5 py-2.5 bg-slate-900 hover:bg-brand-orange text-white font-mono font-bold text-xs uppercase tracking-wider rounded-xl shadow-xs hover:shadow-md active:scale-95 transition-all cursor-pointer"
           >
             <RefreshCw className="w-3.5 h-3.5" />
             <span>{actionLabel}</span>
@@ -62,7 +62,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
         {onSecondaryAction && secondaryActionLabel && (
           <button
             onClick={onSecondaryAction}
-            className="flex items-center justify-center gap-2 px-6 py-3 bg-slate-100 hover:bg-slate-200 text-brand-navy font-mono text-xs font-bold uppercase tracking-wider rounded-xl shadow-[3px_3px_0px_#0C4A6E] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all cursor-pointer border border-brand-navy"
+            className="flex items-center justify-center gap-2 px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-mono text-xs font-bold uppercase tracking-wider rounded-xl border border-slate-200 active:scale-95 transition-all cursor-pointer"
           >
             <span>{secondaryActionLabel}</span>
             <ArrowRight className="w-3.5 h-3.5" />
