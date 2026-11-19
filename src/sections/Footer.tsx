@@ -15,8 +15,14 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="w-full bg-slate-950 text-slate-400 border-t border-slate-800/80 py-12 px-6 md:px-16 relative z-10 select-none">
-      <div className="max-w-7xl mx-auto flex flex-col gap-10">
+    <footer className="w-full bg-slate-950 text-slate-400 border-t border-slate-800/80 pb-12 relative z-10 select-none">
+      {/* 21st.dev inspired micro-mesh divider */}
+      <div
+        className="w-full h-6 border-b border-slate-800/80 bg-[repeating-linear-gradient(315deg,rgba(255,255,255,0.03)_0,rgba(255,255,255,0.03)_1px,transparent_0,transparent_50%)] mb-10"
+        style={{ backgroundSize: '12px 12px' }}
+      />
+
+      <div className="max-w-7xl mx-auto px-6 md:px-16 flex flex-col gap-10">
         {/* Top Tier: Brand, Status, and Quick Navigation */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 pb-8 border-b border-slate-800/80">
           <div className="flex flex-col gap-1.5">
@@ -24,7 +30,7 @@ export const Footer: React.FC = () => {
               <span className="font-space font-bold text-xl text-white tracking-tight">
                 Manthan Utekar
               </span>
-              <span className="px-2.5 py-0.5 rounded-full bg-slate-900 border border-slate-800 font-mono text-[10px] text-slate-400 font-medium">
+              <span className="px-2.5 py-0.5 rounded-full bg-slate-900 border border-slate-800 font-mono text-[10px] text-brand-orange font-medium">
                 Full-stack engineer
               </span>
             </div>
@@ -34,8 +40,8 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Live Availability Status */}
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-slate-400">Status:</span>
             <span className="text-emerald-400 font-medium">Available for opportunities</span>
           </div>
@@ -43,20 +49,23 @@ export const Footer: React.FC = () => {
 
         {/* Middle Tier: Links & Social Channels */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
-          {/* Quick Nav Links */}
-          <div className="flex flex-wrap items-center gap-5 font-mono text-xs font-medium text-slate-400">
-            <a href="#about" className="hover:text-white transition-colors">
-              About
-            </a>
-            <a href="#skills" className="hover:text-white transition-colors">
-              Skills
-            </a>
-            <a href="#projects" className="hover:text-white transition-colors">
-              Projects
-            </a>
-            <a href="#contact" className="hover:text-white transition-colors">
-              Contact
-            </a>
+          {/* Quick Nav Links with interactive pills */}
+          <div className="flex flex-wrap items-center gap-2">
+            {[
+              { name: 'About', href: '#about' },
+              { name: 'Skills', href: '#skills' },
+              { name: 'Projects', href: '#projects' },
+              { name: 'Contact', href: '#contact' },
+            ].map((link) => (
+              <Magnetic key={link.name} strength={0.15}>
+                <a
+                  href={link.href}
+                  className="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 border border-transparent hover:border-slate-800 transition-all font-mono text-xs font-medium"
+                >
+                  {link.name}
+                </a>
+              </Magnetic>
+            ))}
           </div>
 
           {/* Social Row & Back to Top */}

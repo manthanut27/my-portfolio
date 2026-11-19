@@ -120,15 +120,15 @@
     "semantic_hash": ""
   },
   "src/sections/Contact.tsx": {
-    "mtime": 1795106095.19114,
-    "seen": 1795106210.6507068,
-    "ast_hash": "1e193c618db9de78ccaa8729cb943a26",
+    "mtime": 1795106647.8830886,
+    "seen": 1795106760.0498412,
+    "ast_hash": "dc1eb77be2a2e1e4c1e2f3c1adc51f4f",
     "semantic_hash": ""
   },
   "src/sections/Footer.tsx": {
-    "mtime": 1795106169.4345443,
-    "seen": 1795106210.6507115,
-    "ast_hash": "cf6ef1600116f75c5232f957a5ee77a0",
+    "mtime": 1795106677.8814106,
+    "seen": 1795106760.049845,
+    "ast_hash": "2ab94147210f64b0973d1061d227b0b0",
     "semantic_hash": ""
   },
   "src/sections/Hero.tsx": {
@@ -222,15 +222,15 @@
     "semantic_hash": "f14b2646b87832230b06026ec806719e"
   },
   "index.html": {
-    "mtime": 1795096805.2304635,
-    "seen": 1795097070.4457078,
-    "ast_hash": "b3db13ca771454b96b5da46c342ea996",
+    "mtime": 1795106486.8614647,
+    "seen": 1795106760.0498724,
+    "ast_hash": "86bac9a232cc5429568af779324af295",
     "semantic_hash": ""
   },
   "public/resume.pdf": {
-    "mtime": 1795100149.7059586,
-    "seen": 1795100195.8306022,
-    "ast_hash": "cab945b541fc5916e97f9a70f9ab9df3",
+    "mtime": 1795106723.1061025,
+    "seen": 1795106760.0498767,
+    "ast_hash": "7e6bfa09d2c5e0150143dbc12a00cf21",
     "semantic_hash": ""
   },
   "public/favicon.svg": {
