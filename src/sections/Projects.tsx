@@ -402,7 +402,7 @@ export const Projects: React.FC<ProjectsProps> = () => {
                   <button
                     onClick={() => scrollStep('left')}
                     disabled={activeIndex === 0}
-                    className="w-8 h-8 rounded-lg border border-slate-200 bg-white text-slate-700 flex items-center justify-center hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                    className="w-9 h-9 sm:w-8 sm:h-8 rounded-lg border border-slate-200 bg-white text-slate-700 flex items-center justify-center hover:bg-slate-100 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-all"
                     aria-label="Previous project"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" />
@@ -412,7 +412,7 @@ export const Projects: React.FC<ProjectsProps> = () => {
                   <button
                     onClick={() => scrollStep('right')}
                     disabled={activeIndex === filteredProjects.length - 1}
-                    className="w-8 h-8 rounded-lg border border-slate-200 bg-white text-slate-700 flex items-center justify-center hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                    className="w-9 h-9 sm:w-8 sm:h-8 rounded-lg border border-slate-200 bg-white text-slate-700 flex items-center justify-center hover:bg-slate-100 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-all"
                     aria-label="Next project"
                   >
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -449,7 +449,7 @@ export const Projects: React.FC<ProjectsProps> = () => {
                 placeholder="Search projects..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-8 pr-7 py-1.5 bg-slate-50 border border-slate-200 rounded-lg font-body text-xs text-slate-800 placeholder:text-slate-400 outline-none focus:bg-white focus:border-slate-400 transition-colors"
+                className="w-full pl-8 pr-7 py-2 sm:py-1.5 bg-slate-50 border border-slate-200 rounded-lg font-body text-base sm:text-xs text-slate-800 placeholder:text-slate-400 outline-none focus:bg-white focus:border-slate-400 transition-colors"
               />
               {searchQuery && (
                 <button
@@ -528,7 +528,7 @@ export const Projects: React.FC<ProjectsProps> = () => {
               return (
                 <div
                   key={project.name}
-                  className="project-card-container snap-center shrink-0 w-[85vw] sm:w-[360px] md:w-[420px] h-[520px] flex items-center"
+                  className="project-card-container snap-center shrink-0 w-[85vw] sm:w-[360px] md:w-[420px] h-[490px] sm:h-[520px] flex items-center"
                 >
                   <SpotlightCard
                     className={`flex flex-col h-full w-full overflow-hidden transition-colors ${

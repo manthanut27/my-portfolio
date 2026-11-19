@@ -132,9 +132,9 @@
     "semantic_hash": ""
   },
   "src/sections/Hero.tsx": {
-    "mtime": 1795098589.8789086,
-    "seen": 1795098615.8282719,
-    "ast_hash": "6f3cfaf8115a516de777933058d80ba8",
+    "mtime": 1795107236.650393,
+    "seen": 1795107272.1108952,
+    "ast_hash": "8f074ae8c2d04877015c3812775fb55b",
     "semantic_hash": ""
   },
   "src/sections/Projects.tsx": {

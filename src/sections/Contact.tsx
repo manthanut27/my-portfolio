@@ -314,7 +314,7 @@ export const Contact: React.FC<ContactProps> = () => {
                         }}
                         className={`w-full px-4 h-11 rounded-xl bg-slate-950/80 border ${
                           nameError ? 'border-red-400 focus:border-red-500' : 'border-slate-800 focus:border-brand-orange'
-                        } outline-none font-body text-sm text-white placeholder:text-slate-500 focus:bg-slate-950 focus:ring-1 focus:ring-brand-orange/40 transition-all`}
+                        } outline-none font-body text-base sm:text-sm text-white placeholder:text-slate-500 focus:bg-slate-950 focus:ring-1 focus:ring-brand-orange/40 transition-all`}
                       />
                       {nameError && (
                         <span className="text-xs text-red-400 font-medium mt-0.5 ml-1">
@@ -339,7 +339,7 @@ export const Contact: React.FC<ContactProps> = () => {
                           }}
                           className={`w-full pl-4 pr-10 h-11 rounded-xl bg-slate-950/80 border ${
                             emailError ? 'border-red-400 focus:border-red-500' : 'border-slate-800 focus:border-brand-orange'
-                          } outline-none font-body text-sm text-white placeholder:text-slate-500 focus:bg-slate-950 focus:ring-1 focus:ring-brand-orange/40 transition-all`}
+                          } outline-none font-body text-base sm:text-sm text-white placeholder:text-slate-500 focus:bg-slate-950 focus:ring-1 focus:ring-brand-orange/40 transition-all`}
                         />
                         <Mail className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none" />
                       </div>
@@ -370,7 +370,7 @@ export const Contact: React.FC<ContactProps> = () => {
                         }}
                         className={`w-full p-4 h-32 rounded-xl resize-none bg-slate-950/80 border ${
                           messageError ? 'border-red-400 focus:border-red-500' : 'border-slate-800 focus:border-brand-orange'
-                        } outline-none font-body text-sm text-white placeholder:text-slate-500 focus:bg-slate-950 focus:ring-1 focus:ring-brand-orange/40 transition-all`}
+                        } outline-none font-body text-base sm:text-sm text-white placeholder:text-slate-500 focus:bg-slate-950 focus:ring-1 focus:ring-brand-orange/40 transition-all`}
                       />
                       {messageError && (
                         <span className="text-xs text-red-400 font-medium mt-0.5 ml-1">
@@ -415,7 +415,7 @@ export const Contact: React.FC<ContactProps> = () => {
                       <button
                         onClick={handleSubmit}
                         disabled={loading}
-                        className="w-full h-11 flex items-center justify-center gap-2 font-mono font-medium text-xs bg-brand-orange hover:bg-brand-orange/90 text-white rounded-xl shadow-md transition-all active:scale-[0.99] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                        className="w-full h-12 sm:h-11 flex items-center justify-center gap-2 font-mono font-medium text-sm sm:text-xs bg-brand-orange hover:bg-brand-orange/90 text-white rounded-xl shadow-md transition-all active:scale-[0.99] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                       >
                         {loading ? (
                           <>

@@ -25,6 +25,8 @@ export const Magnetic: React.FC<MagneticProps> = ({
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (disabled || !ref.current) return;
+    // Disable on coarse touch devices for mobile battery and rendering performance
+    if (window.matchMedia?.('(pointer: coarse)')?.matches) return;
     // Disable if user prefers reduced motion
     if (window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) return;
 

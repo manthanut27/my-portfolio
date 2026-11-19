@@ -18,9 +18,9 @@
     "semantic_hash": "75a0286de267d5393020e4439ed72f6a"
   },
   "package.json": {
-    "mtime": 1795098197.7112093,
-    "seen": 1795098615.8282032,
-    "ast_hash": "11729329a23ead0f07470ccc461ad477",
+    "mtime": 1795107492.7506669,
+    "seen": 1795108358.1900713,
+    "ast_hash": "9b54095e974590533b9984303a264b06",
     "semantic_hash": ""
   },
   "src/App.tsx": {
@@ -60,9 +60,9 @@
     "semantic_hash": "47e42fbe48c7d5c070e00bfc336d5a2d"
   },
   "src/components/Navbar.tsx": {
-    "mtime": 1795106130.710155,
-    "seen": 1795106210.6506588,
-    "ast_hash": "0c1386513f40dd4e4daea5baa02e4a7f",
+    "mtime": 1795108153.09375,
+    "seen": 1795108358.1900866,
+    "ast_hash": "503fc36a40377e3fdfa8e17f6fe0ecb1",
     "semantic_hash": ""
   },
   "src/context/PerformanceTier.tsx": {
@@ -114,15 +114,15 @@
     "semantic_hash": "df3369963799e47ef5a77cdca932abf0"
   },
   "src/sections/About.tsx": {
-    "mtime": 1795105594.536651,
-    "seen": 1795106210.6507041,
-    "ast_hash": "f92bb6565eef2bc85d8a777db5e9ffde",
+    "mtime": 1795108187.134458,
+    "seen": 1795108358.1901166,
+    "ast_hash": "daa19ec550639b5c4c9b5f0f4a33c4cf",
     "semantic_hash": ""
   },
   "src/sections/Contact.tsx": {
-    "mtime": 1795106647.8830886,
-    "seen": 1795106760.0498412,
-    "ast_hash": "dc1eb77be2a2e1e4c1e2f3c1adc51f4f",
+    "mtime": 1795108276.091425,
+    "seen": 1795108358.1901202,
+    "ast_hash": "806f1ca60841e05401051d638a4194a3",
     "semantic_hash": ""
   },
   "src/sections/Footer.tsx": {
@@ -132,15 +132,15 @@
     "semantic_hash": ""
   },
   "src/sections/Hero.tsx": {
-    "mtime": 1795107236.650393,
-    "seen": 1795107272.1108952,
-    "ast_hash": "8f074ae8c2d04877015c3812775fb55b",
+    "mtime": 1795108136.3950949,
+    "seen": 1795108358.1901252,
+    "ast_hash": "b9551fe286f7e199eda83bb5d963b0eb",
     "semantic_hash": ""
   },
   "src/sections/Projects.tsx": {
-    "mtime": 1795105812.1072707,
-    "seen": 1795106210.6507185,
-    "ast_hash": "e153b5ced3e9b6c75d4298373bdbf4ad",
+    "mtime": 1795108226.3811269,
+    "seen": 1795108358.190128,
+    "ast_hash": "4327f23eb0e42c2155f77e1e7eb23a07",
     "semantic_hash": ""
   },
   "src/sections/ShadowPage.tsx": {
@@ -342,9 +342,9 @@
     "semantic_hash": ""
   },
   "src/components/ui/Magnetic.tsx": {
-    "mtime": 1795105322.649178,
-    "seen": 1795106210.6506624,
-    "ast_hash": "4b86ae2acd4a64086f48137ea0afbe9c",
+    "mtime": 1795108090.6152143,
+    "seen": 1795108358.1900885,
+    "ast_hash": "0f5ddd2a8e04a934d52a6c1aa9cf19ab",
     "semantic_hash": ""
   },
   "src/components/ui/NumberTicker.tsx": {

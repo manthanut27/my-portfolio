@@ -74,7 +74,7 @@ export const About: React.FC<AboutProps> = () => {
     }
 
     return (
-      <div className="grid grid-flow-col grid-cols-52 grid-rows-7 gap-[3px] w-full overflow-x-auto no-scrollbar py-1">
+      <div className="grid grid-flow-col grid-cols-52 grid-rows-7 gap-[3px] w-full overflow-x-auto no-scrollbar py-1 touch-pan-x overscroll-x-contain">
         {cells}
       </div>
     );
@@ -200,29 +200,29 @@ export const About: React.FC<AboutProps> = () => {
                 </div>
 
                 {/* Counts */}
-                <div className="grid grid-cols-3 gap-3 text-left">
-                  <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
-                    <div className="font-space font-semibold text-lg text-slate-900 tabular-nums">
+                <div className="grid grid-cols-3 gap-2 sm:gap-3 text-left">
+                  <div className="bg-slate-50 p-2.5 sm:p-3 rounded-lg border border-slate-100">
+                    <div className="font-space font-semibold text-base sm:text-lg text-slate-900 tabular-nums">
                       {ghLoading ? '—' : <NumberTicker value={publicRepos} />}
                     </div>
-                    <div className="text-[11px] font-mono text-slate-500 mt-0.5">
-                      Public repositories
+                    <div className="text-[10px] sm:text-[11px] font-mono text-slate-500 mt-0.5 truncate">
+                      Repositories
                     </div>
                   </div>
-                  <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
-                    <div className="font-space font-semibold text-lg text-slate-900 tabular-nums">
+                  <div className="bg-slate-50 p-2.5 sm:p-3 rounded-lg border border-slate-100">
+                    <div className="font-space font-semibold text-base sm:text-lg text-slate-900 tabular-nums">
                       {ghLoading ? '—' : <NumberTicker value={stars} />}
                     </div>
-                    <div className="text-[11px] font-mono text-slate-500 mt-0.5">
+                    <div className="text-[10px] sm:text-[11px] font-mono text-slate-500 mt-0.5 truncate">
                       Stars received
                     </div>
                   </div>
-                  <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
-                    <div className="font-space font-semibold text-lg text-slate-900 tabular-nums">
+                  <div className="bg-slate-50 p-2.5 sm:p-3 rounded-lg border border-slate-100">
+                    <div className="font-space font-semibold text-base sm:text-lg text-slate-900 tabular-nums">
                       {ghLoading ? '—' : <NumberTicker value={contributions} />}
                     </div>
-                    <div className="text-[11px] font-mono text-slate-500 mt-0.5">
-                      Commits in 2026
+                    <div className="text-[10px] sm:text-[11px] font-mono text-slate-500 mt-0.5 truncate">
+                      Commits 2026
                     </div>
                   </div>
                 </div>
@@ -234,7 +234,8 @@ export const About: React.FC<AboutProps> = () => {
                       <Activity className="w-3.5 h-3.5 text-slate-400" />
                       <span>52-week contribution matrix</span>
                     </span>
-                    <Magnetic strength={0.2}>
+                    <span className="sm:hidden text-[10px] text-slate-400 font-mono">Swipe →</span>
+                    <Magnetic strength={0.2} className="hidden sm:inline-block">
                       <button
                         onClick={() => {
                           localStorage.removeItem('gh_stats');

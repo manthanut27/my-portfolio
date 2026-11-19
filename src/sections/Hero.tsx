@@ -12,6 +12,17 @@ export const Hero: React.FC<HeroProps> = () => {
   const age = useLiveAge();
   const [availability, setAvailability] = useState<'open' | 'busy'>('open');
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
+  const [isMobileDevice, setIsMobileDevice] = useState(false);
+
+  // Detect mobile device for performance optimization
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobileDevice(window.innerWidth < 768 || window.matchMedia?.('(pointer: coarse)')?.matches);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Monitor scroll for indicator hiding
   useEffect(() => {
@@ -62,20 +73,20 @@ export const Hero: React.FC<HeroProps> = () => {
   return (
     <section id="hero" className="relative w-full min-h-screen bg-slate-50 overflow-hidden">
       {/* Top Floating Status Badges (Building FitMirror, Availability, Age) */}
-      <div className="absolute top-20 sm:top-24 left-4 sm:left-8 md:left-12 z-20 flex flex-wrap items-center gap-2 sm:gap-3 pointer-events-auto">
-        <span className="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] sm:text-xs font-mono font-medium px-3 py-1.5 rounded-full border border-slate-800 shadow-sm">
+      <div className="absolute top-18 sm:top-24 left-4 sm:left-8 md:left-12 z-20 flex items-center gap-2 sm:gap-3 pointer-events-auto overflow-x-auto no-scrollbar max-w-[calc(100vw-2rem)] pb-1">
+        <span className="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] sm:text-xs font-mono font-medium px-3 py-1.5 rounded-full border border-slate-800 shadow-sm shrink-0">
           <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
           <span>Building FitMirror</span>
         </span>
 
         <span
-          className="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] sm:text-xs font-mono font-medium px-3 py-1.5 rounded-full border border-slate-800 shadow-sm transition-all duration-300"
+          className="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] sm:text-xs font-mono font-medium px-3 py-1.5 rounded-full border border-slate-800 shadow-sm transition-all duration-300 shrink-0"
         >
           <span className={`w-1.5 h-1.5 rounded-full ${availability === 'open' ? 'bg-emerald-400' : 'bg-slate-400'}`} />
           <span>{availability === 'open' ? 'Available for hire' : 'Currently busy'}</span>
         </span>
 
-        <span className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-slate-700 text-[11px] sm:text-xs font-mono px-3 py-1.5 rounded-full border border-slate-200/80 shadow-sm">
+        <span className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-slate-700 text-[11px] sm:text-xs font-mono px-3 py-1.5 rounded-full border border-slate-200/80 shadow-sm shrink-0">
           <Calendar className="w-3.5 h-3.5 text-slate-500" />
           <span>Age <strong className="text-slate-900 font-semibold tabular-nums">{age}</strong></span>
         </span>
@@ -99,6 +110,7 @@ export const Hero: React.FC<HeroProps> = () => {
         height="100vh"
         className="pt-16 sm:pt-20"
         interactive={true}
+        particleDensity={isMobileDevice ? 0.6 : 1}
         showCredit={true}
       />
 

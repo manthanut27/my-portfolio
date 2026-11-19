@@ -169,10 +169,10 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
               </a>
             </Magnetic>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button with compliant touch target */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700"
+              className="md:hidden w-10 h-10 min-w-[40px] min-h-[40px] flex items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 active:scale-95 transition-all cursor-pointer"
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             >
               {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -189,7 +189,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.15 }}
-            className="fixed inset-0 w-full h-full z-40 flex flex-col justify-between p-6 pt-24 pb-8 md:hidden bg-slate-950 text-white"
+            className="fixed inset-0 w-full h-full z-40 flex flex-col justify-between p-6 pt-24 pb-8 md:hidden bg-slate-950 text-white overscroll-contain overflow-y-auto"
           >
             <div className="flex items-center justify-between pb-3 border-b border-slate-800 font-mono text-xs text-slate-400">
               <span>Navigation</span>
@@ -203,7 +203,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
                   <button
                     key={link.id}
                     onClick={() => handleScrollTo(link.id)}
-                    className={`w-full flex items-center justify-between p-3.5 rounded-lg font-space text-lg text-left transition-colors border ${
+                    className={`w-full min-h-[48px] flex items-center justify-between p-3.5 rounded-lg font-space text-lg text-left transition-all border active:scale-[0.99] ${
                       isActive
                         ? 'bg-slate-900 text-brand-orange border-slate-800'
                         : 'bg-slate-900/40 text-slate-200 border-transparent hover:border-slate-800'
