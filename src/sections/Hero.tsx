@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SculptureHero from '@/components/ui/liquid-sculpture-hero';
 import { useLiveAge } from '../hooks/useLiveAge';
-import { Briefcase, Calendar, Sparkles } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface HeroProps {
@@ -63,25 +63,21 @@ export const Hero: React.FC<HeroProps> = () => {
     <section id="hero" className="relative w-full min-h-screen bg-slate-50 overflow-hidden">
       {/* Top Floating Status Badges (Building FitMirror, Availability, Age) */}
       <div className="absolute top-20 sm:top-24 left-4 sm:left-8 md:left-12 z-20 flex flex-wrap items-center gap-2 sm:gap-3 pointer-events-auto">
-        <span className="inline-flex items-center gap-1.5 bg-brand-navy text-white text-[11px] sm:text-xs font-mono font-bold px-3 py-1.5 rounded-full shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-brand-yellow animate-spin-slow" />
-          <span>⚡ BUILDING: FITMIRROR</span>
+        <span className="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] sm:text-xs font-mono font-medium px-3 py-1.5 rounded-full border border-slate-800 shadow-sm">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+          <span>Building FitMirror</span>
         </span>
 
         <span
-          className={`inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-mono font-bold px-3 py-1.5 rounded-full shadow-sm transition-all duration-300 ${
-            availability === 'open'
-              ? 'bg-brand-orange text-white'
-              : 'bg-brand-navy text-white'
-          }`}
+          className="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] sm:text-xs font-mono font-medium px-3 py-1.5 rounded-full border border-slate-800 shadow-sm transition-all duration-300"
         >
-          <Briefcase className="w-3.5 h-3.5 text-white" />
-          <span>{availability === 'open' ? 'OPEN TO WORK' : 'CURRENTLY BUSY'}</span>
+          <span className={`w-1.5 h-1.5 rounded-full ${availability === 'open' ? 'bg-emerald-400' : 'bg-slate-400'}`} />
+          <span>{availability === 'open' ? 'Available for hire' : 'Currently busy'}</span>
         </span>
 
-        <span className="inline-flex items-center gap-1.5 bg-white/90 backdrop-blur-sm text-slate-700 text-[11px] sm:text-xs font-mono px-3 py-1.5 rounded-full border border-slate-200/80 shadow-sm">
-          <Calendar className="w-3.5 h-3.5 text-brand-orange" />
-          <span>AGE: <strong className="text-slate-900">{age}</strong></span>
+        <span className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-slate-700 text-[11px] sm:text-xs font-mono px-3 py-1.5 rounded-full border border-slate-200/80 shadow-sm">
+          <Calendar className="w-3.5 h-3.5 text-slate-500" />
+          <span>Age <strong className="text-slate-900 font-semibold tabular-nums">{age}</strong></span>
         </span>
       </div>
 
