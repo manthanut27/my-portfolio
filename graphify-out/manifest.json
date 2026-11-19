@@ -228,9 +228,9 @@
     "semantic_hash": ""
   },
   "public/resume.pdf": {
-    "mtime": 1795097655.926809,
-    "seen": 1795097986.1408114,
-    "ast_hash": "d81531e776873cebf71df6ce2c367873",
+    "mtime": 1795100149.7059586,
+    "seen": 1795100195.8306022,
+    "ast_hash": "cab945b541fc5916e97f9a70f9ab9df3",
     "semantic_hash": ""
   },
   "public/favicon.svg": {
@@ -339,12 +339,6 @@
     "mtime": 1795098206.117453,
     "seen": 1795098615.828255,
     "ast_hash": "ea1c194ee828369e6fcdde84b4d8b8ba",
-    "semantic_hash": ""
-  },
-  "docs/Manthan_Utekar_Resume.pdf": {
-    "mtime": 1794931288.4604216,
-    "seen": 1795099816.1650932,
-    "ast_hash": "d447a5e9036312aa59f3566dfb1b8cee",
     "semantic_hash": ""
   }
 }
