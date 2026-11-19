@@ -18,10 +18,10 @@
     "semantic_hash": "75a0286de267d5393020e4439ed72f6a"
   },
   "package.json": {
-    "mtime": 1782022574.908195,
-    "seen": 1795095877.8994515,
-    "ast_hash": "056c8e9c77d270a888a6f4bb1f13bd89",
-    "semantic_hash": "056c8e9c77d270a888a6f4bb1f13bd89"
+    "mtime": 1795098197.7112093,
+    "seen": 1795098615.8282032,
+    "ast_hash": "11729329a23ead0f07470ccc461ad477",
+    "semantic_hash": ""
   },
   "src/App.tsx": {
     "mtime": 1795096913.452605,
@@ -132,9 +132,9 @@
     "semantic_hash": ""
   },
   "src/sections/Hero.tsx": {
-    "mtime": 1795096971.2770112,
-    "seen": 1795097070.4456663,
-    "ast_hash": "06111dbed30ba82e006e6825ca12d45f",
+    "mtime": 1795098589.8789086,
+    "seen": 1795098615.8282719,
+    "ast_hash": "6f3cfaf8115a516de777933058d80ba8",
     "semantic_hash": ""
   },
   "src/sections/Projects.tsx": {
@@ -162,10 +162,10 @@
     "semantic_hash": ""
   },
   "tsconfig.app.json": {
-    "mtime": 1782022574.9386992,
-    "seen": 1795095877.8995197,
-    "ast_hash": "4cd9dda3b62ff2a571c2419a75074a39",
-    "semantic_hash": "4cd9dda3b62ff2a571c2419a75074a39"
+    "mtime": 1795098234.2390878,
+    "seen": 1795098615.8282876,
+    "ast_hash": "35d6676cac59773026253c5634bf081b",
+    "semantic_hash": ""
   },
   "tsconfig.json": {
     "mtime": 1782022574.9386992,
@@ -186,10 +186,10 @@
     "semantic_hash": "c2f14cf1f11267797c96543653676626"
   },
   "vite.config.ts": {
-    "mtime": 1782022574.9405408,
-    "seen": 1795095877.8995285,
-    "ast_hash": "247f741c642096b4605aac4c6564cb90",
-    "semantic_hash": "247f741c642096b4605aac4c6564cb90"
+    "mtime": 1795098222.0584261,
+    "seen": 1795098615.8282976,
+    "ast_hash": "b5381e1e568092c1f3be49574e46caca",
+    "semantic_hash": ""
   },
   "README.md": {
     "mtime": 1789047786.009465,
@@ -315,6 +315,30 @@
     "mtime": 1791535886.9292977,
     "seen": 1795095877.8995447,
     "ast_hash": "4c253615e567c0b616a53360d96caa2d",
+    "semantic_hash": ""
+  },
+  "components.json": {
+    "mtime": 1795098211.59288,
+    "seen": 1795098615.8281953,
+    "ast_hash": "9582cfafb649d0487c3de7a22ec07cb4",
+    "semantic_hash": ""
+  },
+  "src/components/ui/demo.tsx": {
+    "mtime": 1795098439.836174,
+    "seen": 1795098615.828228,
+    "ast_hash": "4b4b6a392c1a45812c1aba6c3e0cbcec",
+    "semantic_hash": ""
+  },
+  "src/components/ui/liquid-sculpture-hero.tsx": {
+    "mtime": 1795098493.6402187,
+    "seen": 1795098615.8282309,
+    "ast_hash": "c356dc334274d9fcf258bbe5fbe1927e",
+    "semantic_hash": ""
+  },
+  "src/lib/utils.ts": {
+    "mtime": 1795098206.117453,
+    "seen": 1795098615.828255,
+    "ast_hash": "ea1c194ee828369e6fcdde84b4d8b8ba",
     "semantic_hash": ""
   }
 }
